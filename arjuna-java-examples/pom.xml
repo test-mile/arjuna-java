@@ -42,7 +42,7 @@
 		
 		<dependency>
 			<groupId>com.testmile</groupId>
-			<artifactId>arjuna</artifactId>
+			<artifactId>arjuna-java</artifactId>
 			<version>0.1.0-alpha-SNAPSHOT</version>
 		</dependency>
   </dependencies>
