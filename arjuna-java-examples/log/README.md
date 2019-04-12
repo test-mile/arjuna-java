@@ -1,0 +1,1 @@
+This is a placeholder directory for logs of Arjuna client/requester lib as well as Arjuna Setu log.
