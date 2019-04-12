@@ -9,7 +9,8 @@
 	<name>arjuna-java</name>
 
   <description>Arjuna-Java is the client side/requester implementation in Java for development of test automation using Arjuna. It is a re-usable Java library for test automation, to be used primarily with TestNG. With minor tweaks, it can be used with any other test engine or custom test automation implementations. The library is a generic client library for Arjuna, a Python based test automation framework developed by Rahul Verma (www.rahulverma.net)</description>
-	<url>https://testmile.com/arjuna</url>
+
+  <url>https://testmile.com/arjuna</url>
 	
   <licenses>
     <license>
