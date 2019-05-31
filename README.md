@@ -6,4 +6,4 @@ The library is a generic client library for Arjuna, a Python based test automati
 
 A Python version of this client lib is a part of the Arjuna project itself.
 
-Dodcumentation for Arjuna is in progress. You can can find the currrent help doc on Test Mile website at https://testmile.com/arjuna
+Documentation for Arjuna is in progress. You can can find the currrent help doc on Test Mile website at https://testmile.com/arjuna
