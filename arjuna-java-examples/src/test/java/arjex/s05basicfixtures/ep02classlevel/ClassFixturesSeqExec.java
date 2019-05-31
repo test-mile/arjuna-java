@@ -24,16 +24,17 @@ import org.testng.annotations.Test;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.test.TestConfig;
+import arjuna.tpi.test.TestContext;
 import arjuna.tpi.testng.TestNGBaseTest;
 
 public class ClassFixturesSeqExec extends TestNGBaseTest {
 	private GuiAutomator automator = null;
 	
-	protected void setUpClass(TestConfig testConfig) throws Exception {
+	protected void setUpClass(TestContext testContext) throws Exception {
 		automator = Arjuna.createGuiAutomator();
 	}
 	
-	protected void tearDownClass(TestConfig testConfig) throws Exception {
+	protected void tearDownClass(TestContext testContext) throws Exception {
 		automator.quit();
 		automator = null;
 	}

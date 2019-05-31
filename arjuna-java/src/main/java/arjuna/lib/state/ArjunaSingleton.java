@@ -1,6 +1,7 @@
 package arjuna.lib.state;
 
 import java.io.File;
+import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,9 +15,13 @@ import org.testng.ITestContext;
 import arjuna.lib.batteries.console.Console;
 import arjuna.lib.core.config.CliArgsConfig;
 import arjuna.lib.core.config.DefaultTestContext;
+import arjuna.lib.setu.core.requester.config.SetuActionType;
+import arjuna.lib.setu.core.requester.connector.SetuService;
 import arjuna.lib.setu.guiauto.requester.automator.DefaultGuiAutomator;
 import arjuna.lib.setu.testsession.requester.DefaultTestSession;
 import arjuna.lib.setu.testsession.requester.TestSession;
+import arjuna.lib.sysauto.process.CommandExecutor;
+import arjuna.lib.sysauto.process.ProcessOutput;
 import arjuna.lib.testng.TestNGSuiteContext;
 import arjuna.lib.testng.TestNGTestContext;
 import arjuna.tpi.ddauto.DataSourceBuilder;
@@ -38,8 +43,12 @@ public enum ArjunaSingleton {
 	private Logger logger = null;
 
 	private Map<String, TestContext> testContextMap = new HashMap<String, TestContext>();
+	private SetuService setuService;
 
 	public TestContext init(String rootDir) throws Exception {
+		this.setuService = new SetuService();
+		this.setuService.launch();
+		
 		this.rootDir = rootDir;
 		cliConfig = new CliArgsConfig();
 		
@@ -158,4 +167,9 @@ public enum ArjunaSingleton {
 		return logger;
 	}
 
+	public void exit() throws Exception {
+		this.setuService.stop();
+	}
+
 }
+

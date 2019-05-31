@@ -20,6 +20,9 @@
 package arjuna.lib.setu.core.requester.config;
 
 public enum SetuActionType {
+	SETU_HELLO,
+	SETU_KILL_EXISTING_TESTSESSION,
+	
 	TESTSESSION_INIT,
 	TESTSESSION_FINISH,
 

@@ -22,16 +22,17 @@ package arjex.s05basicfixtures.ep04suitelevel;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.test.TestConfig;
+import arjuna.tpi.test.TestContext;
 import arjuna.tpi.testng.TestNGBaseTest;
 
 public class SuiteFixturesSeqExec extends TestNGBaseTest {
 	
-	protected void setUpSuite(TestConfig testConfig) throws Exception {
+	protected void setUpSuite(TestContext testContext) throws Exception {
 		GuiAutomator automator = Arjuna.createGuiAutomator();
 		Global.INSTANCE.setAutomator(automator);
 	}
 	
-	protected void tearDownSuite(TestConfig testConfig) throws Exception {
+	protected void tearDownSuite(TestContext testContext) throws Exception {
 		getAutomator().quit();
 		Global.INSTANCE.destroyAutomator();
 	}

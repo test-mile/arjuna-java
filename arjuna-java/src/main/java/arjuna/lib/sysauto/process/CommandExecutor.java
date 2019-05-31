@@ -27,9 +27,6 @@ import java.util.List;
 public class CommandExecutor {
 	private String command = null;
 	private List<String> args = null;
-	private String stdout = null;
-	private String stderr = null;
-	private int returnCode = -1000;
 
 	public CommandExecutor(String command, String[] args) {
 		this.command = command;
@@ -54,11 +51,13 @@ public class CommandExecutor {
 
 	private void addPrefix(List<String> commandList) {
 		String[] windows = { "cmd.exe", "/C" };
-		String[] empty = {};
+		String[] lin = {};
 
 		if (System.getProperty("os.name").toLowerCase().contains("win")) {
 			commandList.addAll(Arrays.asList(windows));
-		}
+		} else {
+			commandList.addAll(Arrays.asList(lin));
+		} 
 	}
 
 	private String[] getCommandArray() {
@@ -69,39 +68,10 @@ public class CommandExecutor {
 		return commandList.toArray(new String[commandList.size()]);
 	}
 
-	public String getStdoutText() {
-		return this.stdout;
+	public ProcessOutput execute() throws Exception {
+		System.out.println(Arrays.asList(getCommandArray()));
+		Process proc = Runtime.getRuntime().exec(getCommandArray());
+		return new ProcessOutput(proc);
 	}
 
-	public String getStderrText() {
-		return this.stderr;
-	}
-
-	public int getReturnCode() {
-		return this.returnCode;
-	}
-
-	public void execute() throws IOException {
-		try {
-			Process proc = Runtime.getRuntime().exec(getCommandArray());
-			// any error message?
-			ThreadSafeStreamReader errorGobbler = new ThreadSafeStreamReader(proc.getErrorStream(), "ERROR");
-
-			// any output?
-			ThreadSafeStreamReader outputGobbler = new ThreadSafeStreamReader(proc.getInputStream(), "OUTPUT");
-
-			// kick them off
-			errorGobbler.start();
-			outputGobbler.start();
-
-			// any error???
-			proc.getOutputStream().close();
-			int exitVal = proc.waitFor();
-			this.stderr = errorGobbler.getOutput();
-			this.stdout = outputGobbler.getOutput();
-			this.returnCode = exitVal;
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-	}
 }

@@ -24,21 +24,24 @@ import org.testng.annotations.Test;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.test.TestConfig;
+import arjuna.tpi.test.TestContext;
 import arjuna.tpi.testng.TestNGBaseTest;
 
 public class MethodFixturesSeqExec extends TestNGBaseTest {
 	private GuiAutomator automator = null;
 	
-	protected void setUpMethod(TestConfig testConfig) throws Exception {
+	protected void setUpMethod(TestContext testContext) throws Exception {
 		automator = Arjuna.createGuiAutomator();
 	}
 	
-	protected void tearDownMethod(TestConfig testConfig) throws Exception {
+	protected void tearDownMethod(TestContext testContext) throws Exception {
 		automator.quit();
 		automator = null;
 	}
 	
 	private void goToUrl(String url) throws Exception {
+		System.out.println(automator);
+		System.out.println(automator.Browser());
 		automator.Browser().goToUrl(url);
 		System.out.println(automator.MainWindow().getTitle());	
 	}

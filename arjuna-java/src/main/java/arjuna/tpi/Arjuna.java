@@ -69,4 +69,8 @@ public class Arjuna {
 		return internal.createGuiAutomator(config, extendedConfig);
 	}
 
+	public static void exit() throws Exception {
+		internal.exit();
+	}
+
 }

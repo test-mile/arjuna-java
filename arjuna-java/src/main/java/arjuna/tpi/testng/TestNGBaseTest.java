@@ -61,6 +61,7 @@ public class TestNGBaseTest {
 	@AfterSuite
 	public void cleanUpSession(ITestContext testngContext) throws Exception {		
 		this.tearDownSuite(Arjuna.getTestContext(testngContext.getSuite().getXmlSuite().getName()));
+		Arjuna.exit();
 	}
 	
 	protected void setUpTest(TestContext testContext) throws Exception {

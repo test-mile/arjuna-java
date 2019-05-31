@@ -50,17 +50,27 @@ public class BasicRestClient {
 	
 	public String post(String uri, String content) throws Exception{
 		HttpPost httppost = new HttpPost(this.baseUrl +  uri);
-
 		StringEntity se = new StringEntity(content);
 		se.setContentType("application/json");
 		se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "UTF-8"));
 		httppost.setEntity(se);
-		Arjuna.getLogger().debug("Executing POST request " + httppost.getRequestLine());
-		Arjuna.getLogger().debug(content);
+		if (Arjuna.getLogger() != null) {
+			Arjuna.getLogger().debug("Executing POST request " + httppost.getRequestLine());
+			Arjuna.getLogger().debug(content);
+		} else {
+			System.out.println("Executing POST request " + httppost.getRequestLine());
+			System.out.println(content);			
+		}
 		String response = handleResponse(httpclient.execute(httppost));
-		Arjuna.getLogger().debug("----------Setu Response ----------------");
-		Arjuna.getLogger().debug(response);
-		Arjuna.getLogger().debug("----------------------------------------");
+		if (Arjuna.getLogger() != null) {
+			Arjuna.getLogger().debug("----------Setu Response ----------------");
+			Arjuna.getLogger().debug(response);
+			Arjuna.getLogger().debug("----------------------------------------");
+		} else {
+			System.out.println("----------Setu Response ----------------");
+			System.out.println(response);
+			System.out.println("----------------------------------------");
+		}
         return response;
 	}
 }

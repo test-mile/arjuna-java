@@ -127,13 +127,25 @@ class DefaultSetuRequester implements SetuRequester {
 			response = this.restClient.post(baseUri, action.asJsonString());
 			setuResponse = DefaultSetuResponse.fromJsonStr(response);
 		} catch (SetuHttpException e) {
-			Arjuna.getLogger().error("---------- Setu Error Response ----------------------");
-			Arjuna.getLogger().error("Got Http Error: " + e.getStatusCode());
+			if (Arjuna.getLogger() != null) {
+				Arjuna.getLogger().error("---------- Setu Error Response ----------------------");
+				Arjuna.getLogger().error("Got Http Error: " + e.getStatusCode());
+			} else {
+				System.err.println("---------- Setu Error Response ----------------------");
+				System.err.println("Got Http Error: " + e.getStatusCode());				
+			}
 			setuResponse = DefaultSetuResponse.fromJsonStr(e.getResponse());
-			Arjuna.getLogger().error("Error: " +  setuResponse.getMessage());
-			Arjuna.getLogger().error("---------- Setu Error Trace -------------------------");
-			Arjuna.getLogger().error(setuResponse.getTrace());
-			Arjuna.getLogger().error("-----------------------------------------------------");
+			if (Arjuna.getLogger() != null) {
+				Arjuna.getLogger().error("Error: " +  setuResponse.getMessage());
+				Arjuna.getLogger().error("---------- Setu Error Trace -------------------------");
+				Arjuna.getLogger().error(setuResponse.getTrace());
+				Arjuna.getLogger().error("-----------------------------------------------------");
+			} else {
+				System.err.println("Error: " +  setuResponse.getMessage());
+				System.err.println("---------- Setu Error Trace -------------------------");
+				System.err.println(setuResponse.getTrace());
+				System.err.println("-----------------------------------------------------");				
+			}
 			throw e;
 		}
 		return setuResponse;
