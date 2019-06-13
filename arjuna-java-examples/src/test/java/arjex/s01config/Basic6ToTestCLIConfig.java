@@ -42,6 +42,8 @@ public class Basic6ToTestCLIConfig{
 		System.out.println("ff: max wait = " + context.getConfig("ff").getArjunaOptionValue(ArjunaOption.GUIAUTO_MAX_WAIT));
 		System.out.println("ff: a.b.c = " + context.getConfig("ff").getUserOptionValue("a.b.c"));
 		Arjuna.getLogger().debug("hello");
+		
+		Arjuna.exit();
 	}
 
 }

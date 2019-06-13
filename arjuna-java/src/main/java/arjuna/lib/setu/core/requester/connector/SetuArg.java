@@ -40,6 +40,10 @@ public class SetuArg{
 		return new SetuArg(name, obj);
 	}
 	
+	public static SetuArg testSessionArg(String setuId) {
+		return new SetuArg("testSessionSetuId", setuId);	
+	}
+	
 	public static SetuArg textArg(Object obj) {
 		return new SetuArg("text", obj);
 	}

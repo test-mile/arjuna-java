@@ -23,23 +23,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import arjuna.lib.setu.core.requester.config.SetuActionType;
+import arjuna.lib.setu.core.requester.action.GuiAutoActionType;
+import arjuna.lib.setu.core.requester.config.ArjunaComponent;
 import arjuna.lib.setu.core.requester.connector.BaseSetuObject;
 import arjuna.lib.setu.core.requester.connector.SetuArg;
 import arjuna.lib.setu.core.requester.connector.SetuResponse;
 import arjuna.lib.setu.guiauto.requester.automator.AppAutomator;
 import arjuna.lib.setu.testsession.requester.TestSession;
 import arjuna.tpi.guiauto.With;
-import arjuna.tpi.guiauto.component.Alert;
-import arjuna.tpi.guiauto.component.Browser;
-import arjuna.tpi.guiauto.component.ChildWindow;
-import arjuna.tpi.guiauto.component.DomRoot;
-import arjuna.tpi.guiauto.component.DropDown;
-import arjuna.tpi.guiauto.component.Frame;
-import arjuna.tpi.guiauto.component.GuiElement;
-import arjuna.tpi.guiauto.component.GuiMultiElement;
-import arjuna.tpi.guiauto.component.MainWindow;
-import arjuna.tpi.guiauto.component.RadioGroup;
+import arjuna.tpi.guiauto.component.*;
 
 public class GuiAutoComponentFactory {
 
@@ -134,32 +126,32 @@ public class GuiAutoComponentFactory {
 		
 		@Override
 		public void enterText(String text) throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_ELEMENT_ENTER_TEXT, SetuArg.textArg(text));
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_ENTER_TEXT, SetuArg.textArg(text));
 		}
 		
 		@Override
 		public void setText(String text) throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_ELEMENT_SET_TEXT, SetuArg.textArg(text));
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_SET_TEXT, SetuArg.textArg(text));
 		}
 
 		@Override
 		public void click() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_ELEMENT_CLICK);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_CLICK);
 		}
 
 		@Override
 		public void waitUntilClickable() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_ELEMENT_WAIT_UNTIL_CLICKABLE);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_WAIT_UNTIL_CLICKABLE);
 		}
 
 		@Override
 		public void check() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_ELEMENT_CHECK);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_CHECK);
 		}
 
 		@Override
 		public void uncheck() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_ELEMENT_UNCHECK);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_UNCHECK);
 		}
 
 	}
@@ -184,42 +176,42 @@ public class GuiAutoComponentFactory {
 		}
 		
 		public boolean hasValueSelected(String value) throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_DROPDOWN_HAS_VALUE_SELECTED, SetuArg.valueArg(value));
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_HAS_VALUE_SELECTED, SetuArg.valueArg(value));
 			return response.getValueForCheckResult();
 		}
 
 		public boolean hasIndexSelected(int index) throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_DROPDOWN_HAS_INDEX_SELECTED, SetuArg.indexArg(index));
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_HAS_INDEX_SELECTED, SetuArg.indexArg(index));
 			return response.getValueForCheckResult();
 		}
 
 		public void selectByValue(String value) throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VALUE, SetuArg.valueArg(value));
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_VALUE, SetuArg.valueArg(value));
 		}
 
 		public void selectByIndex(int index) throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_INDEX, SetuArg.indexArg(index));
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_INDEX, SetuArg.indexArg(index));
 		}
 
 		public String getFirstSelectedOptionValue() throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_VALUE);
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_GET_FIRST_SELECTED_OPTION_VALUE);
 			return response.getValueForValueAttr();
 		}
 		
 		public String getFirstSelectedOptionText() throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_TEXT);
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_GET_FIRST_SELECTED_OPTION_TEXT);
 			return response.getValueForText();
 		}
 
 		@Override
 		public boolean hasVisibleTextSelected(String text) throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_DROPDOWN_HAS_VISIBLE_TEXT_SELECTED, SetuArg.textArg(text));
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_HAS_VISIBLE_TEXT_SELECTED, SetuArg.textArg(text));
 			return response.getValueForCheckResult();
 		}
 
 		@Override
 		public void selectByVisibleText(String text) throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VISIBLE_TEXT, SetuArg.textArg(text));
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_VISIBLE_TEXT, SetuArg.textArg(text));
 		}
 	}
 
@@ -230,25 +222,25 @@ public class GuiAutoComponentFactory {
 		}
 		
 		public boolean hasValueSelected(String value) throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_RADIOGROUP_HAS_VALUE_SELECTED, SetuArg.valueArg(value));
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_HAS_VALUE_SELECTED, SetuArg.valueArg(value));
 			return response.getValueForCheckResult();
 		}
 
 		public boolean hasIndexSelected(int index) throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_RADIOGROUP_HAS_INDEX_SELECTED, SetuArg.indexArg(index));
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_HAS_INDEX_SELECTED, SetuArg.indexArg(index));
 			return response.getValueForCheckResult();
 		}
 
 		public void selectByValue(String value) throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_VALUE, SetuArg.valueArg(value));
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_SELECT_BY_VALUE, SetuArg.valueArg(value));
 		}
 
 		public void selectByIndex(int index) throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_INDEX, SetuArg.indexArg(index));
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_SELECT_BY_INDEX, SetuArg.indexArg(index));
 		}
 
 		public String getFirstSelectedOptionValue() throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE);
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE);
 			return response.getValueForValueAttr();
 		}
 	}
@@ -261,23 +253,23 @@ public class GuiAutoComponentFactory {
 
 		@Override
 		public void confirm() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_ALERT_CONFIRM);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_CONFIRM);
 		}
 
 		@Override
 		public void dismiss() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_ALERT_DISMISS);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_DISMISS);
 		}
 
 		@Override
 		public String getText() throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_ALERT_GET_TEXT);
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_GET_TEXT);
 			return response.getValueForText();
 		}
 
 		@Override
 		public void sendText(String text) throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_ALERT_SEND_TEXT, SetuArg.textArg(text));
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_SEND_TEXT, SetuArg.textArg(text));
 		}
 
 	}
@@ -290,22 +282,22 @@ public class GuiAutoComponentFactory {
 
 		@Override
 		public void goToUrl(String url) throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_BROWSER_GO_TO_URL, SetuArg.arg("url", url));	
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_GO_TO_URL, SetuArg.arg("url", url));	
 		}
 
 		@Override
 		public void goBack() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_BROWSER_GO_BACK);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_GO_BACK);
 		}
 
 		@Override
 		public void goForward() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_BROWSER_GO_FORWARD);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_GO_FORWARD);
 		}
 
 		@Override
 		public void refresh() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_BROWSER_REFRESH);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_REFRESH);
 		}
 	}
 
@@ -318,7 +310,7 @@ public class GuiAutoComponentFactory {
 
 		@Override
 		public void focus() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_FRAME_FOCUS);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_FOCUS);
 		}
 		
 		@Override
@@ -328,7 +320,7 @@ public class GuiAutoComponentFactory {
 				arg.add(locator.asMap());
 			}
 			SetuResponse response = this.sendRequest(
-					SetuActionType.GUIAUTO_FRAME_CREATE_FRAME,
+					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_CREATE_FRAME,
 					SetuArg.arg("locators", arg)
 			);
 			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
@@ -336,7 +328,7 @@ public class GuiAutoComponentFactory {
 		
 		@Override
 		public Frame ParentFrame() throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_FRAME_GET_PARENT);
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_GET_PARENT);
 			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
 		}
 	}
@@ -349,7 +341,7 @@ public class GuiAutoComponentFactory {
 
 		@Override
 		public void focus() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_DOMROOT_FOCUS);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DOMROOT_FOCUS);
 		}
 
 		@Override
@@ -359,7 +351,7 @@ public class GuiAutoComponentFactory {
 				arg.add(locator.asMap());
 			}
 			SetuResponse response = this.sendRequest(
-					SetuActionType.GUIAUTO_DOMROOT_CREATE_FRAME,
+					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DOMROOT_CREATE_FRAME,
 					SetuArg.arg("locators", arg)
 			);
 			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
@@ -378,12 +370,12 @@ public class GuiAutoComponentFactory {
 		}
 		
 		public String getTitle() throws Exception {
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_WINDOW_GET_TITLE);
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.WINDOW_GET_TITLE);
 			return response.getValueForKey("title").asString();
 		}
 		
 		public void focus() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_WINDOW_FOCUS);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.WINDOW_FOCUS);
 		}
 	}
 
@@ -395,7 +387,7 @@ public class GuiAutoComponentFactory {
 
 		@Override
 		public void close() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_CHILD_WINDOW_CLOSE);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.CHILD_WINDOW_CLOSE);
 		}
 		
 		@Override
@@ -412,11 +404,11 @@ public class GuiAutoComponentFactory {
 		
 		@Override
 		public void maximize() throws Exception {
-			this.sendRequest(SetuActionType.GUIAUTO_MAIN_WINDOW_MAXIMIZE);
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_MAXIMIZE);
 		}
 		
-		protected String takeElementFindingAction(SetuActionType actionType, SetuArg... args) throws Exception {
-			SetuResponse response = this.sendRequest(actionType, args);
+		protected String takeElementFindingAction(GuiAutoActionType actionType, SetuArg... args) throws Exception {
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType, args);
 			return response.getValueForElementSetuId();		
 		}
 		
@@ -427,7 +419,7 @@ public class GuiAutoComponentFactory {
 				arg.add(locator.asMap());
 			}
 			SetuResponse response = this.sendRequest(
-					SetuActionType.GUIAUTO_MAIN_WINDOW_CREATE_CHILD_WINDOW,
+					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_CREATE_CHILD_WINDOW,
 					SetuArg.arg("locators", arg)
 			);
 			return new DefaultChildWindow(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
@@ -435,13 +427,13 @@ public class GuiAutoComponentFactory {
 		
 		@Override
 		public ChildWindow latestChildWindow() throws Exception {
-			SetuResponse response = sendRequest(SetuActionType.GUIAUTO_MAIN_WINDOW_GET_LATEST_CHILD_WINDOW);
+			SetuResponse response = sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_GET_LATEST_CHILD_WINDOW);
 			return new DefaultChildWindow(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
 		}
 
 		@Override
 		public void closeAllChildWindows() throws Exception {
-			sendRequest(SetuActionType.GUIAUTO_MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS);
+			sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS);
 		}
 	}
 

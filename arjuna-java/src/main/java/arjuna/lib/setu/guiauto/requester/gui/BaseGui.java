@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import arjuna.lib.enums.GuiAutomationContext;
-import arjuna.lib.setu.core.requester.config.SetuActionType;
+import arjuna.lib.setu.core.requester.action.GuiActionType;
+import arjuna.lib.setu.core.requester.action.SetuActionType;
+import arjuna.lib.setu.core.requester.config.ArjunaComponent;
 import arjuna.lib.setu.core.requester.connector.SetuArg;
+import arjuna.lib.setu.core.requester.connector.SetuConnectUtils;
 import arjuna.lib.setu.core.requester.connector.SetuResponse;
 import arjuna.lib.setu.guiauto.requester.automator.AbstractAppAutomator;
 import arjuna.lib.setu.testsession.requester.TestSession;
@@ -79,11 +82,11 @@ public class BaseGui extends AbstractAppAutomator implements Gui{
 		SetuArg[] sArgs;
 		if (parent ==  null) {
 			sArgs = args.toArray(new SetuArg[args.size()]);
-			guiSetuId = this.testSession.createGui(automator, sArgs);		
+			guiSetuId = createGui(automator, sArgs);		
 		} else {
 			args.add(SetuArg.arg("parentGuiSetuId", parent.getSetuId()));
 			sArgs = args.toArray(new SetuArg[args.size()]);
-			SetuResponse response = this.sendRequest(SetuActionType.GUIAUTO_GUI_CREATE_GUI, sArgs);
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI, GuiActionType.CREATE_CHILD_GUI, sArgs);
 			guiSetuId = response.getGuiSetuId();
 		}
 
@@ -95,6 +98,17 @@ public class BaseGui extends AbstractAppAutomator implements Gui{
 		}
 		
 		load();
+	}
+
+	private static String createGui(GuiAutomator automator, SetuArg... args) throws Exception {
+		SetuResponse response = SetuConnectUtils.sendRequest(
+				ArjunaComponent.GUI,
+				GuiActionType.CREATE_GUI, 
+				SetuConnectUtils.concat (args, 
+						new SetuArg[] {SetuArg.arg("automatorSetuId", automator.getSetuId())}
+				)
+		);
+		return response.getGuiSetuId();
 	}
 	
 	public BaseGui(GuiAutomator automator, String label, String defFileName) throws Exception {

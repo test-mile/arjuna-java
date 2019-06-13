@@ -1,9 +1,14 @@
 package arjuna.lib.setu.core.requester.config;
 
+import java.util.Map;
+
 import arjuna.lib.enums.BrowserName;
 import arjuna.lib.enums.GuiAutomationContext;
+import arjuna.lib.setu.core.requester.action.ConfigActionType;
+import arjuna.lib.setu.core.requester.action.SetuActionType;
 import arjuna.lib.setu.core.requester.connector.BaseSetuObject;
 import arjuna.lib.setu.core.requester.connector.SetuArg;
+import arjuna.lib.setu.core.requester.connector.SetuConnectUtils;
 import arjuna.lib.setu.core.requester.connector.SetuResponse;
 import arjuna.lib.setu.testsession.requester.TestSession;
 import arjuna.lib.state.ArjunaSingleton;
@@ -23,14 +28,36 @@ public class DefaultTestConfig extends BaseSetuObject implements TestConfig {
 		this.setSelfSetuIdArg("configSetuId");
 		this.setTestSessionSetuIdArg(testSession.getSetuId());
 	}
+	
+	private static String registerConfig(TestSession testSession, boolean hasParent, String parentConfigId, Map<String, String> arjunaOptions, Map<String, Value> userOptions) throws Exception {
+		SetuResponse response = SetuConnectUtils.sendRequest(
+				ArjunaComponent.CONFIGURATOR,
+				ConfigActionType.REGISTER_NEW_CONFIG, 
+				SetuArg.testSessionArg(testSession.getSetuId()),
+				SetuArg.arg("hasParent", hasParent),
+				SetuArg.arg("parentConfigId", parentConfigId),
+				SetuArg.arg("arjunaOptions", arjunaOptions),
+				SetuArg.arg("userOptions", userOptions)
+		);
+		return response.getValueForConfigSetuId();
+	}
+
+	public static String registerConfig(TestSession testSession, Map<String, String> arjunaOptions, Map<String, Value> userOptions) throws Exception {
+		return registerConfig(testSession, false, null, arjunaOptions, userOptions);
+	}
+	
+	public static String registerChildConfig(TestSession testSession, String parentConfigId, Map<String, String> arjunaOptions, Map<String, Value> userOptions) throws Exception {
+		return registerConfig(testSession, true, parentConfigId, arjunaOptions, userOptions);
+	}
 
 	@Override
 	public TestSession getTestSession() {
 		return this.session;
 	}
 	
-	private Value fetchConfOptionValue(SetuActionType actionType, String option) throws Exception {
+	private Value fetchConfOptionValue(ConfigActionType actionType, String option) throws Exception {
 		SetuResponse response = this.sendRequest(
+				ArjunaComponent.CONFIGURATOR,
 				actionType,
 				SetuArg.arg("option", option)
 		);
@@ -39,21 +66,21 @@ public class DefaultTestConfig extends BaseSetuObject implements TestConfig {
 	
 	public Value getArjunaOptionValue(String option) throws Exception{
 		return this.fetchConfOptionValue(
-				SetuActionType.CONFIGURATOR_GET_ARJUNA_OPTION_VALUE,
+				ConfigActionType.GET_ARJUNA_OPTION_VALUE,
 				ArjunaSingleton.INSTANCE.normalizeArjunaOption(option).toString()
 		);
 	}	
 	
 	public Value getArjunaOptionValue(ArjunaOption option) throws Exception{
 		return this.fetchConfOptionValue(
-				SetuActionType.CONFIGURATOR_GET_ARJUNA_OPTION_VALUE,
+				ConfigActionType.GET_ARJUNA_OPTION_VALUE,
 				option.toString()
 		);
 	}
 	
 	public Value getUserOptionValue(String option) throws Exception{
 		return this.fetchConfOptionValue(
-				SetuActionType.CONFIGURATOR_GET_USER_OPTION_VALUE,
+				ConfigActionType.GET_USER_OPTION_VALUE,
 				ArjunaSingleton.INSTANCE.normalizeUserOption(option)
 		);
 	}

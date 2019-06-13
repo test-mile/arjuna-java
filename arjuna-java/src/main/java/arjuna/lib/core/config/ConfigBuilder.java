@@ -93,12 +93,14 @@ public class ConfigBuilder {
 	public void build(String configName) throws Exception {
 		String configSetuId;
 		if (this.sourceConfigSetuId == null) {
-			configSetuId = this.testSession.registerConfig(
+			configSetuId = DefaultTestConfig.registerConfig(
+					testSession,
 					this.configContainer.getArjunaOptions().strItems(), 
 					this.configContainer.getUserOptions().items()
 			);
 		} else {
-			configSetuId = this.testSession.registerChildConfig(
+			configSetuId = DefaultTestConfig.registerChildConfig(
+					testSession,
 					this.sourceConfigSetuId, 
 					this.configContainer.getArjunaOptions().strItems(), 
 					this.configContainer.getUserOptions().items()

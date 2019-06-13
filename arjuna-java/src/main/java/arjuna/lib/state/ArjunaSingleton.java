@@ -15,7 +15,7 @@ import org.testng.ITestContext;
 import arjuna.lib.batteries.console.Console;
 import arjuna.lib.core.config.CliArgsConfig;
 import arjuna.lib.core.config.DefaultTestContext;
-import arjuna.lib.setu.core.requester.config.SetuActionType;
+import arjuna.lib.setu.core.requester.action.SetuActionType;
 import arjuna.lib.setu.core.requester.connector.SetuService;
 import arjuna.lib.setu.guiauto.requester.automator.DefaultGuiAutomator;
 import arjuna.lib.setu.testsession.requester.DefaultTestSession;
@@ -146,7 +146,7 @@ public enum ArjunaSingleton {
 		String PATTERN = null;
 		PATTERN = "(%F:%L)\t%m%n";
 		console.setLayout(new PatternLayout(PATTERN));
-		console.setThreshold(Level.INFO);
+		console.setThreshold(Level.DEBUG);
 		console.activateOptions();
 		Logger.getLogger(loggerName).addAppender(console);
 

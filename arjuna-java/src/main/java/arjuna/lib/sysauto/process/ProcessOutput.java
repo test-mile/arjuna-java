@@ -56,6 +56,7 @@ public class ProcessOutput {
 
 	public void exitProcess() throws Exception{
 		proc.destroyForcibly();
+		Thread.sleep(1000);
 	}
 
 }

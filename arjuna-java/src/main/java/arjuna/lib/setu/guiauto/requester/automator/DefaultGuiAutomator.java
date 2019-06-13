@@ -19,7 +19,8 @@
 
 package arjuna.lib.setu.guiauto.requester.automator;
 
-import arjuna.lib.setu.core.requester.config.SetuActionType;
+import arjuna.lib.setu.core.requester.action.GuiAutoActionType;
+import arjuna.lib.setu.core.requester.config.ArjunaComponent;
 import arjuna.lib.setu.core.requester.connector.SetuArg;
 import arjuna.lib.setu.core.requester.connector.SetuResponse;
 import arjuna.lib.setu.guiauto.requester.component.GuiAutoComponentFactory;
@@ -45,20 +46,22 @@ public class DefaultGuiAutomator extends AbstractAppAutomator implements GuiAuto
 		SetuResponse response;
 		if (this.extendedConfig != null) {
 			response = this.sendRequest(
-					SetuActionType.TESTSESSION_LAUNCH_GUIAUTOMATOR, 
+					ArjunaComponent.GUI_AUTOMATOR,
+					GuiAutoActionType.LAUNCH_AUTOMATOR, 
 					SetuArg.configArg(this.getConfig().getSetuId()),
 					SetuArg.arg("extendedConfig", extendedConfig)
 			);
 		} else {
 			response = this.sendRequest(
-					SetuActionType.TESTSESSION_LAUNCH_GUIAUTOMATOR, 
+					ArjunaComponent.GUI_AUTOMATOR,
+					GuiAutoActionType.LAUNCH_AUTOMATOR, 
 					SetuArg.configArg(this.getConfig().getSetuId())
 			);				
 		}
 		this.setSetuId(response.getValueForGuiAutomatorSetuId());
 		this.setSelfSetuIdArg("automatorSetuId");
 		
-		SetuResponse winResponse = this.sendRequest(SetuActionType.GUIAUTO_GET_MAIN_WINDOW);
+		SetuResponse winResponse = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE_MAIN_WINDOW);
 		this.setMainWindow(GuiAutoComponentFactory.MainWindow(this.getTestSession(), this, winResponse.getValueForElementSetuId()));
 		
 		this.setDomRoot(GuiAutoComponentFactory.DomRoot(this.getTestSession(), this));
@@ -69,7 +72,7 @@ public class DefaultGuiAutomator extends AbstractAppAutomator implements GuiAuto
 
 	@Override
 	public void quit() throws Exception {
-		this.sendRequest(SetuActionType.TESTSESSION_QUIT_GUIAUTOMATOR);
+		this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.QUIT_AUTOMATOR);
 	}
 
 }

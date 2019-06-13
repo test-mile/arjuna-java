@@ -10,9 +10,12 @@ import java.util.NoSuchElementException;
 
 import arjuna.lib.core.value.AbstractValueList;
 import arjuna.lib.core.value.StringKeyValueMap;
-import arjuna.lib.setu.core.requester.config.SetuActionType;
+import arjuna.lib.setu.core.requester.action.DataSourceActionType;
+import arjuna.lib.setu.core.requester.action.SetuActionType;
+import arjuna.lib.setu.core.requester.config.ArjunaComponent;
 import arjuna.lib.setu.core.requester.connector.BaseSetuObject;
 import arjuna.lib.setu.core.requester.connector.SetuArg;
+import arjuna.lib.setu.core.requester.connector.SetuConnectUtils;
 import arjuna.lib.setu.core.requester.connector.SetuResponse;
 import arjuna.lib.setu.testsession.requester.TestSession;
 import arjuna.tpi.ddauto.ListDataRecord;
@@ -245,7 +248,19 @@ abstract class DefaultFileDataSourceBuiler<T> implements FileDataSourceBuilder<T
 		if (delimiter != null) {
 			argPairs.add(SetuArg.arg("delimiter", this.delimiter));
 		}
-		return testSession.createFileDataSource(recordType, this.fileName, argPairs);		
+		return createFileDataSource(recordType, this.fileName, argPairs);		
+	}
+
+	private String createFileDataSource(DataRecordType recordType, String fileName, List<SetuArg> argPairs) throws Exception {
+		SetuResponse response = SetuConnectUtils.sendRequest(
+				ArjunaComponent.DATA_SOURCE,
+				DataSourceActionType.CREATE_FILE_DATA_SOURCE, 
+				SetuConnectUtils.concat(
+						new SetuArg[] {SetuArg.testSessionArg(testSession.getSetuId()), SetuArg.arg("fileName", fileName), SetuArg.arg("recordType", recordType)}, 
+						argPairs.toArray(new SetuArg[] {})
+				)
+		);
+		return response.getDataSourceSetuId();
 	}
 	
 	protected TestSession getTestSession() {
@@ -327,11 +342,11 @@ abstract class SetuDataSource<D> extends BaseSetuObject {
 	}	
 	
 	protected SetuResponse sendAllRecordRequestToSetu() throws Exception {
-		return this.sendRequest(SetuActionType.DATASOURCE_GET_ALL_RECORDS);
+		return this.sendRequest(ArjunaComponent.DATA_SOURCE, DataSourceActionType.GET_ALL_RECORDS);
 	}
 	
 	protected SetuResponse sendNextRequestToSetu() throws Exception {
-		return this.sendRequest(SetuActionType.DATASOURCE_GET_NEXT_RECORD);	
+		return this.sendRequest(ArjunaComponent.DATA_SOURCE, DataSourceActionType.GET_NEXT_RECORD);	
 	}
 	
 	public void reset() throws Exception {

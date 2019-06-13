@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2015-18 Test Mile Software Testing Pvt Ltd
+ * Copyright 2015-19 Test Mile Software Testing Pvt Ltd
  * 
  * Website: www.TestMile.com
  * Email: support [at] testmile.com
@@ -17,25 +17,9 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjex.s01config;
+package arjuna.lib.setu.core.requester.action;
 
-import arjuna.tpi.Arjuna;
-import arjuna.tpi.guiauto.GuiAutomator;
-
-public class Basic1WithCentralTestContext{
-	
-	public static void main (String args[]) throws Exception {
-		// Initialize Arjuna
-		Arjuna.init();
-		
-		// Create Automator (default is Selenium) with default options
-		GuiAutomator automator = Arjuna.createGuiAutomator(Arjuna.getCentralConfig());
-		
-		// Basic flow in chrome
-		automator.Browser().goToUrl("https://www.google.com");
-		System.out.println(automator.MainWindow().getTitle());
-		automator.quit();
-		Arjuna.exit();
-	}
-
+public enum SetuActionType {
+	HELLO,
+	EXIT
 }

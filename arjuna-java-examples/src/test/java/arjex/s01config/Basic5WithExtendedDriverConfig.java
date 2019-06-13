@@ -40,6 +40,8 @@ public class Basic5WithExtendedDriverConfig{
 		automator.Browser().goToUrl("https://www.google.com");
 		System.out.println(automator.MainWindow().getTitle());
 		automator.quit();
+		
+		Arjuna.exit();
 	}
 
 }

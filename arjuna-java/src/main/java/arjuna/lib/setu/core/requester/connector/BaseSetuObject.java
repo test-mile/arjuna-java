@@ -28,13 +28,12 @@ import com.google.gson.GsonBuilder;
 import arjuna.lib.core.value.AnyRefValue;
 import arjuna.lib.httpclient.BasicRestClient;
 import arjuna.lib.httpclient.SetuHttpException;
-import arjuna.lib.setu.core.requester.config.SetuActionType;
+import arjuna.lib.setu.core.requester.action.SetuActionType;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.value.Value;
 
 public class BaseSetuObject implements SetuManagedObject {
 	private String setuId;
-	private static SetuRequester setuClient = new DefaultSetuRequester();
 	private Map<String, Object> coreArgs = new HashMap<String, Object>();
 
 	@Override
@@ -47,15 +46,15 @@ public class BaseSetuObject implements SetuManagedObject {
 	}
 	
 	protected void setTestSessionSetuIdArg(String id) {
-		this.coreArgs.put("testSessionSetuId", id);
+		SetuConnectUtils.setTestSessionSetuIdArg(coreArgs, id);
 	}
 	
 	protected void setAutomatorSetuIdArg(String id) {
-		this.coreArgs.put("automatorSetuId", id);
+		SetuConnectUtils.setAutomatorSetuIdArg(coreArgs, id);
 	}
 	
 	protected void setGuiSetuIdArg(String id) {
-		this.coreArgs.put("guiSetuId", id);
+		SetuConnectUtils.setGuiSetuIdArg(coreArgs, id);
 	}
 	
 	protected void setSelfSetuIdArg(String idName) {
@@ -63,38 +62,15 @@ public class BaseSetuObject implements SetuManagedObject {
 	}
 	
 	protected void addArgs(SetuArg... args) {
-		for(SetuArg arg: args) {
-			coreArgs.put(arg.getName(), arg.getObject());
-		}		
+		SetuConnectUtils.addArgs(coreArgs, args);		
 	}
 	
-	private void prepareRequestWithCoreArgs(SetuRequest request) {
-		for(String name: coreArgs.keySet()) {
-			request.addArg(name, coreArgs.get(name));
-		}		
+	protected <E1 extends Enum<E1>,E2 extends Enum<E2>> SetuResponse sendRequest(E1 component, E2 actionType) throws Exception {
+		return SetuConnectUtils.sendRequest(component, actionType, coreArgs);
 	}
 	
-	private void prepareRequest(SetuRequest request, SetuArg...args) {
-		for(SetuArg arg: args) {
-			request.addArg(arg.getName(), arg.getObject());
-		}		
-	}
-	
-	protected SetuRequest createRequest(SetuActionType actionType, SetuArg... args) {
-		SetuRequest request = new DefaultSetuRequest(actionType);
-		this.prepareRequestWithCoreArgs(request);
-		this.prepareRequest(request, args);
-		return request;
-	}
-	
-	protected SetuResponse sendRequest(SetuActionType actionType) throws Exception {
-		SetuRequest request = this.createRequest(actionType);
-		return setuClient.post(request);
-	}
-	
-	protected SetuResponse sendRequest(SetuActionType actionType, SetuArg... args) throws Exception {
-		SetuRequest request = this.createRequest(actionType, args);
-		return setuClient.post(request);
+	protected <E1 extends Enum<E1>,E2 extends Enum<E2>> SetuResponse sendRequest(E1 component, E2 actionType, SetuArg... args) throws Exception {
+		return SetuConnectUtils.sendRequest(component, actionType, coreArgs, args);
 	}
 
 }
@@ -102,6 +78,7 @@ public class BaseSetuObject implements SetuManagedObject {
 interface SetuRequester {
 
 	SetuResponse post(SetuRequest action) throws Exception;
+	void postExit(SetuRequest action) throws Exception;
 
 }
 
@@ -117,6 +94,15 @@ class DefaultSetuRequester implements SetuRequester {
 
 	public DefaultSetuRequester() {
 		this.restClient = new BasicRestClient(setuUrl);
+	}
+	
+	@Override
+	public void postExit(SetuRequest action) throws Exception {
+		try {
+			this.restClient.post(baseUri, action.asJsonString());
+		} catch (Exception e) {
+			
+		}
 	}
 
 	@Override
@@ -162,9 +148,10 @@ class DefaultSetuRequest implements SetuRequest {
 	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	private RequestBody actionRequest;
 	
-	public DefaultSetuRequest(SetuActionType actionType) {
+	public DefaultSetuRequest(String component, String actionType) {
 		this.actionRequest = new RequestBody();
-		this.actionRequest.setAction(actionType.toString());
+		this.actionRequest.setComponent(component);
+		this.actionRequest.setAction(actionType);
 	}
 	
 	public DefaultSetuRequest(String testSessionSetuId) {
@@ -192,6 +179,7 @@ class DefaultSetuRequest implements SetuRequest {
 	}
 	
 	private class RequestBody {
+		private String component;
 		private String action;
 //		private String setuId;
 		private Map<String,Object> args = null;
@@ -203,18 +191,13 @@ class DefaultSetuRequest implements SetuRequest {
 			this.args.put(name, value);
 		}
 		
+		public void setComponent(String component) {
+			this.component = component;
+		}
+
 		public void setAction(String action) {
 			this.action = action;
 		}
-//
-//		public String getSetuId() {
-//			return setuId;
-//		}
-//
-//		public void setSetuId(String setuId) {
-//			this.setuId = setuId;
-//		}
-
 	}	
 }
 

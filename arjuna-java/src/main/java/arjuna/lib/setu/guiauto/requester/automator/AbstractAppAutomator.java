@@ -24,7 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import arjuna.lib.enums.GuiAutomationContext;
-import arjuna.lib.setu.core.requester.config.SetuActionType;
+import arjuna.lib.setu.core.requester.action.GuiAutoActionType;
+import arjuna.lib.setu.core.requester.config.ArjunaComponent;
 import arjuna.lib.setu.core.requester.connector.BaseSetuObject;
 import arjuna.lib.setu.core.requester.connector.SetuArg;
 import arjuna.lib.setu.core.requester.connector.SetuResponse;
@@ -74,12 +75,12 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 		return false;
 	}
 
-	protected String takeElementFindingAction(SetuActionType actionType, SetuArg... args) throws Exception {
-		SetuResponse response = this.sendRequest(actionType, args);
+	protected String takeElementFindingAction(GuiAutoActionType actionType, SetuArg... args) throws Exception {
+		SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType, args);
 		return response.getValueForElementSetuId();		
 	}
 
-	private String createGenericElement(SetuActionType actionType, With... locators) throws Exception {
+	private String createGenericElement(GuiAutoActionType actionType, With... locators) throws Exception {
 		List<Map<String,Object>> arg = new ArrayList<Map<String,Object>>();
 		for(With locator: locators) {
 			arg.add(locator.asMap());
@@ -92,31 +93,31 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 
 	@Override
 	public GuiElement Element(With... locators) throws Exception {
-		String elemSetuId = createGenericElement(SetuActionType.GUIAUTO_CREATE_ELEMENT, locators);
+		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE_ELEMENT, locators);
 		return GuiAutoComponentFactory.Element(this.testSession, this, elemSetuId);
 	}
 
 	@Override
 	public GuiMultiElement MultiElement(With... locators) throws Exception {
-		String elemSetuId = createGenericElement(SetuActionType.GUIAUTO_CREATE_MULTIELEMENT, locators);
+		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE_MULTIELEMENT, locators);
 		return GuiAutoComponentFactory.MultiElement(this.testSession, this, elemSetuId);
 	}
 
 	@Override
 	public DropDown DropDown(With... locators) throws Exception {
-		String elemSetuId = createGenericElement(SetuActionType.GUIAUTO_CREATE_DROPDOWN, locators);
+		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE_DROPDOWN, locators);
 		return GuiAutoComponentFactory.DropDown(this.testSession, this, elemSetuId);
 	}
 
 	@Override
 	public RadioGroup RadioGroup(With... locators) throws Exception {
-		String elemSetuId = createGenericElement(SetuActionType.GUIAUTO_CREATE_RADIOGROUP, locators);
+		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE_RADIOGROUP, locators);
 		return GuiAutoComponentFactory.RadioGroup(this.testSession, this, elemSetuId);
 	}
 
 	@Override
 	public Alert Alert() throws Exception {
-		String elemSetuId = takeElementFindingAction(SetuActionType.GUIAUTO_CREATE_ALERT);
+		String elemSetuId = takeElementFindingAction(GuiAutoActionType.DEFINE_ALERT);
 		return GuiAutoComponentFactory.Alert(this.testSession, this, elemSetuId);
 	}
 	
@@ -182,7 +183,8 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 	@Override
 	public void enableSlowMotion(boolean on, int interval) throws Exception {
 		this.sendRequest(
-				SetuActionType.GUIAUTO_SET_SLOMO,
+				ArjunaComponent.GUI_AUTOMATOR,
+				GuiAutoActionType.SET_SLOMO,
 				SetuArg.arg("on", on),
 				SetuArg.arg("interval", interval)
 		);
@@ -191,14 +193,18 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 	@Override
 	public void enableSlowMotion(boolean on) throws Exception {
 		this.sendRequest(
-				SetuActionType.GUIAUTO_SET_SLOMO,
+				ArjunaComponent.GUI_AUTOMATOR, 
+				GuiAutoActionType.SET_SLOMO,
 				SetuArg.arg("on", on)
 		);
 	}
 	
 	@Override
 	public void executeJavaScript(String script) throws Exception {
-		this.sendRequest(SetuActionType.GUIAUTO_BROWSER_EXECUTE_JAVASCRIPT, SetuArg.arg("script", script));
+		this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, 
+				GuiAutoActionType.BROWSER_EXECUTE_JAVASCRIPT, 
+				SetuArg.arg("script", script)
+		);
 	}
 
 }
