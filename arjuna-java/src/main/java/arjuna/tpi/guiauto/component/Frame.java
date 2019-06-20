@@ -19,7 +19,7 @@
 
 package arjuna.tpi.guiauto.component;
 
-import arjuna.lib.setu.core.requester.connector.SetuManagedObject;
+import arjuna.client.core.connector.SetuManagedObject;
 import arjuna.tpi.guiauto.With;
 
 public interface Frame extends SetuManagedObject{

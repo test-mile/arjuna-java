@@ -19,7 +19,7 @@
 
 package arjuna.tpi.guiauto;
 
-import arjuna.lib.setu.guiauto.requester.automator.AppAutomator;
+import arjuna.client.guiauto.automator.AppAutomator;
 import arjuna.tpi.guiauto.component.ChildWindow;
 import arjuna.tpi.guiauto.component.DropDown;
 import arjuna.tpi.guiauto.component.Frame;

@@ -19,8 +19,8 @@
 
 package arjuna.tpi.guiauto;
 
-import arjuna.lib.setu.guiauto.requester.automator.AppAutomator;
-import arjuna.lib.setu.testsession.requester.TestSession;
+import arjuna.client.guiauto.automator.AppAutomator;
+import arjuna.client.testsession.TestSession;
 
 public interface GuiAutomator extends AppAutomator{
 	void quit() throws Exception;

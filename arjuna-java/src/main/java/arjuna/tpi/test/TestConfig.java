@@ -1,9 +1,9 @@
 package arjuna.tpi.test;
 
+import arjuna.client.core.connector.SetuManagedObject;
+import arjuna.client.testsession.TestSession;
 import arjuna.lib.enums.BrowserName;
 import arjuna.lib.enums.GuiAutomationContext;
-import arjuna.lib.setu.core.requester.connector.SetuManagedObject;
-import arjuna.lib.setu.testsession.requester.TestSession;
 import arjuna.tpi.enums.ArjunaOption;
 import arjuna.tpi.value.Value;
 

@@ -18,7 +18,7 @@
  ******************************************************************************/
 
 package arjuna.tpi.guiauto;
-import arjuna.lib.setu.guiauto.requester.gui.BaseGui;
+import arjuna.client.guiauto.gui.BaseGui;
 
 public class DefaultGui extends BaseGui{
 	

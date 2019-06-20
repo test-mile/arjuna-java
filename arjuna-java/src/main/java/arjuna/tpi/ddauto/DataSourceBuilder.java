@@ -1,9 +1,9 @@
 package arjuna.tpi.ddauto;
 
-import arjuna.lib.setu.databroker.requester.DataContainerBuilder;
-import arjuna.lib.setu.databroker.requester.FileDataSourceBuilder;
-import arjuna.lib.setu.databroker.requester.SetuDataSourceBuilder;
-import arjuna.lib.setu.testsession.requester.TestSession;
+import arjuna.client.databroker.DataContainerBuilder;
+import arjuna.client.databroker.FileDataSourceBuilder;
+import arjuna.client.databroker.SetuDataSourceBuilder;
+import arjuna.client.testsession.TestSession;
 
 public class DataSourceBuilder{
 	private TestSession session;

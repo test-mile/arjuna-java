@@ -19,7 +19,7 @@
 
 package arjuna.tpi.guiauto.component;
 
-import arjuna.lib.setu.core.requester.connector.SetuManagedObject;
+import arjuna.client.core.connector.SetuManagedObject;
 
 public interface Browser extends SetuManagedObject {
 	void goToUrl(String url) throws Exception;

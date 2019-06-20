@@ -2,7 +2,7 @@ package arjuna.tpi.test;
 
 import java.util.Map;
 
-import arjuna.lib.core.config.ConfigBuilder;
+import arjuna.lib.config.ConfigBuilder;
 
 public interface TestContext {
 	
