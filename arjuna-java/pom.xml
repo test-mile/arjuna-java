@@ -10,7 +10,7 @@
 
 	<name>arjuna-java</name>
 
-	<description>Arjuna-Java is the client side/requester implementation in Java for development of test automation using Arjuna. It is a re-usable Java library for test automation, to be used primarily with TestNG. With minor tweaks, it can be used with any other test engine or custom test automation implementations. The library is a generic client library for Arjuna, a Python based test automation framework developed by Rahul Verma (www.rahulverma.net)</description>
+	<description>Arjuna-Java is the client implementation in Java for development of test automation using Arjuna. It uses TestNG as the test engine. With minor tweaks, it can be used with any other test engine or custom test automation implementations. Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net)</description>
 
 	<url>https://testmile.com/arjuna</url>
 
@@ -28,17 +28,6 @@
 		<jetty.version>9.4.0.M0</jetty.version>
 	</properties>
 	<dependencies>
-
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-servlet</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>com.sun.jna</groupId>
@@ -90,13 +79,7 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.8</version>
 		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -179,7 +162,7 @@
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:git:git://github.com/dexecutor/dependent-tasks-executor.git</connection>
+		<connection>scm:git:git://github.com/test-mile/arjuna-java.git</connection>
 		<developerConnection>scm:git:git@github.com:test-mile/arjuna-java.git</developerConnection>
 		<url>https://github.com/tes-mile/arjuna-java</url>
 		<tag>HEAD</tag>

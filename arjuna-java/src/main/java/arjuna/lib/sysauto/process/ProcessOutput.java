@@ -14,9 +14,10 @@ public class ProcessOutput {
 		this.proc = proc;
 		// any error message?
 		errorGobbler = new ThreadSafeStreamReader(proc.getErrorStream(), "ERROR");
-
+		errorGobbler.setPriority(Thread.MAX_PRIORITY);
 		// any output?
 		outputGobbler = new ThreadSafeStreamReader(proc.getInputStream(), "OUTPUT");
+		outputGobbler.setPriority(Thread.MAX_PRIORITY);
 
 		// kick them off
 		errorGobbler.start();
@@ -55,7 +56,7 @@ public class ProcessOutput {
 	}
 
 	public void exitProcess() throws Exception{
-		proc.destroyForcibly();
+		proc.destroy();
 		Thread.sleep(1000);
 	}
 

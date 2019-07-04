@@ -39,7 +39,7 @@ public class ThreadSafeStreamReader extends Thread {
 			InputStreamReader isr = new InputStreamReader(is);
 			BufferedReader br = new BufferedReader(isr);
 			String line = null;
-			while ((line = br.readLine()) != null)
+			while ((line = br.readLine()) != null) 
 				output.append(line + System.getProperty("line.separator"));
 		} catch (IOException ioe) {
 			ioe.printStackTrace();

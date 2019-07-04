@@ -19,6 +19,7 @@
 
 package arjuna.lib.sysauto.process;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,8 +71,11 @@ public class CommandExecutor {
 
 	public ProcessOutput execute() throws Exception {
 		System.out.println(Arrays.asList(getCommandArray()));
-		Process proc = Runtime.getRuntime().exec(getCommandArray());
-		return new ProcessOutput(proc);
+		//Process proc = Runtime.getRuntime()..exec(getCommandArray());
+		ProcessBuilder pb = new ProcessBuilder(getCommandArray());
+		pb.redirectError(new File("/Users/rahulverma/Documents/________stderr.txt"));
+		pb.redirectOutput(new File("/Users/rahulverma/Documents/________stdout.txt"));
+		return new ProcessOutput(pb.start());
 	}
 
 }
