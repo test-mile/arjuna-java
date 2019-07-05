@@ -1,11 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.testmile</groupId>
 	<artifactId>arjuna-java</artifactId>
-	<version>0.1.0-beta-SNAPSHOT</version>
+	<version>0.1.0-beta</version>
 	<packaging>jar</packaging>
 
 	<name>arjuna-java</name>
@@ -165,7 +163,7 @@
 		<connection>scm:git:git://github.com/test-mile/arjuna-java.git</connection>
 		<developerConnection>scm:git:git@github.com:test-mile/arjuna-java.git</developerConnection>
 		<url>https://github.com/tes-mile/arjuna-java</url>
-		<tag>HEAD</tag>
+		<tag>arjuna-java-0.1.0-beta</tag>
 	</scm>
 
 
