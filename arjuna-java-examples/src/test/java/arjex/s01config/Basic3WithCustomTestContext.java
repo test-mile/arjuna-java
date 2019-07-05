@@ -49,8 +49,6 @@ public class Basic3WithCustomTestContext{
 		automator.Browser().goToUrl("https://www.google.com");
 		System.out.println(automator.MainWindow().getTitle());
 		automator.quit();
-		
-		Arjuna.exit();
 	}
 
 }
