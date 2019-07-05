@@ -3,7 +3,7 @@
 
 	<groupId>com.testmile</groupId>
 	<artifactId>arjuna-java</artifactId>
-	<version>0.1.0-beta</version>
+	<version>0.1.1-beta-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>arjuna-java</name>
@@ -163,7 +163,7 @@
 		<connection>scm:git:git://github.com/test-mile/arjuna-java.git</connection>
 		<developerConnection>scm:git:git@github.com:test-mile/arjuna-java.git</developerConnection>
 		<url>https://github.com/tes-mile/arjuna-java</url>
-		<tag>arjuna-java-0.1.0-beta</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 
