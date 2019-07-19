@@ -10,10 +10,10 @@ Documentation for Arjuna is in progress. You can can find the currrent help doc 
 
 ### Arjuna-setup in windows 
 
-1. Download Java8 64 bit from https://adoptopenjdk.net/archive.html
-2. Download the latest eclipse
+1. Download Java8 64-bit from https://adoptopenjdk.net/archive.html
+2. Download the latest Eclipse from https://www.eclipse.org/eclipseide/
 3. Create a maven project
-4. Update the properties in pom.xml to target as java8 compiler
+4. Update the properties in pom.xml to mention Java 1.8 as compiler.
     * `<maven.compiler.source>1.8</maven.compiler.source>`
     * `<maven.compiler.target>1.8</maven.compiler.target>`
 5. Add arjuna-java dependency to the project's pom.
@@ -21,20 +21,20 @@ Documentation for Arjuna is in progress. You can can find the currrent help doc 
 <dependency>
    <groupId>com.testmile</groupId>
    <artifactId>arjuna-java</artifactId>
-   <version>0.1.1-beta</version>
+   <version>0.1.1</version>
 </dependency>
  ```
-6. Download and install python3.6+ from https://python.org, version used https://www.python.org/ftp/python/3.7.4/python-3.7.4.exe
+6. Download and install latest Python (3.5+) from https://python.org
     * If you are insterested to learn python Following are links for tutorials and docs.
     + https://docs.python.org/3.7/tutorial/index.html
     + https://docs.python.org/3.7/index.html
-7. Install Git as well https://git-scm.com/downloads
-8. Add the git bin path(C:\Program Files\Git\bin) to PATH environment 
-9. Add python path to the PATH environment variable If it is not added.
+7. Install Git https://git-scm.com/downloads
+8. Add the git bin path(C:\Program Files\Git\bin) to PATH environment variable.
+9. Add python path to the PATH environment variable if it is not added.
 10. Confirm the python version installed by running the command `python --version`
 11. Install the arjuna-python binding using the following command
     * `pip install git+https://github.com/test-mile/arjuna.git@master`
 12. Run the following command to create the project directory structure
-    * `python -m arjuna create-project --non-unitee -p absolute-project-path of the maven project`
+    * `python -m arjuna create-project --non-unitee -p <Absolute directory path of the Java project>`
     * EXAMPLE
     * `python -m arjuna create-project --non-unitee -p C:\Users\test\eclipse-workspace\arjuna-demo`
