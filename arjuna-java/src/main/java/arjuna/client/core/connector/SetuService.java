@@ -112,7 +112,7 @@ public class SetuService {
 		} else {
 		    // Port is available
 			String[] cargs = {"-m", "arjuna", "launch-setu", "--port", props.getProperty("setu.port")};
-			CommandExecutor ce = new CommandExecutor(props.getProperty("python3.bin.path"), cargs);
+			CommandExecutor ce = new CommandExecutor(props.getProperty("python.bin.path"), cargs);
 			po = ce.execute();
 			waitForSetu();
 		}

@@ -73,8 +73,9 @@ public class CommandExecutor {
 		System.out.println(Arrays.asList(getCommandArray()));
 		//Process proc = Runtime.getRuntime()..exec(getCommandArray());
 		ProcessBuilder pb = new ProcessBuilder(getCommandArray());
-		pb.redirectError(new File("/Users/rahulverma/Documents/________stderr.txt"));
-		pb.redirectOutput(new File("/Users/rahulverma/Documents/________stdout.txt"));
+		String logDir = System.getProperty("user.dir") + File.separator + "log" + File.separator;
+		pb.redirectError(new File(logDir + "service_stderr.txt"));
+		pb.redirectOutput(new File(logDir + "service_stdout.txt"));
 		return new ProcessOutput(pb.start());
 	}
 
