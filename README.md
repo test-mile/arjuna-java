@@ -8,7 +8,7 @@ A Python version of this client lib is a part of the Arjuna project itself.
 
 Documentation for Arjuna is in progress. You can can find the currrent help doc on Test Mile website at https://testmile.com/arjuna
 
-### Arjuna-setup in windows 
+### Setting Up Arjuna-Java on Windows 
 
 1. Download Java8 64-bit from https://adoptopenjdk.net/archive.html
 2. Download the latest Eclipse from https://www.eclipse.org/eclipseide/
