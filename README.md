@@ -7,3 +7,34 @@ The library is a generic client library for Arjuna, a Python based test automati
 A Python version of this client lib is a part of the Arjuna project itself.
 
 Documentation for Arjuna is in progress. You can can find the currrent help doc on Test Mile website at https://testmile.com/arjuna
+
+### Arjuna-setup in windows 
+
+1. Download Java8 64 bit from https://adoptopenjdk.net/archive.html
+2. Download the latest eclipse
+3. Create a maven project
+4. Update the properties in pom.xml to target as java8 compiler
+    * `<maven.compiler.source>1.8</maven.compiler.source>`
+    * `<maven.compiler.target>1.8</maven.compiler.target>`
+5. Add arjuna-java dependency to the project's pom.
+ ```xml
+<dependency>
+   <groupId>com.testmile</groupId>
+   <artifactId>arjuna-java</artifactId>
+   <version>0.1.1-beta</version>
+</dependency>
+ ```
+6. Download and install python3.6+ from https://python.org, version used https://www.python.org/ftp/python/3.7.4/python-3.7.4.exe
+    * If you are insterested to learn python Following are links for tutorials and docs.
+    + https://docs.python.org/3.7/tutorial/index.html
+    + https://docs.python.org/3.7/index.html
+7. Install Git as well https://git-scm.com/downloads
+8. Add the git bin path(C:\Program Files\Git\bin) to PATH environment 
+9. Add python path to the PATH environment variable If it is not added.
+10. Confirm the python version installed by running the command `python --version`
+11. Install the arjuna-python binding using the following command
+    * `pip install git+https://github.com/test-mile/arjuna.git@master`
+12. Run the following command to create the project directory structure
+    * `python -m arjuna create-project --non-unitee -p absolute-project-path of the maven project`
+    * EXAMPLE
+    * `python -m arjuna create-project --non-unitee -p C:\Users\test\eclipse-workspace\arjuna-demo`
