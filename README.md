@@ -8,15 +8,16 @@ A Python version of this client lib is a part of the Arjuna project itself.
 
 Documentation for Arjuna is in progress. You can can find the currrent help doc on Test Mile website at https://testmile.com/arjuna
 
-### Setting Up Arjuna-Java on Windows 
+### Setting Up Arjuna-Java
 
-1. Download Java8 64-bit from https://adoptopenjdk.net/archive.html
-2. Download the latest Eclipse from https://www.eclipse.org/eclipseide/
-3. Create a maven project
-4. Update the properties in pom.xml to mention Java 1.8 as compiler.
+1. Install Arjuna as per instructions at this link: https://github.com/test-mile/arjuna/blob/master/README.md#arjuna-installation
+2. Download Java8 64-bit from https://adoptopenjdk.net/archive.html
+3. Download the latest Eclipse from https://www.eclipse.org/eclipseide/
+4. Create a maven project
+5. Update the properties in pom.xml to mention Java 1.8 as compiler.
     * `<maven.compiler.source>1.8</maven.compiler.source>`
     * `<maven.compiler.target>1.8</maven.compiler.target>`
-5. Add arjuna-java dependency to the project's pom.
+6. Add arjuna-java dependency to the project's pom.
  ```xml
 <dependency>
    <groupId>com.testmile</groupId>
@@ -24,17 +25,7 @@ Documentation for Arjuna is in progress. You can can find the currrent help doc 
    <version>0.1.1</version>
 </dependency>
  ```
-6. Download and install latest Python (3.5+) from https://python.org
-    * If you are insterested to learn python Following are links for tutorials and docs.
-    + https://docs.python.org/3.7/tutorial/index.html
-    + https://docs.python.org/3.7/index.html
-7. Install Git https://git-scm.com/downloads
-8. Add the git bin path(C:\Program Files\Git\bin) to PATH environment variable.
-9. Add python path to the PATH environment variable if it is not added.
-10. Confirm the python version installed by running the command `python --version`
-11. Install the arjuna-python binding using the following command
-    * `pip install git+https://github.com/test-mile/arjuna.git@master`
-12. Run the following command to create the project directory structure
+7. Create project skeleton by running the following command:
     * `python -m arjuna create-project --non-unitee -p <Absolute directory path of the Java project>`
     * EXAMPLE
     * `python -m arjuna create-project --non-unitee -p C:\Users\test\eclipse-workspace\arjuna-demo`
