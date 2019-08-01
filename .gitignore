@@ -85,3 +85,5 @@ report/results.ini
 
 Ant-Build/**
 **/release.properties
+arjex/log/service_stdout.txt
+arjex/log/service_stderr.txt
