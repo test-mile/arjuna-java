@@ -3,13 +3,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.testmile</groupId>
-  <artifactId>arjuna-java-examples</artifactId>
+  <artifactId>arjex</artifactId>
   <version>1.0.0-alpha</version>
   <packaging>jar</packaging>
 
-  <name>arjuna-java-examples</name>
+  <name>arjex</name>
 
-   <description>Arjuna-Java-Examples demonstrates usage of TestMile Arjuna-Java library. Arjuna-Java is the client side/requester implementation in Java for development of test automation using Arjuna. It is a re-usable Java library for test automation, to be used primarily with TestNG. With minor tweaks, it can be used with any other test engine or custom test automation implementations. The library is a generic client library for Arjuna, a Python based test automation framework developed by Rahul Verma (www.rahulverma.net)</description>
+   <description>Arjuex (Arjuna Examples) demonstrates usage of TestMile Arjuna-Java library. Arjuna-Java is the client side/requester implementation in Java for development of test automation using Arjuna. It is a re-usable Java library for test automation, to be used primarily with TestNG. With minor tweaks, it can be used with any other test engine or custom test automation implementations. The library is a generic client library for Arjuna, a Python based test automation framework developed by Rahul Verma (www.rahulverma.net)</description>
 	<url>https://testmile.com/arjuna</url>
 
   <properties>
@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>com.testmile</groupId>
 			<artifactId>arjuna-java</artifactId>
-			<version>0.1.0-alpha-SNAPSHOT</version>
+			<version>0.1.1</version>
 		</dependency>
   </dependencies>
 </project>
