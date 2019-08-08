@@ -12,7 +12,7 @@ Documentation for Arjuna is in progress. You can can find the currrent help doc 
 
 1. Install Arjuna as per instructions at this link: https://github.com/test-mile/arjuna/blob/master/README.md#arjuna-installation
 2. Download Java8 64-bit from https://adoptopenjdk.net/archive.html
-3. Download the latest Eclipse from https://www.eclipse.org/eclipseide/
+3. Download the latest Eclipse from Eclipse.org website. As of writing this doc, the TestNG support is not available for the latest Eclipse IDE. So, use this link: https://www.eclipse.org/downloads/packages/release/2018-09/r
 4. Create a maven project
 5. Update the properties in pom.xml to mention Java 1.8 as compiler.
     * `<maven.compiler.source>1.8</maven.compiler.source>`
@@ -28,4 +28,5 @@ Documentation for Arjuna is in progress. You can can find the currrent help doc 
 7. Create project skeleton by running the following command:
     * `python -m arjuna create-project --non-unitee -p <Absolute directory path of the Java project>`
     * EXAMPLE
-    * `python -m arjuna create-project --non-unitee -p C:\Users\test\eclipse-workspace\arjuna-demo`
+    * `python -m arjuna create-project --non-unitee -p C:\Users\test\eclipse-workspace\arjex`
+8. For running TestNG based tests within Eclipse IDE, you would need to install TestNG for Eclipse plugin from marketplace : https://marketplace.eclipse.org/content/testng-eclipse
