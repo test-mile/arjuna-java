@@ -17,23 +17,24 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjex.s02guiauto.ep01selenium;
-
-import org.testng.annotations.Test;
+package arjex.youtube.basics;
 
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.testng.TestNGBaseTest;
 
-public class Ex01Basic extends TestNGBaseTest{
+public class Y01ChromeLaunch{
 	
-	@Test
-	public void test() throws Exception{
-		GuiAutomator automator = Arjuna.createGuiAutomator();
+	public static void main (String args[]) throws Exception {
+		// Initialize Arjuna
+		Arjuna.init();
 		
+		// Create Automator (default is Selenium) with default options
+		GuiAutomator automator = Arjuna.createGuiAutomator(Arjuna.getCentralConfig());
+		
+		// Basic flow in chrome
 		automator.Browser().goToUrl("https://www.google.com");
 		System.out.println(automator.MainWindow().getTitle());
 		automator.quit();
 	}
-	
+
 }
