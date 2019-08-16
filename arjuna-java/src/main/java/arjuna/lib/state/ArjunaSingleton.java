@@ -146,7 +146,7 @@ public enum ArjunaSingleton {
 		String PATTERN = null;
 		PATTERN = "(%F:%L)\t%m%n";
 		console.setLayout(new PatternLayout(PATTERN));
-		console.setThreshold(Level.DEBUG);
+		console.setThreshold(Level.INFO);
 		console.activateOptions();
 		Logger.getLogger(loggerName).addAppender(console);
 

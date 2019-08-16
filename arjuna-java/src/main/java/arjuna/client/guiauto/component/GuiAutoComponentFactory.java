@@ -138,6 +138,16 @@ public class GuiAutoComponentFactory {
 		public void click() throws Exception {
 			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_CLICK);
 		}
+		
+		@Override
+		public void waitUntilPresent() throws Exception {
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_WAIT_UNTIL_PRESENT);
+		}
+
+		@Override
+		public void waitUntilVisible() throws Exception {
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_WAIT_UNTIL_VISIBLE);
+		}
 
 		@Override
 		public void waitUntilClickable() throws Exception {
@@ -153,6 +163,18 @@ public class GuiAutoComponentFactory {
 		public void uncheck() throws Exception {
 			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_UNCHECK);
 		}
+		
+		@Override
+		public void identify() throws Exception {
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_IDENTIFY);
+		}
+		
+
+		@Override
+		public String getSource() throws Exception {
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_GET_SOURCE);
+			return response.getValueForValueAttr();
+		}
 
 	}
 
@@ -163,8 +185,30 @@ public class GuiAutoComponentFactory {
 		}
 
 		@Override
-		public GuiElement IndexedElement(int index) {
+		public GuiElement atIndex(int index) {
 			return new DefaultGuiElement(this.getTestSession(), this.getAutomator(), this.getSetuId(), index);
+		}
+
+		@Override
+		public GuiElement first() throws Exception {
+			return atIndex(0);
+		}
+
+		@Override
+		public GuiElement last() throws Exception {
+			return atIndex(this.length() - 1);
+		}
+
+		@Override
+		public GuiElement random() throws Exception {
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MULTIELEMENT_GET_RANDOM_INDEX);
+			return atIndex(response.getValue().asInt());
+		}
+		
+		@Override
+		public int length() throws Exception {
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MULTIELEMENT_GET_INSTANCE_COUNT);
+			return response.getValue().asInt();
 		}
 
 	}

@@ -17,24 +17,29 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjuna.lib.audit;
+package arjex.youtube.scheduled;
 
-import arjuna.lib.utils.StackBatteries;
+import org.testng.annotations.Test;
+
+import arjex.youtube.basics.WPLoginLogout;
 import arjuna.tpi.Arjuna;
+import arjuna.tpi.guiauto.GuiAutomator;
+import arjuna.tpi.guiauto.With;
+import arjuna.tpi.guiauto.component.Alert;
+import arjuna.tpi.testng.TestNGBaseTest;
 
-public class HardCoded {
+public class Y19ExecuteJavaScript extends TestNGBaseTest{
 	
-	public static void log(String klass, String method, String why, float seconds) throws Exception {
-		Arjuna.getLogger().warn(String.format("Hardcoded sleep executed for %s seconds in %s.%s method. Reason by author: %s", seconds, klass, method, why));
+	@Test
+	public void test() throws Exception{
+		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
+		
+		WPLoginLogout.login(automator);
+		
+		automator.executeJavaScript("document.getElementsByClassName('welcome-view-site')[0].click();");
+		automator.Element(With.linkText("Site Admin")).waitUntilClickable();;
+		
+		WPLoginLogout.logout(automator);
 	}
 
-	public static void sleep(String why, int seconds) throws Exception {
-		Thread.sleep(seconds * 1000);
-		log(StackBatteries.getInvokingClassName(), StackBatteries.getInvokingMethodName(), why, seconds);
-	}
-
-	public static void sleep(String why, float seconds) throws Exception {
-		Thread.sleep(new Float(seconds).longValue());
-		log(StackBatteries.getInvokingClassName(), StackBatteries.getInvokingMethodName(), why, seconds);
-	}
 }

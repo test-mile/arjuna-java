@@ -17,33 +17,39 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjex.s02guiauto.ep01selenium;
+package arjex.youtube.scheduled;
 
 import org.testng.annotations.Test;
 
-import arjuna.lib.audit.HardCoded;
+import arjex.youtube.basics.WPLoginLogout;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.With;
-import arjuna.tpi.guiauto.component.GuiMultiElement;
+import arjuna.tpi.guiauto.component.ChildWindow;
+import arjuna.tpi.guiauto.component.MainWindow;
+import arjuna.tpi.testng.TestNGBaseTest;
 
-public class Ex03MultiElement {
+public class Y21WindowHandling extends TestNGBaseTest{
 	
 	@Test
 	public void test() throws Exception{
-		Arjuna.init();
-		GuiAutomator automator = Arjuna.createGuiAutomator();
+		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
 		
 		WPLoginLogout.login(automator);
 		
-		automator.Element(With.linkText("Posts")).click();
-		automator.Element(With.linkText("Categories")).click();
+		MainWindow mainWin = automator.MainWindow();
+		mainWin.maximize();
+		System.out.println(mainWin.getTitle());
 		
-		GuiMultiElement checkboxes = automator.MultiElement(With.name("delete_tags[]"));
-		checkboxes.atIndex(0).uncheck();
-		checkboxes.atIndex(0).check();
-		checkboxes.atIndex(0).check();
-		checkboxes.atIndex(1).check();
+		automator.executeJavaScript("window.open('/abc')");
+		ChildWindow win = automator.LatestChildWindow();
+		win.focus();
+		System.out.println(win.getTitle());
+		win.close();
+		
+		automator.executeJavaScript("window.open('/def')");
+		automator.executeJavaScript("window.open('/xyz')");
+		automator.closeAllChildWindows();
+		System.out.println(mainWin.getTitle());
 		
 		WPLoginLogout.logout(automator);
 	}

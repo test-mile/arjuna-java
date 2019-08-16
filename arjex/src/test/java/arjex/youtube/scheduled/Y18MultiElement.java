@@ -17,22 +17,22 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjex.s02guiauto.ep01selenium;
+package arjex.youtube.scheduled;
 
 import org.testng.annotations.Test;
 
-import arjuna.lib.audit.HardCoded;
+import arjex.youtube.basics.WPLoginLogout;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.GuiMultiElement;
+import arjuna.tpi.testng.TestNGBaseTest;
 
-public class Ex03MultiElement {
+public class Y18MultiElement extends TestNGBaseTest{
 	
 	@Test
 	public void test() throws Exception{
-		Arjuna.init();
-		GuiAutomator automator = Arjuna.createGuiAutomator();
+		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
 		
 		WPLoginLogout.login(automator);
 		
@@ -44,6 +44,10 @@ public class Ex03MultiElement {
 		checkboxes.atIndex(0).check();
 		checkboxes.atIndex(0).check();
 		checkboxes.atIndex(1).check();
+		
+		checkboxes.first().check();
+		checkboxes.last().check();
+		checkboxes.random().check();
 		
 		WPLoginLogout.logout(automator);
 	}

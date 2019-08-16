@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2015-19 Test Mile Software Testing Pvt Ltd
+ * Copyright 2015-18 Test Mile Software Testing Pvt Ltd
  * 
  * Website: www.TestMile.com
  * Email: support [at] testmile.com
@@ -17,7 +17,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjex.s02guiauto.ep01selenium;
+package arjex.youtube.scheduled;
 
 import org.testng.annotations.Test;
 
@@ -25,27 +25,23 @@ import arjuna.lib.audit.HardCoded;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
-import arjuna.tpi.guiauto.component.GuiMultiElement;
+import arjuna.tpi.guiauto.component.GuiElement;
+import arjuna.tpi.testng.TestNGBaseTest;
 
-public class Ex03MultiElement {
+public class Y15HardcodedSleep extends TestNGBaseTest{
 	
 	@Test
 	public void test() throws Exception{
-		Arjuna.init();
-		GuiAutomator automator = Arjuna.createGuiAutomator();
+		// You are stage 1
 		
-		WPLoginLogout.login(automator);
+		// You put a static wait for reasons best known to you at that time or sheer laziness :-)
+		Thread.sleep(2000);
 		
-		automator.Element(With.linkText("Posts")).click();
-		automator.Element(With.linkText("Categories")).click();
+		// Atleast do this
+		HardCoded.sleep("I am being lazy", 2);
+		HardCoded.sleep("I don't know what to do.", 2);
+		HardCoded.sleep("Temporary fix for 5 years.", 2);
 		
-		GuiMultiElement checkboxes = automator.MultiElement(With.name("delete_tags[]"));
-		checkboxes.atIndex(0).uncheck();
-		checkboxes.atIndex(0).check();
-		checkboxes.atIndex(0).check();
-		checkboxes.atIndex(1).check();
-		
-		WPLoginLogout.logout(automator);
 	}
-
+	
 }

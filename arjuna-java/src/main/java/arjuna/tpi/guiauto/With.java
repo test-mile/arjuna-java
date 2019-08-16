@@ -64,8 +64,16 @@ public class With {
 		return new With(WithType.CLASS_NAME, name);
 	}
 	
+	public static With tagName(String name) throws Exception {
+		return new With(WithType.TAG_NAME, name);
+	}
+	
 	public static With linkText(String text) throws Exception {
 		return new With(WithType.LINK_TEXT, text);
+	}
+	
+	public static With partialLinkText(String text) throws Exception {
+		return new With(WithType.PARTIAL_LINK_TEXT, text);
 	}
 	
 	public static With cssSelector(String selector) throws Exception {
@@ -74,6 +82,34 @@ public class With {
 	
 	public static With xpath(String xpath) throws Exception {
 		return new With(WithType.XPATH, xpath);
+	}
+	
+	public static With text(String text) throws Exception {
+		return new With(WithType.TEXT, text);
+	}
+	
+	public static With title(String title) throws Exception {
+		return new With(WithType.TITLE, title);
+	}
+	
+	public static With partialText(String text) throws Exception {
+		return new With(WithType.PARTIAL_TEXT, text);
+	}
+	
+	public static With attrValue(String value) throws Exception {
+		return new With(WithType.ATTR_VALUE, value);
+	}
+	
+	public static With attrPartialValue(String value) throws Exception {
+		return new With(WithType.ATTR_PARTIAL_VALUE, value);
+	}
+	
+	public static With type(String type) throws Exception {
+		return new With(WithType.TYPE, type);
+	}
+	
+	public static With value(String value) throws Exception {
+		return new With(WithType.VALUE, value);
 	}
 	
 	public static With index(int index) throws Exception {
@@ -87,6 +123,14 @@ public class With {
 	public static With assignedName(String name) throws Exception {
 		return new With(WithType.ASSIGNED_NAME, name);
 	}
+	
+	public static With classNames(String namesString) throws Exception {
+		return new With(WithType.CLASS_NAMES, namesString);
+	}
+	
+	public static With classNames(String... names) throws Exception {
+		return new With(WithType.CLASS_NAMES, String.join(" ", names));
+	}
 }
 
 
@@ -95,11 +139,21 @@ enum WithType {
 	NAME,
 	CLASS_NAME, 
 	LINK_TEXT, 
+	PARTIAL_LINK_TEXT,
 	XPATH,
 	CSS_SELECTOR, 
-	
+	TAG_NAME,
+    CLASS_NAMES,
+    
+    TEXT,
+    TITLE,
+    PARTIAL_TEXT,
+    ATTR_VALUE,
+    ATTR_PARTIAL_VALUE,
+    TYPE,
+    VALUE,
+    
 	INDEX,
 	CHILD_LOCATOR,
 	ASSIGNED_NAME
-
 }

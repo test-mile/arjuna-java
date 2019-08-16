@@ -40,7 +40,7 @@ public class StackBatteries {
 	 * (2) invoking class/method names
 	 */
 
-	/* (Lifted from virgo47's stackoverflow answer) */
+	/* (Taken from virgo47's stackoverflow answer) */
 	private static final int CLIENT_CODE_STACK_INDEX;
 
 	static {

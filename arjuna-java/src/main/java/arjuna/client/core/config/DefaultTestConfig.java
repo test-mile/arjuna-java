@@ -1,5 +1,6 @@
 package arjuna.client.core.config;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import arjuna.client.core.action.ConfigActionType;
@@ -29,6 +30,14 @@ public class DefaultTestConfig extends BaseSetuObject implements TestConfig {
 		this.setTestSessionSetuIdArg(testSession.getSetuId());
 	}
 	
+	private static Map<String,String> convertUserOptionValueMap(Map<String, Value> map){
+		Map<String,String> outMap  = new HashMap<String,String>();
+		for(String key: map.keySet()) {
+			outMap.put(key, map.get(key).toString());
+		}
+		return outMap;
+	}
+	
 	private static String registerConfig(TestSession testSession, boolean hasParent, String parentConfigId, Map<String, String> arjunaOptions, Map<String, Value> userOptions) throws Exception {
 		SetuResponse response = SetuConnectUtils.sendRequest(
 				ArjunaComponent.CONFIGURATOR,
@@ -37,7 +46,7 @@ public class DefaultTestConfig extends BaseSetuObject implements TestConfig {
 				SetuArg.arg("hasParent", hasParent),
 				SetuArg.arg("parentConfigId", parentConfigId),
 				SetuArg.arg("arjunaOptions", arjunaOptions),
-				SetuArg.arg("userOptions", userOptions)
+				SetuArg.arg("userOptions", convertUserOptionValueMap(userOptions))
 		);
 		return response.getValueForConfigSetuId();
 	}

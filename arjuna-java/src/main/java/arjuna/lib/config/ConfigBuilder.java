@@ -92,6 +92,13 @@ public class ConfigBuilder {
 
 	public void build(String configName) throws Exception {
 		String configSetuId;
+		if (this.configMap.containsKey(configName)) {
+			this.sourceConfig(this.configMap.get(configName));
+		} else {
+			if (this.configMap.containsKey(DEFAULT_CONF_NAME)) {
+				this.sourceConfig(this.configMap.get(DEFAULT_CONF_NAME));
+			}
+		}
 		if (this.sourceConfigSetuId == null) {
 			configSetuId = DefaultTestConfig.registerConfig(
 					testSession,

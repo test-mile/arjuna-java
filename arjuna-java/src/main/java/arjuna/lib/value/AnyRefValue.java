@@ -1,5 +1,6 @@
 package arjuna.lib.value;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -193,6 +194,21 @@ public class AnyRefValue implements Value {
 	public List<String> asStringList() throws Exception {
 		try{
 			return Arrays.asList(this.asString());
+		} catch (Exception e){
+			this.throwWrongReprException("string list");
+			return null;
+		}
+	}
+	
+	@Override
+	public List<String> splitToStringList() throws Exception {
+		try{
+			String[] out = this.asString().split(",");
+			List<String> outList = new ArrayList<String>();
+			for (String val: out) {
+				outList.add(val.trim());
+			}
+			return outList;
 		} catch (Exception e){
 			this.throwWrongReprException("string list");
 			return null;

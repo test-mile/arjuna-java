@@ -29,10 +29,18 @@ public interface GuiElement extends SetuManagedObject{
 
 	void click() throws Exception;
 
+	void waitUntilPresent() throws Exception;
+	
+	void waitUntilVisible() throws Exception;
+	
 	void waitUntilClickable() throws Exception;
 
 	void check() throws Exception;
 	
 	void uncheck() throws Exception;
+	
+	void identify() throws Exception;
+	
+	String getSource() throws Exception;
 	
 }

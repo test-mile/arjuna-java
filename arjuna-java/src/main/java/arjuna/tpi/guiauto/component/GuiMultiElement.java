@@ -23,6 +23,9 @@ import arjuna.client.core.connector.SetuManagedObject;
 
 public interface GuiMultiElement extends SetuManagedObject{
 
-	GuiElement IndexedElement(int index);
-
+	GuiElement atIndex(int index) throws Exception;
+	GuiElement first() throws Exception;
+	GuiElement last() throws Exception;
+	GuiElement random() throws Exception;
+	int length() throws Exception;	
 }

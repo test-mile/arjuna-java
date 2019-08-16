@@ -36,4 +36,6 @@ public interface Value{
 
 	float asFloat() throws Exception;
 
+	List<String> splitToStringList() throws Exception;
+
 }
