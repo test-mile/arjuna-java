@@ -23,6 +23,7 @@ import org.testng.annotations.Test;
 
 import arjex.youtube.basics.WPLoginLogout;
 import arjuna.tpi.Arjuna;
+import arjuna.tpi.enums.ArjunaOption;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.Alert;
@@ -39,7 +40,7 @@ public class Y19ExecuteJavaScript extends TestNGBaseTest{
 		automator.executeJavaScript("document.getElementsByClassName('welcome-view-site')[0].click();");
 		automator.Element(With.linkText("Site Admin")).waitUntilClickable();;
 		
-		WPLoginLogout.logout(automator);
+		WPLoginLogout.logout(automator);	
 	}
 
 }

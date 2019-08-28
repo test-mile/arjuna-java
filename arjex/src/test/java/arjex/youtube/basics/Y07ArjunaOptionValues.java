@@ -17,7 +17,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjex.youtube.scheduled;
+package arjex.youtube.basics;
 
 import org.testng.annotations.Test;
 
