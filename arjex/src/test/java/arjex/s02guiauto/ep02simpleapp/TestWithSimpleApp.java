@@ -22,9 +22,11 @@ package arjex.s02guiauto.ep02simpleapp;
 import org.testng.annotations.Test;
 
 import arjuna.tpi.Arjuna;
+import arjuna.tpi.arg.Args;
 import arjuna.tpi.guiauto.DefaultGui;
 import arjuna.tpi.guiauto.Gui;
 import arjuna.tpi.guiauto.GuiAutomator;
+import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.DropDown;
 
 public class TestWithSimpleApp{
@@ -39,7 +41,7 @@ public class TestWithSimpleApp{
 
 		// Login
 		app.Browser().goToUrl(automator.getConfig().getUserOptionValue("wp.login.url").asString());
-		app.Element("login").setText("user");
+		app.Element(With.gnsName("login").format(Args.arg("type", "login"))).setText("user");
 		app.Element("password").setText("bitnami");
 		app.Element("submit").click();
 		app.Element("view-site").waitUntilClickable();

@@ -174,32 +174,32 @@ public class BaseGui extends AbstractAppAutomator implements Gui{
 
 	@Override
 	public GuiElement Element(String name) throws Exception {
-		return this.Element(With.assignedName(name));
+		return this.Element(With.gnsName(name));
 	}
 
 	@Override
 	public GuiMultiElement MultiElement(String name) throws Exception {
-		return this.MultiElement(With.assignedName(name));
+		return this.MultiElement(With.gnsName(name));
 	}
 
 	@Override
 	public DropDown DropDown(String name) throws Exception {
-		return this.DropDown(With.assignedName(name));
+		return this.DropDown(With.gnsName(name));
 	}
 
 	@Override
 	public RadioGroup RadioGroup(String name) throws Exception {
-		return this.RadioGroup(With.assignedName(name));
+		return this.RadioGroup(With.gnsName(name));
 	}
 
 	@Override
 	public ChildWindow ChildWindow(String name) throws Exception {
-		return this.childWindow(With.assignedName(name));
+		return this.childWindow(With.gnsName(name));
 	}
 
 	@Override
 	public Frame Frame(String name) throws Exception {
-		return this.Frame(With.assignedName(name));
+		return this.Frame(With.gnsName(name));
 	}
 
 	public MainWindow MainWindow() throws Exception {

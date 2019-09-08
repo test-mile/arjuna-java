@@ -19,14 +19,23 @@
 
 package arjuna.tpi.guiauto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import arjuna.tpi.arg.Arg;
+import arjuna.tpi.enums.ArgsType;
 
 public class With {
 	private String withType;
 	private Object withValue;
 	private boolean isChildLocator = false;
 	private With child;
+	private boolean formatCalled = false;
+	private ArgsType argsType = ArgsType.NAMED;
+	private List<Arg> withArgs = null;
 	
 	private With(WithType withType, Object withValue) throws Exception{
 		this.withType = withType.toString();
@@ -41,6 +50,29 @@ public class With {
 		}
 	}
 	
+	private void raiseFormatException() throws Exception {
+		if (formatCalled) throw new Exception("You can not format a With object more than once.");
+	}
+	
+	public With format(String... args) throws Exception {
+		raiseFormatException();
+		formatCalled = true;
+		argsType = ArgsType.POSITIONAL;
+		withArgs = new ArrayList<Arg>();
+		for (int i=0; i< args.length; i++) {
+			withArgs.add(new PosArg(i + 1, args[i]));
+		}	
+		return this;
+	}
+	
+	public With format(Arg... args) throws Exception {
+		raiseFormatException();
+		formatCalled = true;
+		argsType = ArgsType.NAMED;
+		withArgs = Arrays.asList(args);	
+		return this;
+	}
+	
 	public Map<String,Object> asMap() throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("withType", this.withType);
@@ -48,6 +80,10 @@ public class With {
 			map.put("withValue", this.withValue);
 		} else {
 			map.put("withValue", this.child.asMap());		
+		}
+		if (formatCalled) {
+			map.put("argsType", argsType);
+			map.put("args", withArgs);
 		}
 		return map;
 	}
@@ -120,8 +156,8 @@ public class With {
 		return new With(WithType.CHILD_LOCATOR, withObj);
 	}
 	
-	public static With assignedName(String name) throws Exception {
-		return new With(WithType.ASSIGNED_NAME, name);
+	public static With gnsName(String name) throws Exception {
+		return new With(WithType.GNS_NAME, name);
 	}
 	
 	public static With classNames(String namesString) throws Exception {
@@ -131,6 +167,14 @@ public class With {
 	public static With classNames(String... names) throws Exception {
 		return new With(WithType.CLASS_NAMES, String.join(" ", names));
 	}
+}
+
+class PosArg extends Arg{
+	
+	public PosArg(int pos, String value) {
+		super(String.valueOf(pos), value);
+	}
+	
 }
 
 
@@ -155,5 +199,5 @@ enum WithType {
     
 	INDEX,
 	CHILD_LOCATOR,
-	ASSIGNED_NAME
+	GNS_NAME
 }
