@@ -30,5 +30,6 @@ public interface DropDown extends SetuManagedObject{
 	void selectByValue(String value) throws Exception;
 	void selectByVisibleText(String text) throws Exception;
 	void selectByIndex(int index) throws Exception;
+	DropDown configure(GuiElementConfig config) throws Exception;
 	
 }

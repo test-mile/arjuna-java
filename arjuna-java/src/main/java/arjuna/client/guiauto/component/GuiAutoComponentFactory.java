@@ -111,6 +111,11 @@ public class GuiAutoComponentFactory {
 					SetuArg.arg("instanceIndex", index)
 			);
 		}
+		
+		@SuppressWarnings("unused")
+		protected void configure(GuiElementConfig config, GuiAutoActionType actionType) throws Exception {
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType, SetuArg.arg("elementConfig", config.getSettings()));
+		}
 
 	}
 
@@ -174,6 +179,12 @@ public class GuiAutoComponentFactory {
 		public String getSource() throws Exception {
 			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_GET_SOURCE);
 			return response.getValueForValueAttr();
+		}
+		
+		@Override
+		public GuiElement configure(GuiElementConfig config) throws Exception {
+			super.configure(config, GuiAutoActionType.ELEMENT_CONFIGURE);
+			return this;
 		}
 
 	}
@@ -257,6 +268,12 @@ public class GuiAutoComponentFactory {
 		public void selectByVisibleText(String text) throws Exception {
 			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_VISIBLE_TEXT, SetuArg.textArg(text));
 		}
+		
+		@Override
+		public DropDown configure(GuiElementConfig config) throws Exception {
+			super.configure(config, GuiAutoActionType.DROPDOWN_CONFIGURE);
+			return this;
+		}
 	}
 
 	private static class DefaultRadioGroup extends BaseElement implements RadioGroup {
@@ -286,6 +303,12 @@ public class GuiAutoComponentFactory {
 		public String getFirstSelectedOptionValue() throws Exception {
 			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE);
 			return response.getValueForValueAttr();
+		}
+		
+		@Override
+		public RadioGroup configure(GuiElementConfig config) throws Exception {
+			super.configure(config, GuiAutoActionType.RADIOGROUP_CONFIGURE);
+			return this;
 		}
 	}
 

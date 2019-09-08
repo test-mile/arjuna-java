@@ -21,13 +21,8 @@ package arjex.youtube.basics;
 
 import org.testng.annotations.Test;
 
-import arjuna.tpi.Arjuna;
 import arjuna.tpi.enums.ArjunaOption;
-import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.With;
-import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.test.TestConfig;
-import arjuna.tpi.test.TestContext;
 import arjuna.tpi.testng.TestNGBaseTest;
 import arjuna.tpi.value.Value;
 

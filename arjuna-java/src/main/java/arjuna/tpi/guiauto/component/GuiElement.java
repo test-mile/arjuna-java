@@ -43,4 +43,6 @@ public interface GuiElement extends SetuManagedObject{
 	
 	String getSource() throws Exception;
 	
+	GuiElement configure(GuiElementConfig config) throws Exception;
+	
 }

@@ -23,10 +23,8 @@ import org.testng.annotations.Test;
 
 import arjex.youtube.basics.WPLoginLogout;
 import arjuna.tpi.Arjuna;
-import arjuna.tpi.enums.ArjunaOption;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
-import arjuna.tpi.guiauto.component.Alert;
 import arjuna.tpi.testng.TestNGBaseTest;
 
 public class Y19ExecuteJavaScript extends TestNGBaseTest{

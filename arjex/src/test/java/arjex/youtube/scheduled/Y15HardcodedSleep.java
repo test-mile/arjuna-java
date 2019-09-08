@@ -22,10 +22,6 @@ package arjex.youtube.scheduled;
 import org.testng.annotations.Test;
 
 import arjuna.lib.audit.HardCoded;
-import arjuna.tpi.Arjuna;
-import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.With;
-import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.testng.TestNGBaseTest;
 
 public class Y15HardcodedSleep extends TestNGBaseTest{

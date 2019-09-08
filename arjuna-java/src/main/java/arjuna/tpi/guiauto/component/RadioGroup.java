@@ -28,5 +28,6 @@ public interface RadioGroup extends SetuManagedObject{
 	String getFirstSelectedOptionValue() throws Exception;
 	void selectByValue(String value) throws Exception;
 	void selectByIndex(int index) throws Exception;
+	RadioGroup configure(GuiElementConfig config) throws Exception;
 	
 }

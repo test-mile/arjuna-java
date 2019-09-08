@@ -17,31 +17,29 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjex.s05basicfixtures.ep04suitelevel;
+package arjex.youtube.scheduled;
+
+import org.testng.annotations.Test;
 
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.test.TestContext;
+import arjuna.tpi.guiauto.With;
+import arjuna.tpi.guiauto.component.GuiElementConfig;
+import arjuna.tpi.guiauto.component.GuiElementConfigBuilder;
 import arjuna.tpi.testng.TestNGBaseTest;
 
-public class SuiteFixturesSeqExec extends TestNGBaseTest {
+public class YXClickWithDefaultStateCheck extends TestNGBaseTest{
 	
-	protected void setUpSuite(TestContext testContext) throws Exception {
-		GuiAutomator automator = Arjuna.createGuiAutomator();
-		Global.INSTANCE.setAutomator(automator);
+	@Test
+	public void test() throws Exception{
+		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
+		
+		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.elemstate.url").asString());
+
+		automator.Element(With.id("target")).click();
+		automator.Alert().confirm();
+		
+		automator.quit();
 	}
 	
-	protected void tearDownSuite(TestContext testContext) throws Exception {
-		getAutomator().quit();
-		Global.INSTANCE.destroyAutomator();
-	}
-	
-	protected GuiAutomator getAutomator() {
-		return Global.INSTANCE.getAutomator();
-	}
-	
-	protected void goToUrl(String url) throws Exception {
-		getAutomator().Browser().goToUrl(url);
-		System.out.println(getAutomator().MainWindow().getTitle());	
-	}
 }

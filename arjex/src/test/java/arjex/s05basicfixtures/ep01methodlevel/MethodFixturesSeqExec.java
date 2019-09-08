@@ -23,7 +23,6 @@ import org.testng.annotations.Test;
 
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.test.TestConfig;
 import arjuna.tpi.test.TestContext;
 import arjuna.tpi.testng.TestNGBaseTest;
 

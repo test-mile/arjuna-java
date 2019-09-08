@@ -22,9 +22,7 @@ package arjex.youtube.scheduled;
 import org.testng.annotations.Test;
 
 import arjuna.tpi.test.TestConfig;
-import arjuna.tpi.test.TestContext;
 import arjuna.tpi.testng.TestNGBaseTest;
-import arjuna.tpi.value.Value;
 
 public class Y09UserOptionsFromProjectConf extends TestNGBaseTest{
 	

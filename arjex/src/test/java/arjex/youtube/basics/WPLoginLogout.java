@@ -23,7 +23,6 @@ import java.util.List;
 
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
-import arjuna.tpi.guiauto.component.GuiElement;
 
 public class WPLoginLogout {
 	
