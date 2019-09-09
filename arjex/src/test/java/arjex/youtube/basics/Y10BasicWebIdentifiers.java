@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2015-18 Test Mile Software Testing Pvt Ltd
+ * Copyright 2015-19 Test Mile Software Testing Pvt Ltd
  * 
  * Website: www.TestMile.com
  * Email: support [at] testmile.com
@@ -17,7 +17,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjex.youtube.scheduled;
+package arjex.youtube.basics;
 
 import org.testng.annotations.Test;
 
@@ -27,7 +27,7 @@ import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.testng.TestNGBaseTest;
 
-public class Y10BasicIdenfiers extends TestNGBaseTest{
+public class Y10BasicWebIdentifiers extends TestNGBaseTest{
 	
 	@Test
 	public void test() throws Exception{
