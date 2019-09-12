@@ -20,6 +20,7 @@
 package arjuna.tpi.guiauto.component;
 
 import arjuna.client.core.connector.SetuManagedObject;
+import arjuna.tpi.guiauto.With;
 
 public interface DropDown extends SetuManagedObject{
 	
@@ -31,5 +32,7 @@ public interface DropDown extends SetuManagedObject{
 	void selectByVisibleText(String text) throws Exception;
 	void selectByIndex(int index) throws Exception;
 	DropDown configure(GuiElementConfig config) throws Exception;
+	void setOptionLocators(With... locators) throws Exception;
+	void setOptionContainer(With... locators) throws Exception;
 	
 }

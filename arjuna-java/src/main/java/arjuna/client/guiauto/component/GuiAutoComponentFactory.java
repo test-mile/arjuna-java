@@ -274,6 +274,24 @@ public class GuiAutoComponentFactory {
 			super.configure(config, GuiAutoActionType.DROPDOWN_CONFIGURE);
 			return this;
 		}
+		
+		private List<Map<String,Object>> convertToMap(With... locators) throws Exception{
+			List<Map<String,Object>> args = new ArrayList<Map<String,Object>>();
+			for(With locator: locators) {
+				args.add(locator.asMap());
+			}
+			return args;
+		}
+		
+		@Override
+		public void setOptionLocators(With... locators) throws Exception {
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SET_OPTION_LOCATORS, SetuArg.arg("locators", convertToMap(locators)));
+		}
+
+		@Override
+		public void setOptionContainer(With... locators) throws Exception {
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SET_OPTION_CONTAINER, SetuArg.arg("locators", convertToMap(locators)));
+		}
 	}
 
 	private static class DefaultRadioGroup extends BaseElement implements RadioGroup {

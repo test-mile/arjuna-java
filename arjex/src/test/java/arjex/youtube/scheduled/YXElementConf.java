@@ -38,7 +38,7 @@ public class YXElementConf extends TestNGBaseTest{
 		
 		// The following would fail because we have switched off auto state checking.
 		GuiElementConfigBuilder confBuilder = new GuiElementConfigBuilder();
-		GuiElementConfig conf = confBuilder.checkState(false).build();
+		GuiElementConfig conf = confBuilder.checkPreState(false).build();
 		
 		automator.Element(With.id("target")).configure(conf).click();
 		automator.Alert().confirm();
