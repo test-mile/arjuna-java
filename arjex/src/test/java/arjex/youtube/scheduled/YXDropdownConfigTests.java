@@ -40,7 +40,7 @@ public class YXDropdownConfigTests extends TestNGBaseTest{
 
 		automator.DropDown(With.id("test")).selectByVisibleText("Another Option");
 		
-		//automator.quit();
+		automator.quit();
 	}
 	
 	@Test
@@ -79,7 +79,7 @@ public class YXDropdownConfigTests extends TestNGBaseTest{
 		
 		automator.DropDown(With.id("Prob1")).configure(config).selectByIndex(1);
 		
-		//automator.quit();
+		automator.quit();
 	}
 	
 	@Test
@@ -90,16 +90,14 @@ public class YXDropdownConfigTests extends TestNGBaseTest{
 
 		GuiElementConfigBuilder confBuilder = new GuiElementConfigBuilder();
 		GuiElementConfig config = confBuilder.checkType(false).checkPostState(false).build();
-//		
+		
 		DropDown dropdown = automator.DropDown(With.id("DropDown")).configure(config);
 		automator.enableSlowMotion(true);
 		dropdown.setOptionContainer(With.className("dropdown"));
 		dropdown.setOptionLocators(With.className("dropdown-item"));
 		dropdown.selectByIndex(2);
-//		
-//		automator.Element(With.partialText("Mouli")).click();
-		
-		//automator.quit();
+
+		automator.quit();
 	}
 	
 }

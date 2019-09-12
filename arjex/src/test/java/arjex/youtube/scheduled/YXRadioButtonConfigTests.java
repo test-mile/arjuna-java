@@ -102,7 +102,7 @@ public class YXRadioButtonConfigTests extends TestNGBaseTest{
 		RadioGroup group = automator.RadioGroup(With.name("Prob1")).configure(config);
 		group.selectByIndex(1);
 		
-		//automator.quit();
+		automator.quit();
 	}
 	
 }
