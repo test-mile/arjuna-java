@@ -20,8 +20,9 @@
 package arjuna.tpi.guiauto.component;
 
 import arjuna.client.core.connector.SetuManagedObject;
+import arjuna.client.guiauto.component.SourceInquirable;
 
-public interface GuiElement extends SetuManagedObject{
+public interface GuiElement extends SetuManagedObject, SourceInquirable{
 	
 	void enterText(String text) throws Exception;
 
@@ -41,8 +42,6 @@ public interface GuiElement extends SetuManagedObject{
 	
 	void identify() throws Exception;
 	
-	String getSource() throws Exception;
-	
-	GuiElement configure(GuiElementConfig config) throws Exception;
+	GuiElement configure(GuiActionConfig config) throws Exception;
 	
 }

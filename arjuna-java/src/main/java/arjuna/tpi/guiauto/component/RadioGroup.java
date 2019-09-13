@@ -20,14 +20,15 @@
 package arjuna.tpi.guiauto.component;
 
 import arjuna.client.core.connector.SetuManagedObject;
+import arjuna.client.guiauto.component.SourceInquirable;
 
-public interface RadioGroup extends SetuManagedObject{
+public interface RadioGroup extends SetuManagedObject, SourceInquirable{
 	
 	boolean hasValueSelected(String value) throws Exception;
 	boolean hasIndexSelected(int index) throws Exception;
 	String getFirstSelectedOptionValue() throws Exception;
 	void selectByValue(String value) throws Exception;
 	void selectByIndex(int index) throws Exception;
-	RadioGroup configure(GuiElementConfig config) throws Exception;
+	RadioGroup configure(GuiActionConfig config) throws Exception;
 	
 }

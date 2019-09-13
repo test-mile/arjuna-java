@@ -20,9 +20,10 @@
 package arjuna.tpi.guiauto.component;
 
 import arjuna.client.core.connector.SetuManagedObject;
+import arjuna.client.guiauto.component.SourceInquirable;
 import arjuna.tpi.guiauto.With;
 
-public interface Frame extends SetuManagedObject{
+public interface Frame extends SetuManagedObject, SourceInquirable{
 	
 	void focus() throws Exception;
 	Frame ParentFrame() throws Exception;

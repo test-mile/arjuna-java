@@ -20,7 +20,7 @@ public class AnyRefValue implements Value {
 		if (isNull()) {
 			this.strObject = "null";
 		} else {
-			this.strObject = object.toString().trim();
+			this.strObject = object.toString();
 		}
 	}
 	

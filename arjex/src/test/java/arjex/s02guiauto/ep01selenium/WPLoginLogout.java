@@ -19,6 +19,8 @@
 
 package arjex.s02guiauto.ep01selenium;
 
+import java.util.List;
+
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
 
@@ -26,14 +28,20 @@ public class WPLoginLogout {
 	
 	public static void login(GuiAutomator automator) throws Exception {
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("wp.login.url").asString());
-		automator.Element(With.id("user_login")).setText("user");
-		automator.Element(With.id("user_pass")).setText("bitnami");
+		List<String> credentials = automator.getConfig().getUserOptionValue("wp.users.admin").splitToStringList();
+		
+		// Login
+		automator.Element(With.id("user_login")).setText(credentials.get(0));
+		automator.Element(With.id("user_pass")).setText(credentials.get(1));
 		automator.Element(With.id("wp-submit")).click();
-		automator.Element(With.className("welcome-view-site")).waitUntilClickable();
+
+		// Wait for dashboard to load by waiting for an element
+		automator.Element(With.className("welcome-view-site")).waitUntilVisible();
 	}
 	
 	public static void logout(GuiAutomator automator) throws Exception {
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("wp.logout.url").asString());
+		automator.Element(With.partialText("logged out")).waitUntilVisible();
 		automator.quit();		
 	}
 

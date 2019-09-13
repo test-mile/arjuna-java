@@ -25,8 +25,8 @@ import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.DropDown;
-import arjuna.tpi.guiauto.component.GuiElementConfig;
-import arjuna.tpi.guiauto.component.GuiElementConfigBuilder;
+import arjuna.tpi.guiauto.component.GuiActionConfig;
+import arjuna.tpi.guiauto.component.GuiActionConfigBuilder;
 import arjuna.tpi.guiauto.component.RadioGroup;
 import arjuna.tpi.testng.TestNGBaseTest;
 
@@ -60,8 +60,8 @@ public class YXDropdownConfigTests extends TestNGBaseTest{
 		
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.dropdown.url").asString());
 
-		GuiElementConfigBuilder confBuilder = new GuiElementConfigBuilder();
-		GuiElementConfig config = confBuilder.checkPreState(false).build();
+		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
+		GuiActionConfig config = confBuilder.checkPreState(false).build();
 		
 		automator.DropDown(With.id("test")).configure(config).selectByIndex(1);;
 		
@@ -74,8 +74,8 @@ public class YXDropdownConfigTests extends TestNGBaseTest{
 		
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.dropdown.url").asString());
 
-		GuiElementConfigBuilder confBuilder = new GuiElementConfigBuilder();
-		GuiElementConfig config = confBuilder.checkType(false).checkPreState(false).build();
+		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
+		GuiActionConfig config = confBuilder.checkType(false).checkPreState(false).build();
 		
 		automator.DropDown(With.id("Prob1")).configure(config).selectByIndex(1);
 		
@@ -88,8 +88,8 @@ public class YXDropdownConfigTests extends TestNGBaseTest{
 		
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.dropdown.url").asString());
 
-		GuiElementConfigBuilder confBuilder = new GuiElementConfigBuilder();
-		GuiElementConfig config = confBuilder.checkType(false).checkPostState(false).build();
+		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
+		GuiActionConfig config = confBuilder.checkType(false).checkPostState(false).build();
 		
 		DropDown dropdown = automator.DropDown(With.id("DropDown")).configure(config);
 		automator.enableSlowMotion(true);

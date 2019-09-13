@@ -24,8 +24,8 @@ import org.testng.annotations.Test;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
-import arjuna.tpi.guiauto.component.GuiElementConfig;
-import arjuna.tpi.guiauto.component.GuiElementConfigBuilder;
+import arjuna.tpi.guiauto.component.GuiActionConfig;
+import arjuna.tpi.guiauto.component.GuiActionConfigBuilder;
 import arjuna.tpi.guiauto.component.RadioGroup;
 import arjuna.tpi.testng.TestNGBaseTest;
 
@@ -81,8 +81,8 @@ public class YXRadioButtonConfigTests extends TestNGBaseTest{
 		
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.radio.url").asString());
 
-		GuiElementConfigBuilder confBuilder = new GuiElementConfigBuilder();
-		GuiElementConfig config = confBuilder.checkPreState(false).build();
+		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
+		GuiActionConfig config = confBuilder.checkPreState(false).build();
 		
 		RadioGroup group = automator.RadioGroup(With.name("Traditional")).configure(config);
 		group.selectByIndex(1);
@@ -96,8 +96,8 @@ public class YXRadioButtonConfigTests extends TestNGBaseTest{
 		
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.radio.url").asString());
 
-		GuiElementConfigBuilder confBuilder = new GuiElementConfigBuilder();
-		GuiElementConfig config = confBuilder.checkType(false).checkPreState(false).build();
+		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
+		GuiActionConfig config = confBuilder.checkType(false).checkPreState(false).build();
 		
 		RadioGroup group = automator.RadioGroup(With.name("Prob1")).configure(config);
 		group.selectByIndex(1);

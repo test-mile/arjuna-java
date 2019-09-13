@@ -20,19 +20,23 @@
 package arjuna.tpi.guiauto.component;
 
 import arjuna.client.core.connector.SetuManagedObject;
+import arjuna.client.guiauto.component.SourceInquirable;
 import arjuna.tpi.guiauto.With;
 
-public interface DropDown extends SetuManagedObject{
-	
+public interface DropDown extends SetuManagedObject, SourceInquirable{
+	DropDown configure(GuiActionConfig config) throws Exception;
+	DropDown setOptionLocators(With... locators) throws Exception;
+	DropDown setOptionContainer(With... locators) throws Exception;
+
 	boolean hasVisibleTextSelected(String text) throws Exception;
 	boolean hasValueSelected(String value) throws Exception;
 	boolean hasIndexSelected(int index) throws Exception;
+	
 	String getFirstSelectedOptionText() throws Exception;
+	
 	void selectByValue(String value) throws Exception;
 	void selectByVisibleText(String text) throws Exception;
 	void selectByIndex(int index) throws Exception;
-	DropDown configure(GuiElementConfig config) throws Exception;
-	void setOptionLocators(With... locators) throws Exception;
-	void setOptionContainer(With... locators) throws Exception;
 	
+	void sendOptionText(String text) throws Exception;	
 }

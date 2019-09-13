@@ -21,9 +21,7 @@ package arjuna.tpi.guiauto.component;
 
 import arjuna.tpi.guiauto.With;
 
-public interface DomRoot extends Frame {
-	
+public interface DomRoot{	
 	void focus() throws Exception;
 	Frame Frame(With... locators) throws Exception;
-	
 }

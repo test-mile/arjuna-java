@@ -93,6 +93,11 @@ public class GuiAutoComponentFactory {
 		protected TestSession getTestSession() {
 			return this.testSession;
 		}
+		
+		protected String getSourceOfType(GuiAutoActionType actionType) throws Exception {
+			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType);
+			return response.getValueForValueAttr();
+		}
 
 	}
 
@@ -113,7 +118,7 @@ public class GuiAutoComponentFactory {
 		}
 		
 		@SuppressWarnings("unused")
-		protected void configure(GuiElementConfig config, GuiAutoActionType actionType) throws Exception {
+		protected void configure(GuiActionConfig config, GuiAutoActionType actionType) throws Exception {
 			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType, SetuArg.arg("elementConfig", config.getSettings()));
 		}
 
@@ -174,17 +179,30 @@ public class GuiAutoComponentFactory {
 			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_IDENTIFY);
 		}
 		
-
 		@Override
-		public String getSource() throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_GET_SOURCE);
-			return response.getValueForValueAttr();
+		public GuiElement configure(GuiActionConfig config) throws Exception {
+			super.configure(config, GuiAutoActionType.ELEMENT_CONFIGURE);
+			return this;
 		}
 		
 		@Override
-		public GuiElement configure(GuiElementConfig config) throws Exception {
-			super.configure(config, GuiAutoActionType.ELEMENT_CONFIGURE);
-			return this;
+		public String getSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.ELEMENT_GET_SOURCE);
+		}
+		
+		@Override
+		public String getFullSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.ELEMENT_GET_FULL_SOURCE);
+		}
+		
+		@Override
+		public String getInnerSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.ELEMENT_GET_INNER_SOURCE);
+		}
+		
+		@Override
+		public String getText() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.ELEMENT_GET_TEXT);
 		}
 
 	}
@@ -226,6 +244,32 @@ public class GuiAutoComponentFactory {
 
 	private static class DefaultDropDown extends BaseElement implements DropDown {
 
+		@Override
+		public DropDown configure(GuiActionConfig config) throws Exception {
+			super.configure(config, GuiAutoActionType.DROPDOWN_CONFIGURE);
+			return this;
+		}
+		
+		private List<Map<String,Object>> convertToMap(With... locators) throws Exception{
+			List<Map<String,Object>> args = new ArrayList<Map<String,Object>>();
+			for(With locator: locators) {
+				args.add(locator.asMap());
+			}
+			return args;
+		}
+		
+		@Override
+		public DropDown setOptionLocators(With... locators) throws Exception {
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SET_OPTION_LOCATORS, SetuArg.arg("locators", convertToMap(locators)));
+			return this;
+		}
+
+		@Override
+		public DropDown setOptionContainer(With... locators) throws Exception {
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SET_OPTION_CONTAINER, SetuArg.arg("locators", convertToMap(locators)));
+			return this;
+		}
+		
 		public DefaultDropDown(TestSession session, AppAutomator automator, String setuId) {
 			super(session, automator, setuId);
 		}
@@ -268,29 +312,30 @@ public class GuiAutoComponentFactory {
 		public void selectByVisibleText(String text) throws Exception {
 			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_VISIBLE_TEXT, SetuArg.textArg(text));
 		}
-		
-		@Override
-		public DropDown configure(GuiElementConfig config) throws Exception {
-			super.configure(config, GuiAutoActionType.DROPDOWN_CONFIGURE);
-			return this;
-		}
-		
-		private List<Map<String,Object>> convertToMap(With... locators) throws Exception{
-			List<Map<String,Object>> args = new ArrayList<Map<String,Object>>();
-			for(With locator: locators) {
-				args.add(locator.asMap());
-			}
-			return args;
-		}
-		
-		@Override
-		public void setOptionLocators(With... locators) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SET_OPTION_LOCATORS, SetuArg.arg("locators", convertToMap(locators)));
-		}
 
 		@Override
-		public void setOptionContainer(With... locators) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SET_OPTION_CONTAINER, SetuArg.arg("locators", convertToMap(locators)));
+		public void sendOptionText(String text) throws Exception {
+			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SEND_OPTION_TEXT, SetuArg.textArg(text));
+		}
+		
+		@Override
+		public String getSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.DROPDOWN_GET_SOURCE);
+		}
+		
+		@Override
+		public String getFullSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.DROPDOWN_GET_FULL_SOURCE);
+		}
+		
+		@Override
+		public String getInnerSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.DROPDOWN_GET_INNER_SOURCE);
+		}
+		
+		@Override
+		public String getText() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.DROPDOWN_GET_TEXT);
 		}
 	}
 
@@ -324,9 +369,29 @@ public class GuiAutoComponentFactory {
 		}
 		
 		@Override
-		public RadioGroup configure(GuiElementConfig config) throws Exception {
+		public RadioGroup configure(GuiActionConfig config) throws Exception {
 			super.configure(config, GuiAutoActionType.RADIOGROUP_CONFIGURE);
 			return this;
+		}
+		
+		@Override
+		public String getSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.RADIOGROUP_GET_SOURCE);
+		}
+		
+		@Override
+		public String getFullSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.RADIOGROUP_GET_FULL_SOURCE);
+		}
+		
+		@Override
+		public String getInnerSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.RADIOGROUP_GET_INNER_SOURCE);
+		}
+		
+		@Override
+		public String getText() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.RADIOGROUP_GET_TEXT);
 		}
 	}
 
@@ -416,6 +481,26 @@ public class GuiAutoComponentFactory {
 			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_GET_PARENT);
 			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
 		}
+		
+		@Override
+		public String getSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.FRAME_GET_SOURCE);
+		}
+		
+		@Override
+		public String getFullSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.FRAME_GET_FULL_SOURCE);
+		}
+		
+		@Override
+		public String getInnerSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.FRAME_GET_INNER_SOURCE);
+		}
+		
+		@Override
+		public String getText() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.FRAME_GET_TEXT);
+		}
 	}
 
 	private static class DefaultDomRoot extends BaseComponent implements DomRoot{
@@ -441,11 +526,7 @@ public class GuiAutoComponentFactory {
 			);
 			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
 		}
-
-		@Override
-		public Frame ParentFrame() throws Exception {
-			throw new Exception("DOM root does not have a parent frame.");
-		}	
+	
 	}
 
 	private static class AbstractBasicWindow extends BaseElement {
