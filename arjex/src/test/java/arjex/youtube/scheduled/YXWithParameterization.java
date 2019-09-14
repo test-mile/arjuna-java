@@ -50,23 +50,23 @@ public class YXWithParameterization extends TestNGBaseTest{
 		// Positional
 		GuiElement element = automator.Element(With.xpath(identifier).format(appURL, page));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 
 		// Named
 		element = automator.Element(With.xpath(identifier).format(Args.arg("app_url", appURL), Args.arg("page", page)));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		
 		// Named params need not be passed in order, providing you flexibility, readability and preventing positional errors.
 		element = automator.Element(With.xpath(identifier).format(Args.arg("page", page), Args.arg("app_url", appURL)));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		// Names for parameters are case-insensitive
 		element = automator.Element(With.xpath(identifier).format(Args.arg("PaGe", page), Args.arg("aPP_Url", appURL)));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 
 		automator.quit();
 	}

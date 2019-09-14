@@ -20,6 +20,7 @@
 package arjuna.client.guiauto.automator;
 
 import arjuna.client.core.connector.SetuManagedObject;
+import arjuna.client.guiauto.component.SourceInquirable;
 import arjuna.lib.enums.GuiAutomationContext;
 import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.Alert;
@@ -34,7 +35,7 @@ import arjuna.tpi.guiauto.component.MainWindow;
 import arjuna.tpi.guiauto.component.RadioGroup;
 import arjuna.tpi.test.TestConfig;
 
-public interface AppAutomator extends SetuManagedObject{
+public interface AppAutomator extends SetuManagedObject, SourceInquirable{
 	TestConfig getConfig();
 
 	GuiElement Element(With... locators) throws Exception;

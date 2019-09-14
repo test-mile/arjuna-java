@@ -206,5 +206,30 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 				SetuArg.arg("script", script)
 		);
 	}
+	
+	protected String getSourceOfType(GuiAutoActionType actionType) throws Exception {
+		SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType);
+		return response.getValueForValueAttr();
+	}
+
+	@Override
+	public String getRootSource() throws Exception {
+		return this.getSourceOfType(GuiAutoActionType.GET_ROOT_SOURCE);
+	}
+	
+	@Override
+	public String getFullSource() throws Exception {
+		return this.getSourceOfType(GuiAutoActionType.GET_FULL_SOURCE);
+	}
+	
+	@Override
+	public String getInnerSource() throws Exception {
+		return this.getSourceOfType(GuiAutoActionType.GET_INNER_SOURCE);
+	}
+	
+	@Override
+	public String getText() throws Exception {
+		return this.getSourceOfType(GuiAutoActionType.GET_TEXT);
+	}
 
 }

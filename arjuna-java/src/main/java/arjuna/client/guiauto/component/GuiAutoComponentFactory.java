@@ -186,8 +186,8 @@ public class GuiAutoComponentFactory {
 		}
 		
 		@Override
-		public String getSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.ELEMENT_GET_SOURCE);
+		public String getRootSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.ELEMENT_GET_ROOT_SOURCE);
 		}
 		
 		@Override
@@ -319,8 +319,8 @@ public class GuiAutoComponentFactory {
 		}
 		
 		@Override
-		public String getSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.DROPDOWN_GET_SOURCE);
+		public String getRootSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.DROPDOWN_GET_ROOT_SOURCE);
 		}
 		
 		@Override
@@ -375,8 +375,8 @@ public class GuiAutoComponentFactory {
 		}
 		
 		@Override
-		public String getSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.RADIOGROUP_GET_SOURCE);
+		public String getRootSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.RADIOGROUP_GET_ROOT_SOURCE);
 		}
 		
 		@Override
@@ -483,8 +483,8 @@ public class GuiAutoComponentFactory {
 		}
 		
 		@Override
-		public String getSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.FRAME_GET_SOURCE);
+		public String getRootSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.FRAME_GET_ROOT_SOURCE);
 		}
 		
 		@Override
@@ -525,6 +525,26 @@ public class GuiAutoComponentFactory {
 					SetuArg.arg("locators", arg)
 			);
 			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
+		}
+		
+		@Override
+		public String getRootSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.DOMROOT_GET_ROOT_SOURCE);
+		}
+		
+		@Override
+		public String getFullSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.DOMROOT_GET_FULL_SOURCE);
+		}
+		
+		@Override
+		public String getInnerSource() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.DOMROOT_GET_INNER_SOURCE);
+		}
+		
+		@Override
+		public String getText() throws Exception {
+			return this.getSourceOfType(GuiAutoActionType.DOMROOT_GET_TEXT);
 		}
 	
 	}

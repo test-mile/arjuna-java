@@ -37,22 +37,22 @@ public class Y12ElementIdentificationUsingCssSelectors extends TestNGBaseTest{
 		// Based on any attribute e.g. for
 		GuiElement element = automator.Element(With.cssSelector("*[for = 'user_login']"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		// Based on partial content of an attribute
 		element = automator.Element(With.cssSelector("*[for *= '_login']"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		// Based on element type
 		element = automator.Element(With.cssSelector("*[type ='password']"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		// Based on compound classes
 		element = automator.Element(With.cssSelector(".button.button-large"));
 		element.identify();
-		System.out.println(element.getSource());	
+		System.out.println(element.getRootSource());	
 		
 		automator.quit();
 	}

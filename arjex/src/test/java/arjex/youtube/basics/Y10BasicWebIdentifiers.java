@@ -38,29 +38,29 @@ public class Y10BasicWebIdentifiers extends TestNGBaseTest{
 		// Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
 		GuiElement element = automator.Element(With.id("user_login"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		element = automator.Element(With.name("log"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		element = automator.Element(With.className("input"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		element = automator.Element(With.tagName("input"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		// The following options are for 
 		// Html of link: <a href="http://192.168.56.103/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
 		element = automator.Element(With.linkText("Lost your password?"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		element = automator.Element(With.partialLinkText("password"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 
 		automator.quit();
 	}

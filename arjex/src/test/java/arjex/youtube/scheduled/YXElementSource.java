@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
+import arjuna.tpi.guiauto.component.DomRoot;
 import arjuna.tpi.guiauto.component.DropDown;
 import arjuna.tpi.guiauto.component.Frame;
 import arjuna.tpi.guiauto.component.GuiActionConfig;
@@ -42,7 +43,7 @@ public class YXElementSource extends TestNGBaseTest{
 		// Based on Text
 		GuiElement element = automator.Element(With.id("loginform"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		System.out.println(element.getFullSource());
 		System.out.println(element.getInnerSource());
 		System.out.println(element.getText());
@@ -59,7 +60,7 @@ public class YXElementSource extends TestNGBaseTest{
 		automator.Element(With.linkText("Settings")).click();
 		
 		DropDown dropdown = automator.DropDown(With.id("default_role"));
-		System.out.println(dropdown.getSource());
+		System.out.println(dropdown.getRootSource());
 		System.out.println(dropdown.getFullSource());
 		System.out.println(dropdown.getInnerSource());
 		System.out.println(dropdown.getText());
@@ -79,7 +80,7 @@ public class YXElementSource extends TestNGBaseTest{
 		dropdown.setOptionContainer(With.className("dropdown"));
 		dropdown.setOptionLocators(With.className("dropdown-item"));
 		
-		System.out.println(dropdown.getSource());
+		System.out.println(dropdown.getRootSource());
 		System.out.println(dropdown.getFullSource());
 		System.out.println(dropdown.getInnerSource());
 		System.out.println(dropdown.getText());
@@ -102,12 +103,48 @@ public class YXElementSource extends TestNGBaseTest{
 		radio.selectByValue("\\c\\u\\s\\t\\o\\m");
 		radio.selectByIndex(2);
 		
-		System.out.println(radio.getSource());
+		System.out.println(radio.getRootSource());
 		System.out.println(radio.getFullSource());
 		System.out.println(radio.getInnerSource());
 		System.out.println(radio.getText());
 		
 		WPLoginLogout.logout(automator);
+	}
+	
+	@Test
+	public void testAutomatorSourceRetrieval() throws Exception{
+		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());		
+		
+		WPLoginLogout.login(automator);
+		
+		automator.Element(With.linkText("Posts")).click();
+		automator.Element(With.linkText("Add New")).click();
+		
+		System.out.println(automator.getRootSource());
+		System.out.println(automator.getFullSource());
+		System.out.println(automator.getInnerSource());
+		System.out.println(automator.getText());
+		
+		//WPLoginLogout.logout(automator);
+	}
+	
+	@Test
+	public void testDomRootSourceRetrieval() throws Exception{
+		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());		
+		
+		WPLoginLogout.login(automator);
+		
+		automator.Element(With.linkText("Posts")).click();
+		automator.Element(With.linkText("Add New")).click();
+		
+		DomRoot root = automator.DomRoot();
+		
+		System.out.println(root.getRootSource());
+		System.out.println(root.getFullSource());
+		System.out.println(root.getInnerSource());
+		System.out.println(root.getText());
+		
+		//WPLoginLogout.logout(automator);
 	}
 	
 	@Test
@@ -125,7 +162,7 @@ public class YXElementSource extends TestNGBaseTest{
 		
 		// !!!!!!!!!!!!! This does not work yet. Needs feature development.
 		
-		System.out.println(frame.getSource());
+		System.out.println(frame.getRootSource());
 		System.out.println(frame.getFullSource());
 		System.out.println(frame.getInnerSource());
 		System.out.println(frame.getText());

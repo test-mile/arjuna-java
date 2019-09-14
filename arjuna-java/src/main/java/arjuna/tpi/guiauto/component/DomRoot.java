@@ -19,9 +19,10 @@
 
 package arjuna.tpi.guiauto.component;
 
+import arjuna.client.guiauto.component.SourceInquirable;
 import arjuna.tpi.guiauto.With;
 
-public interface DomRoot{	
+public interface DomRoot extends SourceInquirable{	
 	void focus() throws Exception;
 	Frame Frame(With... locators) throws Exception;
 }

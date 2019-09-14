@@ -37,37 +37,37 @@ public class Y11ElementIdentificationUsingXPath extends TestNGBaseTest{
 		// Based on Text
 		GuiElement element = automator.Element(With.xpath("//*[text() = 'Lost your password?']"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		// Based on partial text
 		element = automator.Element(With.xpath("//*[contains(text(), 'Lost')]"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 	
 		// Based on Title
 		element = automator.Element(With.xpath("//*[@title = 'Password Lost and Found']"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		// Based on Value
 		element = automator.Element(With.xpath("//*[@value = 'Log In']"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		// Based on any attribute e.g. for
 		element = automator.Element(With.xpath("//*[@for = 'user_login']"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		// Based on partial content of an attribute
 		element = automator.Element(With.xpath("//*[contains(@for, '_login')]"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 		
 		// Based on element type
 		element = automator.Element(With.xpath("//*[@type ='password']"));
 		element.identify();
-		System.out.println(element.getSource());
+		System.out.println(element.getRootSource());
 
 		automator.quit();
 	}
