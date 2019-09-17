@@ -59,4 +59,13 @@ public class SetuArg{
 	public static SetuArg configArg(String id) {
 		return new SetuArg("configSetuId", id);
 	}
+	
+	public static SetuArg[] combineArrays(SetuArg[] first, SetuArg[] second) {
+        int length = first.length + second.length;
+        SetuArg[] outArray = new SetuArg[length];
+        System.arraycopy(first, 0, outArray, 0, first.length);
+        System.arraycopy(second, 0, outArray, first.length, second.length);
+        return outArray;
+    }
+
 }

@@ -64,7 +64,7 @@ public interface AppAutomator extends SetuManagedObject, SourceInquirable{
 	
 	Browser Browser();
 	
-	void executeJavaScript(String script) throws Exception;
+	void executeScript(String script) throws Exception;
 
 	void enableSlowMotion(boolean on, int interval) throws Exception;
 

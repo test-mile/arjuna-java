@@ -27,7 +27,7 @@ public interface MainWindow extends SetuManagedObject {
 	void focus() throws Exception;
 	void maximize() throws Exception;
 	
-	ChildWindow childWindow(With... locators) throws Exception;
-	ChildWindow latestChildWindow() throws Exception;
+	ChildWindow ChildWindow(With... locators) throws Exception;
+	ChildWindow ChildWindow() throws Exception;
 	void closeAllChildWindows() throws Exception;
 }

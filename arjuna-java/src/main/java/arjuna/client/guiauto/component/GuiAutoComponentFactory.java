@@ -30,6 +30,7 @@ import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuResponse;
 import arjuna.client.guiauto.automator.AppAutomator;
 import arjuna.client.testsession.TestSession;
+import arjuna.tpi.guiauto.GuiSource;
 import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.*;
 
@@ -74,8 +75,9 @@ public class GuiAutoComponentFactory {
 	private static class BaseComponent extends BaseSetuObject{
 		private AppAutomator automator;
 		private TestSession testSession;
+		private GuiComponentType compType;
 
-		public BaseComponent(TestSession session, AppAutomator automator) {
+		public BaseComponent(TestSession session, AppAutomator automator, GuiComponentType compType) {
 			this.testSession = session;
 			this.automator = automator;
 			if (automator.isGui()) {
@@ -83,7 +85,12 @@ public class GuiAutoComponentFactory {
 			} else {
 				this.setAutomatorSetuIdArg(automator.getSetuId());	
 			}
+			this.compType = compType;
 			this.setTestSessionSetuIdArg(testSession.getSetuId());
+		}
+		
+		private SetuArg[] getTypeArgArray() {
+			return new SetuArg[] {SetuArg.arg("origGuiComponentType", this.compType)};
 		}
 
 		protected AppAutomator getAutomator() {
@@ -93,33 +100,38 @@ public class GuiAutoComponentFactory {
 		protected TestSession getTestSession() {
 			return this.testSession;
 		}
-		
-		protected String getSourceOfType(GuiAutoActionType actionType) throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType);
-			return response.getValueForValueAttr();
-		}
 
+		protected SetuResponse sendSetuRequest(GuiAutoActionType actionType, SetuArg... args) throws Exception {
+			return this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType, SetuArg.combineArrays(getTypeArgArray(), args));
+		}
+		
+		public GuiSource Source() throws Exception {
+			return new DefaultGuiSource(this.getAutomator(), this.sendSetuRequest(GuiAutoActionType.GET_SOURCE).getValueForKey("textBlobSetuId").asString());
+		}
 	}
 
 	private static class BaseElement extends BaseComponent{
+		
+		public BaseElement(TestSession session, AppAutomator automator, GuiComponentType compType) {
+			super(session, automator, compType);
+		}
 
-		public BaseElement(TestSession session, AppAutomator automator, String elemSetuId) {
-			super(session, automator);
+		public BaseElement(TestSession session, AppAutomator automator, GuiComponentType compType, String elemSetuId) {
+			super(session, automator, compType);
 			this.setSetuId(elemSetuId);
 			this.setSelfSetuIdArg("elementSetuId");
 		}
 		
-		public BaseElement(TestSession testSession, AppAutomator automator, String elemSetuId, int index) {
-			this(testSession, automator, elemSetuId);
+		public BaseElement(TestSession testSession, AppAutomator automator, GuiComponentType compType, String elemSetuId, int index) {
+			this(testSession, automator, compType, elemSetuId);
 			this.addArgs(
 					SetuArg.arg("isInstanceAction", true),
 					SetuArg.arg("instanceIndex", index)
 			);
 		}
 		
-		@SuppressWarnings("unused")
-		protected void configure(GuiActionConfig config, GuiAutoActionType actionType) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType, SetuArg.arg("elementConfig", config.getSettings()));
+		protected void updateConfig(GuiActionConfig config) throws Exception {
+			this.sendSetuRequest(GuiAutoActionType.CONFIGURE, SetuArg.arg("elementConfig", config.getSettings()));
 		}
 
 	}
@@ -127,90 +139,69 @@ public class GuiAutoComponentFactory {
 	private static class DefaultGuiElement extends BaseElement implements GuiElement {
 
 		public DefaultGuiElement(TestSession session, AppAutomator automator, String setuId) {
-			super(session, automator, setuId);
+			super(session, automator, GuiComponentType.ELEMENT, setuId);
 		}
 		
 		public DefaultGuiElement(TestSession session, AppAutomator automator, String setuId, int index) {
-			super(session, automator, setuId, index);
+			super(session, automator, GuiComponentType.ELEMENT, setuId, index);
 		}
 		
 		@Override
 		public void enterText(String text) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_ENTER_TEXT, SetuArg.textArg(text));
+			this.sendSetuRequest(GuiAutoActionType.ENTER_TEXT, SetuArg.textArg(text));
 		}
 		
 		@Override
 		public void setText(String text) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_SET_TEXT, SetuArg.textArg(text));
+			this.sendSetuRequest(GuiAutoActionType.SET_TEXT, SetuArg.textArg(text));
 		}
 
 		@Override
 		public void click() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_CLICK);
+			this.sendSetuRequest(GuiAutoActionType.CLICK);
 		}
 		
 		@Override
 		public void waitUntilPresent() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_WAIT_UNTIL_PRESENT);
+			this.sendSetuRequest(GuiAutoActionType.WAIT_UNTIL_PRESENT);
 		}
 
 		@Override
 		public void waitUntilVisible() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_WAIT_UNTIL_VISIBLE);
+			this.sendSetuRequest(GuiAutoActionType.WAIT_UNTIL_VISIBLE);
 		}
 
 		@Override
 		public void waitUntilClickable() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_WAIT_UNTIL_CLICKABLE);
+			this.sendSetuRequest(GuiAutoActionType.WAIT_UNTIL_CLICKABLE);
 		}
 
 		@Override
 		public void check() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_CHECK);
+			this.sendSetuRequest(GuiAutoActionType.CHECK);
 		}
 
 		@Override
 		public void uncheck() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_UNCHECK);
+			this.sendSetuRequest(GuiAutoActionType.UNCHECK);
 		}
 		
 		@Override
 		public void identify() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ELEMENT_IDENTIFY);
+			this.sendSetuRequest(GuiAutoActionType.IDENTIFY);
 		}
 		
 		@Override
 		public GuiElement configure(GuiActionConfig config) throws Exception {
-			super.configure(config, GuiAutoActionType.ELEMENT_CONFIGURE);
+			super.updateConfig(config);
 			return this;
 		}
-		
-		@Override
-		public String getRootSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.ELEMENT_GET_ROOT_SOURCE);
-		}
-		
-		@Override
-		public String getFullSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.ELEMENT_GET_FULL_SOURCE);
-		}
-		
-		@Override
-		public String getInnerSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.ELEMENT_GET_INNER_SOURCE);
-		}
-		
-		@Override
-		public String getText() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.ELEMENT_GET_TEXT);
-		}
-
 	}
 
 	private static class DefaultGuiMultiElement extends BaseElement implements GuiMultiElement {
 
 		public DefaultGuiMultiElement(TestSession session, AppAutomator automator, String setuId) {
-			super(session, automator, setuId);
+			super(session, automator, GuiComponentType.MULTI_ELEMENT, setuId);
 		}
 
 		@Override
@@ -230,27 +221,25 @@ public class GuiAutoComponentFactory {
 
 		@Override
 		public GuiElement random() throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MULTIELEMENT_GET_RANDOM_INDEX);
+			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.GET_RANDOM_INDEX);
 			return atIndex(response.getValue().asInt());
 		}
 		
 		@Override
 		public int length() throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MULTIELEMENT_GET_INSTANCE_COUNT);
+			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.GET_INSTANCE_COUNT);
 			return response.getValue().asInt();
 		}
 
 	}
-
-	private static class DefaultDropDown extends BaseElement implements DropDown {
-
-		@Override
-		public DropDown configure(GuiActionConfig config) throws Exception {
-			super.configure(config, GuiAutoActionType.DROPDOWN_CONFIGURE);
-			return this;
-		}
+	
+	private static class MultiElementSelectable extends BaseElement {
 		
-		private List<Map<String,Object>> convertToMap(With... locators) throws Exception{
+		protected MultiElementSelectable(TestSession session, AppAutomator automator, GuiComponentType compType, String setuId) {
+			super(session, automator, compType, setuId);
+		}	
+		
+		protected List<Map<String,Object>> convertToMap(With... locators) throws Exception{
 			List<Map<String,Object>> args = new ArrayList<Map<String,Object>>();
 			for(With locator: locators) {
 				args.add(locator.asMap());
@@ -258,168 +247,114 @@ public class GuiAutoComponentFactory {
 			return args;
 		}
 		
+		public boolean hasValueSelected(String value) throws Exception {
+			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.HAS_VALUE_SELECTED, SetuArg.valueArg(value));
+			return response.getValueForCheckResult();
+		}
+
+		public boolean hasIndexSelected(int index) throws Exception {
+			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.HAS_INDEX_SELECTED, SetuArg.indexArg(index));
+			return response.getValueForCheckResult();
+		}
+		
+		public void selectByValue(String value) throws Exception {
+			this.sendSetuRequest(GuiAutoActionType.SELECT_BY_VALUE, SetuArg.valueArg(value));
+		}
+
+		public void selectByIndex(int index) throws Exception {
+			this.sendSetuRequest(GuiAutoActionType.SELECT_BY_INDEX, SetuArg.indexArg(index));
+		}
+
+		public String getFirstSelectedOptionValue() throws Exception {
+			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.GET_FIRST_SELECTED_OPTION_VALUE);
+			return response.getValueForValueAttr();
+		}
+	}
+
+	private static class DefaultDropDown extends MultiElementSelectable implements DropDown {
+
+		public DefaultDropDown(TestSession session, AppAutomator automator, String setuId) {
+			super(session, automator, GuiComponentType.DROPDOWN, setuId);
+		}
+		
+		@Override
+		public DropDown configure(GuiActionConfig config) throws Exception {
+			super.updateConfig(config);
+			return this;
+		}
+		
 		@Override
 		public DropDown setOptionLocators(With... locators) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SET_OPTION_LOCATORS, SetuArg.arg("locators", convertToMap(locators)));
+			this.sendSetuRequest(GuiAutoActionType.SET_OPTION_LOCATORS, SetuArg.arg("locators", convertToMap(locators)));
 			return this;
 		}
 
 		@Override
 		public DropDown setOptionContainer(With... locators) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SET_OPTION_CONTAINER, SetuArg.arg("locators", convertToMap(locators)));
+			this.sendSetuRequest(GuiAutoActionType.SET_OPTION_CONTAINER, SetuArg.arg("locators", convertToMap(locators)));
 			return this;
 		}
 		
-		public DefaultDropDown(TestSession session, AppAutomator automator, String setuId) {
-			super(session, automator, setuId);
-		}
-		
-		public boolean hasValueSelected(String value) throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_HAS_VALUE_SELECTED, SetuArg.valueArg(value));
-			return response.getValueForCheckResult();
-		}
-
-		public boolean hasIndexSelected(int index) throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_HAS_INDEX_SELECTED, SetuArg.indexArg(index));
-			return response.getValueForCheckResult();
-		}
-
-		public void selectByValue(String value) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_VALUE, SetuArg.valueArg(value));
-		}
-
-		public void selectByIndex(int index) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_INDEX, SetuArg.indexArg(index));
-		}
-
-		public String getFirstSelectedOptionValue() throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_GET_FIRST_SELECTED_OPTION_VALUE);
-			return response.getValueForValueAttr();
-		}
-		
 		public String getFirstSelectedOptionText() throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_GET_FIRST_SELECTED_OPTION_TEXT);
+			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.GET_FIRST_SELECTED_OPTION_TEXT);
 			return response.getValueForText();
 		}
 
 		@Override
 		public boolean hasVisibleTextSelected(String text) throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_HAS_VISIBLE_TEXT_SELECTED, SetuArg.textArg(text));
+			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.HAS_VISIBLE_TEXT_SELECTED, SetuArg.textArg(text));
 			return response.getValueForCheckResult();
 		}
 
 		@Override
 		public void selectByVisibleText(String text) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_VISIBLE_TEXT, SetuArg.textArg(text));
+			this.sendSetuRequest(GuiAutoActionType.SELECT_BY_VISIBLE_TEXT, SetuArg.textArg(text));
 		}
 
 		@Override
 		public void sendOptionText(String text) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SEND_OPTION_TEXT, SetuArg.textArg(text));
-		}
-		
-		@Override
-		public String getRootSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.DROPDOWN_GET_ROOT_SOURCE);
-		}
-		
-		@Override
-		public String getFullSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.DROPDOWN_GET_FULL_SOURCE);
-		}
-		
-		@Override
-		public String getInnerSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.DROPDOWN_GET_INNER_SOURCE);
-		}
-		
-		@Override
-		public String getText() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.DROPDOWN_GET_TEXT);
+			this.sendSetuRequest(GuiAutoActionType.SEND_OPTION_TEXT, SetuArg.textArg(text));
 		}
 	}
 
-	private static class DefaultRadioGroup extends BaseElement implements RadioGroup {
+	private static class DefaultRadioGroup extends MultiElementSelectable implements RadioGroup {
 
 		public DefaultRadioGroup(TestSession session, AppAutomator automator, String setuId) {
-			super(session, automator, setuId);
+			super(session, automator, GuiComponentType.RADIOGROUP, setuId);
 		}
-		
-		public boolean hasValueSelected(String value) throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_HAS_VALUE_SELECTED, SetuArg.valueArg(value));
-			return response.getValueForCheckResult();
-		}
-
-		public boolean hasIndexSelected(int index) throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_HAS_INDEX_SELECTED, SetuArg.indexArg(index));
-			return response.getValueForCheckResult();
-		}
-
-		public void selectByValue(String value) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_SELECT_BY_VALUE, SetuArg.valueArg(value));
-		}
-
-		public void selectByIndex(int index) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_SELECT_BY_INDEX, SetuArg.indexArg(index));
-		}
-
-		public String getFirstSelectedOptionValue() throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE);
-			return response.getValueForValueAttr();
-		}
-		
+				
 		@Override
 		public RadioGroup configure(GuiActionConfig config) throws Exception {
-			super.configure(config, GuiAutoActionType.RADIOGROUP_CONFIGURE);
+			super.updateConfig(config);
 			return this;
-		}
-		
-		@Override
-		public String getRootSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.RADIOGROUP_GET_ROOT_SOURCE);
-		}
-		
-		@Override
-		public String getFullSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.RADIOGROUP_GET_FULL_SOURCE);
-		}
-		
-		@Override
-		public String getInnerSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.RADIOGROUP_GET_INNER_SOURCE);
-		}
-		
-		@Override
-		public String getText() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.RADIOGROUP_GET_TEXT);
 		}
 	}
 
 	private static class DefaultAlert extends BaseElement implements Alert {
 
 		public DefaultAlert(TestSession session, AppAutomator automator, String setuId) {
-			super(session, automator, setuId);
+			super(session, automator, GuiComponentType.ALERT, setuId);
 		}
 
 		@Override
 		public void confirm() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_CONFIRM);
+			this.sendSetuRequest(GuiAutoActionType.CONFIRM);
 		}
 
 		@Override
 		public void dismiss() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_DISMISS);
+			this.sendSetuRequest(GuiAutoActionType.DISMISS);
 		}
 
 		@Override
 		public String getText() throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_GET_TEXT);
+			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.GET_TEXT);
 			return response.getValueForText();
 		}
 
 		@Override
 		public void sendText(String text) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_SEND_TEXT, SetuArg.textArg(text));
+			this.sendSetuRequest(GuiAutoActionType.SEND_TEXT, SetuArg.textArg(text));
 		}
 
 	}
@@ -427,40 +362,45 @@ public class GuiAutoComponentFactory {
 	private static class DefaultBrowser extends BaseComponent implements Browser {
 
 		public DefaultBrowser(TestSession session, AppAutomator automator) {
-			super(session, automator);
+			super(session, automator, GuiComponentType.BROWSER);
 		}
 
 		@Override
 		public void goToUrl(String url) throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_GO_TO_URL, SetuArg.arg("url", url));	
+			this.sendSetuRequest(GuiAutoActionType.GO_TO_URL, SetuArg.arg("url", url));	
 		}
 
 		@Override
 		public void goBack() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_GO_BACK);
+			this.sendSetuRequest(GuiAutoActionType.GO_BACK);
 		}
 
 		@Override
 		public void goForward() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_GO_FORWARD);
+			this.sendSetuRequest(GuiAutoActionType.GO_FORWARD);
 		}
 
 		@Override
 		public void refresh() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_REFRESH);
+			this.sendSetuRequest(GuiAutoActionType.REFRESH_CONTENT);
 		}
 	}
+	
+	private static class BaseFrame extends BaseElement implements Frame {
 
-	private static class DefaultFrame extends BaseElement implements Frame {
-
-		public DefaultFrame(TestSession session, AppAutomator automator, String setuId) {
-			super(session, automator, setuId);
+		protected BaseFrame(TestSession session, AppAutomator automator, GuiComponentType compType, String setuId) {
+			super(session, automator, compType, setuId);
 			this.setSelfSetuIdArg("elementSetuId");
 		}
 
+		protected BaseFrame(TestSession session, AppAutomator automator, GuiComponentType compType) {
+			super(session, automator, compType);
+			this.setSelfSetuIdArg("elementSetuId");
+		}
+		
 		@Override
 		public void focus() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_FOCUS);
+			this.sendSetuRequest(GuiAutoActionType.FOCUS);
 		}
 		
 		@Override
@@ -470,7 +410,8 @@ public class GuiAutoComponentFactory {
 				arg.add(locator.asMap());
 			}
 			SetuResponse response = this.sendRequest(
-					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_CREATE_FRAME,
+					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE,
+					SetuArg.arg("defGuiComponentType", GuiComponentType.FRAME),
 					SetuArg.arg("locators", arg)
 			);
 			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
@@ -478,102 +419,61 @@ public class GuiAutoComponentFactory {
 		
 		@Override
 		public Frame ParentFrame() throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_GET_PARENT);
+			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.GET_PARENT);
 			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
-		}
-		
-		@Override
-		public String getRootSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.FRAME_GET_ROOT_SOURCE);
-		}
-		
-		@Override
-		public String getFullSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.FRAME_GET_FULL_SOURCE);
-		}
-		
-		@Override
-		public String getInnerSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.FRAME_GET_INNER_SOURCE);
-		}
-		
-		@Override
-		public String getText() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.FRAME_GET_TEXT);
 		}
 	}
 
-	private static class DefaultDomRoot extends BaseComponent implements DomRoot{
+	private static class DefaultFrame extends BaseFrame implements Frame {
+
+		public DefaultFrame(TestSession session, AppAutomator automator, String setuId) {
+			super(session, automator, GuiComponentType.FRAME, setuId);
+			this.setSelfSetuIdArg("elementSetuId");
+		}
+
+		public Frame ParentFrame() throws Exception {
+			throw new Exception("DomRoot does not have a parent frame.");
+		}
+	}
+
+	private static class DefaultDomRoot extends BaseFrame implements DomRoot{
 		
 		public DefaultDomRoot(TestSession session, AppAutomator automator) {
-			super(session, automator);
+			super(session, automator, GuiComponentType.DOMROOT);
 		}
 
 		@Override
 		public void focus() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DOMROOT_FOCUS);
+			this.sendSetuRequest(GuiAutoActionType.FOCUS);
 		}
 
-		@Override
-		public DefaultFrame Frame(With... locators) throws Exception {
-			List<Map<String,Object>> arg = new ArrayList<Map<String,Object>>();
-			for(With locator: locators) {
-				arg.add(locator.asMap());
-			}
-			SetuResponse response = this.sendRequest(
-					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DOMROOT_CREATE_FRAME,
-					SetuArg.arg("locators", arg)
-			);
-			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
-		}
-		
-		@Override
-		public String getRootSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.DOMROOT_GET_ROOT_SOURCE);
-		}
-		
-		@Override
-		public String getFullSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.DOMROOT_GET_FULL_SOURCE);
-		}
-		
-		@Override
-		public String getInnerSource() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.DOMROOT_GET_INNER_SOURCE);
-		}
-		
-		@Override
-		public String getText() throws Exception {
-			return this.getSourceOfType(GuiAutoActionType.DOMROOT_GET_TEXT);
-		}
-	
 	}
 
 	private static class AbstractBasicWindow extends BaseElement {
 
-		public AbstractBasicWindow(TestSession session, AppAutomator automator, String setuId) {
-			super(session, automator, setuId);
+		public AbstractBasicWindow(TestSession session, AppAutomator automator, GuiComponentType compType, String setuId) {
+			super(session, automator, compType, setuId);
 		}
 		
 		public String getTitle() throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.WINDOW_GET_TITLE);
+			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.GET_TITLE);
 			return response.getValueForKey("title").asString();
 		}
 		
 		public void focus() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.WINDOW_FOCUS);
+			this.sendSetuRequest(GuiAutoActionType.FOCUS);
 		}
 	}
 
 	private static class DefaultChildWindow extends AbstractBasicWindow implements ChildWindow {
 
 		public DefaultChildWindow(TestSession session, AppAutomator automator, String setuId) {
-			super(session, automator, setuId);
+			super(session, automator, GuiComponentType.CHILD_WINDOW, setuId);
 		}
 
 		@Override
 		public void close() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.CHILD_WINDOW_CLOSE);
+			this.sendSetuRequest(GuiAutoActionType.CLOSE);
 		}
 		
 		@Override
@@ -585,41 +485,42 @@ public class GuiAutoComponentFactory {
 	private static class DefaultMainWindow extends AbstractBasicWindow implements MainWindow {
 
 		public DefaultMainWindow(TestSession session, AppAutomator automator, String setuId) {
-			super(session, automator, setuId);
+			super(session, automator, GuiComponentType.MAIN_WINDOW, setuId);
 		}
 		
 		@Override
 		public void maximize() throws Exception {
-			this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_MAXIMIZE);
+			this.sendSetuRequest(GuiAutoActionType.MAXIMIZE);
 		}
 		
 		protected String takeElementFindingAction(GuiAutoActionType actionType, SetuArg... args) throws Exception {
-			SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType, args);
+			SetuResponse response = this.sendSetuRequest(actionType, args);
 			return response.getValueForElementSetuId();		
 		}
 		
 		@Override
-		public ChildWindow childWindow(With... locators) throws Exception {
+		public ChildWindow ChildWindow(With... locators) throws Exception {
 			List<Map<String,Object>> arg = new ArrayList<Map<String,Object>>();
 			for(With locator: locators) {
 				arg.add(locator.asMap());
 			}
 			SetuResponse response = this.sendRequest(
-					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_CREATE_CHILD_WINDOW,
+					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE,
+					SetuArg.arg("defGuiComponentType", GuiComponentType.CHILD_WINDOW),
 					SetuArg.arg("locators", arg)
 			);
 			return new DefaultChildWindow(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
 		}
 		
 		@Override
-		public ChildWindow latestChildWindow() throws Exception {
-			SetuResponse response = sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_GET_LATEST_CHILD_WINDOW);
+		public ChildWindow ChildWindow() throws Exception {
+			SetuResponse response = sendSetuRequest(GuiAutoActionType.GET_LATEST_CHILD_WINDOW);
 			return new DefaultChildWindow(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
 		}
 
 		@Override
 		public void closeAllChildWindows() throws Exception {
-			sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS);
+			sendSetuRequest(GuiAutoActionType.CLOSE_ALL_CHILD_WINDOWS);
 		}
 	}
 

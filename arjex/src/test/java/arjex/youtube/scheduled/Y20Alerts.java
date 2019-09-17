@@ -35,17 +35,17 @@ public class Y20Alerts extends TestNGBaseTest{
 		
 		WPLoginLogout.login(automator);
 		
-		automator.executeJavaScript("alert('dummy')");
+		automator.executeScript("alert('dummy')");
 		automator.Alert().confirm();
-		automator.executeJavaScript("alert('dummy')");
+		automator.executeScript("alert('dummy')");
 		automator.Alert().dismiss();
 		
-		automator.executeJavaScript("alert('Sample')");
+		automator.executeScript("alert('Sample')");
 		Alert alert = automator.Alert();
 		assert alert.getText().equals("Sample");
 		alert.confirm();
 		
-		automator.executeJavaScript("prompt('Are You Sure?')");
+		automator.executeScript("prompt('Are You Sure?')");
 		alert = automator.Alert();
 		alert.sendText("Yes");	
 		alert.confirm();

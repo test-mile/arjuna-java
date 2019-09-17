@@ -29,8 +29,10 @@ import arjuna.client.core.connector.BaseSetuObject;
 import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuResponse;
 import arjuna.client.guiauto.component.GuiAutoComponentFactory;
+import arjuna.client.guiauto.component.GuiComponentType;
 import arjuna.client.testsession.TestSession;
 import arjuna.lib.enums.GuiAutomationContext;
+import arjuna.tpi.guiauto.GuiSource;
 import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.Alert;
 import arjuna.tpi.guiauto.component.Browser;
@@ -51,6 +53,7 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 	private GuiAutomationContext autoContext;
 	private TestSession testSession;
 	private TestConfig config;
+	private GuiSource source;
 	
 	public AbstractAppAutomator() {
 		super();
@@ -75,49 +78,53 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 		return false;
 	}
 
-	protected String takeElementFindingAction(GuiAutoActionType actionType, SetuArg... args) throws Exception {
-		SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType, args);
+	protected String takeElementFindingAction(GuiAutoActionType actionType, GuiComponentType component, SetuArg... arg) throws Exception {
+		SetuResponse response = this.sendRequest(
+				ArjunaComponent.GUI_AUTOMATOR, 
+				actionType, 
+				SetuArg.combineArrays(new SetuArg[] {SetuArg.arg("defGuiComponentType", component)}, arg));
 		return response.getValueForElementSetuId();		
 	}
 
-	private String createGenericElement(GuiAutoActionType actionType, With... locators) throws Exception {
+	private String createGenericElement(GuiAutoActionType actionType, GuiComponentType component, With... locators) throws Exception {
 		List<Map<String,Object>> arg = new ArrayList<Map<String,Object>>();
 		for(With locator: locators) {
 			arg.add(locator.asMap());
 		}
 		return this.takeElementFindingAction(
 				actionType,
+				component,
 				SetuArg.arg("locators", arg)
 		);	
 	}
 
 	@Override
 	public GuiElement Element(With... locators) throws Exception {
-		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE_ELEMENT, locators);
+		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE, GuiComponentType.ELEMENT, locators);
 		return GuiAutoComponentFactory.Element(this.testSession, this, elemSetuId);
 	}
 
 	@Override
 	public GuiMultiElement MultiElement(With... locators) throws Exception {
-		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE_MULTIELEMENT, locators);
+		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE, GuiComponentType.MULTI_ELEMENT, locators);
 		return GuiAutoComponentFactory.MultiElement(this.testSession, this, elemSetuId);
 	}
 
 	@Override
 	public DropDown DropDown(With... locators) throws Exception {
-		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE_DROPDOWN, locators);
+		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE, GuiComponentType.ELEMENT, locators);
 		return GuiAutoComponentFactory.DropDown(this.testSession, this, elemSetuId);
 	}
 
 	@Override
 	public RadioGroup RadioGroup(With... locators) throws Exception {
-		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE_RADIOGROUP, locators);
+		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE, GuiComponentType.RADIOGROUP, locators);
 		return GuiAutoComponentFactory.RadioGroup(this.testSession, this, elemSetuId);
 	}
 
 	@Override
 	public Alert Alert() throws Exception {
-		String elemSetuId = takeElementFindingAction(GuiAutoActionType.DEFINE_ALERT);
+		String elemSetuId = takeElementFindingAction(GuiAutoActionType.DEFINE, GuiComponentType.ALERT);
 		return GuiAutoComponentFactory.Alert(this.testSession, this, elemSetuId);
 	}
 	
@@ -128,12 +135,12 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 	
 	@Override
 	public ChildWindow childWindow(With... locators) throws Exception {
-		return this.mainWindow.childWindow(locators);
+		return this.mainWindow.ChildWindow(locators);
 	}
 	
 	@Override
 	public ChildWindow LatestChildWindow() throws Exception {
-		return this.mainWindow.latestChildWindow();
+		return this.mainWindow.ChildWindow();
 	}
 
 	@Override
@@ -200,36 +207,20 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 	}
 	
 	@Override
-	public void executeJavaScript(String script) throws Exception {
+	public void executeScript(String script) throws Exception {
 		this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, 
-				GuiAutoActionType.BROWSER_EXECUTE_JAVASCRIPT, 
+				GuiAutoActionType.EXECUTE_SCRIPT, 
 				SetuArg.arg("script", script)
 		);
 	}
 	
-	protected String getSourceOfType(GuiAutoActionType actionType) throws Exception {
-		SetuResponse response = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, actionType);
-		return response.getValueForValueAttr();
-	}
-
 	@Override
-	public String getRootSource() throws Exception {
-		return this.getSourceOfType(GuiAutoActionType.GET_ROOT_SOURCE);
+	public GuiSource Source() throws Exception {
+		return this.source;
 	}
 	
-	@Override
-	public String getFullSource() throws Exception {
-		return this.getSourceOfType(GuiAutoActionType.GET_FULL_SOURCE);
-	}
-	
-	@Override
-	public String getInnerSource() throws Exception {
-		return this.getSourceOfType(GuiAutoActionType.GET_INNER_SOURCE);
-	}
-	
-	@Override
-	public String getText() throws Exception {
-		return this.getSourceOfType(GuiAutoActionType.GET_TEXT);
+	protected void setSource(GuiSource source) {
+		this.source = source;
 	}
 
 }

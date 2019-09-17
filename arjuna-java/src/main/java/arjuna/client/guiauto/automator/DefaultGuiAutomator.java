@@ -23,9 +23,12 @@ import arjuna.client.core.action.GuiAutoActionType;
 import arjuna.client.core.config.ArjunaComponent;
 import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuResponse;
+import arjuna.client.guiauto.component.DefaultGuiSource;
 import arjuna.client.guiauto.component.GuiAutoComponentFactory;
+import arjuna.client.guiauto.component.GuiComponentType;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.GuiDriverExtendedConfig;
+import arjuna.tpi.guiauto.GuiSource;
 import arjuna.tpi.test.TestConfig;
 
 public class DefaultGuiAutomator extends AbstractAppAutomator implements GuiAutomator {
@@ -47,32 +50,31 @@ public class DefaultGuiAutomator extends AbstractAppAutomator implements GuiAuto
 		if (this.extendedConfig != null) {
 			response = this.sendRequest(
 					ArjunaComponent.GUI_AUTOMATOR,
-					GuiAutoActionType.LAUNCH_AUTOMATOR, 
+					GuiAutoActionType.LAUNCH, 
 					SetuArg.configArg(this.getConfig().getSetuId()),
 					SetuArg.arg("extendedConfig", extendedConfig)
 			);
 		} else {
 			response = this.sendRequest(
 					ArjunaComponent.GUI_AUTOMATOR,
-					GuiAutoActionType.LAUNCH_AUTOMATOR, 
+					GuiAutoActionType.LAUNCH, 
 					SetuArg.configArg(this.getConfig().getSetuId())
 			);				
 		}
 		this.setSetuId(response.getValueForGuiAutomatorSetuId());
 		this.setSelfSetuIdArg("automatorSetuId");
 		
-		SetuResponse winResponse = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE_MAIN_WINDOW);
+		SetuResponse winResponse = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE, SetuArg.arg("defGuiComponentType", GuiComponentType.MAIN_WINDOW));
 		this.setMainWindow(GuiAutoComponentFactory.MainWindow(this.getTestSession(), this, winResponse.getValueForElementSetuId()));
 		
 		this.setDomRoot(GuiAutoComponentFactory.DomRoot(this.getTestSession(), this));
 		this.setBrowser(GuiAutoComponentFactory.Browser(this.getTestSession(), this));
+		this.setSource(DefaultGuiSource.defineSource(this));
 	}
-	
-
 
 	@Override
 	public void quit() throws Exception {
-		this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.QUIT_AUTOMATOR);
+		this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.QUIT);
 	}
 
 }

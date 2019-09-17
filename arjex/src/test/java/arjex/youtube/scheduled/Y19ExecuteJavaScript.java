@@ -35,7 +35,7 @@ public class Y19ExecuteJavaScript extends TestNGBaseTest{
 		
 		WPLoginLogout.login(automator);
 		
-		automator.executeJavaScript("document.getElementsByClassName('welcome-view-site')[0].click();");
+		automator.executeScript("document.getElementsByClassName('welcome-view-site')[0].click();");
 		automator.Element(With.linkText("Site Admin")).waitUntilClickable();;
 		
 		WPLoginLogout.logout(automator);	

@@ -65,11 +65,11 @@ public class BaseSetuObject implements SetuManagedObject {
 		SetuConnectUtils.addArgs(coreArgs, args);		
 	}
 	
-	protected <E1 extends Enum<E1>,E2 extends Enum<E2>> SetuResponse sendRequest(E1 component, E2 actionType) throws Exception {
+	public <E1 extends Enum<E1>,E2 extends Enum<E2>> SetuResponse sendRequest(E1 component, E2 actionType) throws Exception {
 		return SetuConnectUtils.sendRequest(component, actionType, coreArgs);
 	}
 	
-	protected <E1 extends Enum<E1>,E2 extends Enum<E2>> SetuResponse sendRequest(E1 component, E2 actionType, SetuArg... args) throws Exception {
+	public <E1 extends Enum<E1>,E2 extends Enum<E2>> SetuResponse sendRequest(E1 component, E2 actionType, SetuArg... args) throws Exception {
 		return SetuConnectUtils.sendRequest(component, actionType, coreArgs, args);
 	}
 
@@ -150,7 +150,7 @@ class DefaultSetuRequest implements SetuRequest {
 	
 	public DefaultSetuRequest(String component, String actionType) {
 		this.actionRequest = new RequestBody();
-		this.actionRequest.setComponent(component);
+		this.actionRequest.setArjunaComponent(component);
 		this.actionRequest.setAction(actionType);
 	}
 	
@@ -179,7 +179,7 @@ class DefaultSetuRequest implements SetuRequest {
 	}
 	
 	private class RequestBody {
-		private String component;
+		private String arjunaComponent;
 		private String action;
 //		private String setuId;
 		private Map<String,Object> args = null;
@@ -191,8 +191,8 @@ class DefaultSetuRequest implements SetuRequest {
 			this.args.put(name, value);
 		}
 		
-		public void setComponent(String component) {
-			this.component = component;
+		public void setArjunaComponent(String component) {
+			this.arjunaComponent = component;
 		}
 
 		public void setAction(String action) {

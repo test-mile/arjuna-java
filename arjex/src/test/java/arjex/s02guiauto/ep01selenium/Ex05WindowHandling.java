@@ -39,14 +39,14 @@ public class Ex05WindowHandling {
 		mainWin.maximize();
 		System.out.println(mainWin.getTitle());
 		
-		automator.executeJavaScript("window.open('/abc')");
+		automator.executeScript("window.open('/abc')");
 		ChildWindow win = automator.LatestChildWindow();
 		win.focus();
 		System.out.println(win.getTitle());
 		win.close();
 		
-		automator.executeJavaScript("window.open('/def')");
-		automator.executeJavaScript("window.open('/xyz')");
+		automator.executeScript("window.open('/def')");
+		automator.executeScript("window.open('/xyz')");
 		automator.closeAllChildWindows();
 		System.out.println(mainWin.getTitle());
 		
