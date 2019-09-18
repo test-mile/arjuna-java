@@ -39,13 +39,13 @@ public class Y14ElementIdentificationWithORRelationship extends TestNGBaseTest{
 		// Two identifiers. Only first one would be tried as it succeeds.
 		GuiElement element = automator.Element(With.id("user_login"), With.name("log"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 		
 		// Two identifiers. First invalid, second valid. Hence it succeeds by using second With construct
 		// Identification max wait time is for all With constructs clubbed together.
 		element = automator.Element(With.id("INVALID"), With.name("log"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 		
 		automator.quit();
 	}

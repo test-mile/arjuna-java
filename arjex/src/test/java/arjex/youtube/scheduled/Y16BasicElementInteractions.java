@@ -60,6 +60,14 @@ public class Y16BasicElementInteractions extends TestNGBaseTest{
 
 		// Go to logout URL
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("wp.logout.url").asString());
+		GuiElement confirmation = automator.Element(With.partialLinkText("log out"));
+		confirmation.identify();
+		confirmation.waitUntilClickable();
+		confirmation.click();
+		
+		GuiElement message = automator.Element(With.partialText("logged out"));
+		message.identify();
+		message.waitUntilVisible();
 
 		automator.quit();
 	}

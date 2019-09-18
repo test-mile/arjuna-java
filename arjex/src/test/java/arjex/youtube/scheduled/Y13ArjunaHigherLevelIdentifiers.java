@@ -37,46 +37,46 @@ public class Y13ArjunaHigherLevelIdentifiers extends TestNGBaseTest{
 		// Based on Text
 		GuiElement element = automator.Element(With.text("Lost your password?"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 		
 		// Based on partial text
 		element = automator.Element(With.partialText("Lost"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 	
 		// Based on Title
 		element = automator.Element(With.title("Password Lost and Found"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 		
 		// Based on Value
 		element = automator.Element(With.value("Log In"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 		
 		// Based on any attribute e.g. for
 		element = automator.Element(With.attrValue("[for][user_login]"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 		
 		// Based on partial content of an attribute
 		element = automator.Element(With.attrPartialValue("[for][_login]"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 		
 		// Based on element type
 		element = automator.Element(With.type("password"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 		
 		// Based on compound classes
 		element = automator.Element(With.classNames("button button-large"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 		
 		element = automator.Element(With.classNames("button", "button-large"));
 		element.identify();
-		System.out.println(element.getRootSource());
+		System.out.println(element.Source().getRootContent());
 
 		automator.quit();
 	}

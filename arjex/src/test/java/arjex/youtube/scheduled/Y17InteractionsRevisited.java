@@ -48,6 +48,7 @@ public class Y17InteractionsRevisited extends TestNGBaseTest{
 		
 		// Logout
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("wp.logout.url").asString());
+		automator.Element(With.partialLinkText("log out")).click();
 		automator.Element(With.partialText("logged out")).waitUntilVisible();
 
 		automator.quit();
