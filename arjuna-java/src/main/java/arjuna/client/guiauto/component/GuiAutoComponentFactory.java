@@ -440,12 +440,7 @@ public class GuiAutoComponentFactory {
 		public DefaultFrame(TestSession session, AppAutomator automator, String setuId) {
 			super(session, automator, GuiComponentType.FRAME, setuId);
 			this.setSelfSetuIdArg("elementSetuId");
-		}
-
-		public Frame ParentFrame() throws Exception {
-			throw new Exception("DomRoot does not have a parent frame.");
-		}
-		
+		}		
 
 	}
 
@@ -467,6 +462,9 @@ public class GuiAutoComponentFactory {
 			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
 		}
 
+		public Frame ParentFrame() throws Exception {
+			throw new Exception("DomRoot does not have a parent frame.");
+		}
 	}
 
 	private static class AbstractBasicWindow extends BaseElement {
