@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 import arjex.youtube.basics.WPLoginLogout;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
+import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.ChildWindow;
 import arjuna.tpi.guiauto.component.MainWindow;
 import arjuna.tpi.testng.TestNGBaseTest;
@@ -46,12 +47,62 @@ public class Y21WindowHandling extends TestNGBaseTest{
 		System.out.println(win.getTitle());
 		win.close();
 		
-		automator.executeScript("window.open('/def')");
-		automator.executeScript("window.open('/xyz')");
+		automator.executeScript("window.open('https://testmile.com')");
+		automator.executeScript("window.open('https://google.com')");
 		automator.closeAllChildWindows();
 		System.out.println(mainWin.getTitle());
 		
 		WPLoginLogout.logout(automator);
 	}
 
+	@Test
+	public void test2() throws Exception{
+		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
+		
+		WPLoginLogout.login(automator);
+		
+		automator.executeScript("window.open('https://testmile.com')");
+		automator.executeScript("window.open('https://google.com')");
+		
+		ChildWindow dynamicWin = automator.childWindow(With.windowTitle("Test Mile – Your Software Testing Partner"));
+		dynamicWin.focus();
+		System.out.println(dynamicWin.getTitle());
+		dynamicWin.close();
+		
+		WPLoginLogout.logout(automator);
+	}
+	
+	@Test
+	public void test3() throws Exception{
+		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
+		
+		WPLoginLogout.login(automator);
+		
+		automator.executeScript("window.open('https://testmile.com')");
+		automator.executeScript("window.open('https://google.com')");
+		
+		ChildWindow dynamicWin = automator.childWindow(With.partialWindowTitle("Software Testing"));
+		dynamicWin.focus();
+		System.out.println(dynamicWin.getTitle());
+		dynamicWin.close();
+		
+		WPLoginLogout.logout(automator);
+	}
+	
+	@Test
+	public void test4() throws Exception{
+		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
+		
+		WPLoginLogout.login(automator);
+		
+		automator.executeScript("window.open('https://testmile.com')");
+		automator.executeScript("window.open('https://google.com')");
+		
+		ChildWindow dynamicWin = automator.childWindow(With.childLocator(With.value("Google Search")));
+		dynamicWin.focus();
+		System.out.println(dynamicWin.getTitle());
+		dynamicWin.close();
+		
+		WPLoginLogout.logout(automator);
+	}
 }

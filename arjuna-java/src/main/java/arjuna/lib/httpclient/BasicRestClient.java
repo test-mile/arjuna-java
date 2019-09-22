@@ -1,5 +1,7 @@
 package arjuna.lib.httpclient;
 
+import java.nio.charset.Charset;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -50,7 +52,7 @@ public class BasicRestClient {
 	
 	public String post(String uri, String content) throws Exception{
 		HttpPost httppost = new HttpPost(this.baseUrl +  uri);
-		StringEntity se = new StringEntity(content);
+		StringEntity se = new StringEntity(content, Charset.forName("UTF-8"));
 		se.setContentType("application/json");
 		se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "UTF-8"));
 		httppost.setEntity(se);

@@ -523,7 +523,9 @@ public class GuiAutoComponentFactory {
 				arg.add(locator.asMap());
 			}
 			SetuResponse response = this.sendRequest(
-					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE,
+					ArjunaComponent.GUI_AUTOMATOR, 
+					GuiAutoActionType.DEFINE,
+					SetuArg.arg("origGuiComponentType", GuiComponentType.MAIN_WINDOW),
 					SetuArg.arg("defGuiComponentType", GuiComponentType.CHILD_WINDOW),
 					SetuArg.arg("locators", arg)
 			);

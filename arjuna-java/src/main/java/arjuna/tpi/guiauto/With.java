@@ -152,6 +152,14 @@ public class With {
 		return new With(WithType.INDEX, index);
 	}
 	
+	public static With windowTitle(String title) throws Exception {
+		return new With(WithType.WINDOW_TITLE, title);
+	}
+	
+	public static With partialWindowTitle(String title) throws Exception {
+		return new With(WithType.PARTIAL_WINDOW_TITLE, title);
+	}
+	
 	public static With childLocator(With withObj) throws Exception {
 		return new With(WithType.CHILD_LOCATOR, withObj);
 	}
@@ -198,6 +206,8 @@ enum WithType {
     VALUE,
     
 	INDEX,
+	WINDOW_TITLE,
+	PARTIAL_WINDOW_TITLE,
 	CHILD_LOCATOR,
 	GNS_NAME
 }
