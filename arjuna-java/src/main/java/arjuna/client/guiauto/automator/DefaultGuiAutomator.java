@@ -69,7 +69,6 @@ public class DefaultGuiAutomator extends AbstractAppAutomator implements GuiAuto
 		
 		this.setDomRoot(GuiAutoComponentFactory.DomRoot(this.getTestSession(), this));
 		this.setBrowser(GuiAutoComponentFactory.Browser(this.getTestSession(), this));
-		this.setSource(DefaultGuiSource.defineSource(this));
 	}
 
 	@Override

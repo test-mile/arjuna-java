@@ -108,6 +108,10 @@ public class GuiAutoComponentFactory {
 		public GuiSource Source() throws Exception {
 			return new DefaultGuiSource(this.getAutomator(), this.sendSetuRequest(GuiAutoActionType.GET_SOURCE).getValueForKey("textBlobSetuId").asString());
 		}
+		
+		protected GuiComponentType getComponentType() {
+			return this.compType;
+		}
 	}
 
 	private static class BaseElement extends BaseComponent{
@@ -386,7 +390,7 @@ public class GuiAutoComponentFactory {
 		}
 	}
 	
-	private static class BaseFrame extends BaseElement implements Frame {
+	private static abstract class BaseFrame extends BaseElement implements Frame {
 
 		protected BaseFrame(TestSession session, AppAutomator automator, GuiComponentType compType, String setuId) {
 			super(session, automator, compType, setuId);
@@ -398,6 +402,15 @@ public class GuiAutoComponentFactory {
 			this.setSelfSetuIdArg("elementSetuId");
 		}
 		
+		
+		protected List<Map<String,Object>> getLocatorsAsMap(With... locators) throws Exception{
+			List<Map<String,Object>> args = new ArrayList<Map<String,Object>>();
+			for(With locator: locators) {
+				args.add(locator.asMap());
+			}
+			return args;
+		}
+		
 		@Override
 		public void focus() throws Exception {
 			this.sendSetuRequest(GuiAutoActionType.FOCUS);
@@ -405,14 +418,12 @@ public class GuiAutoComponentFactory {
 		
 		@Override
 		public Frame Frame(With... locators) throws Exception {
-			List<Map<String,Object>> arg = new ArrayList<Map<String,Object>>();
-			for(With locator: locators) {
-				arg.add(locator.asMap());
-			}
 			SetuResponse response = this.sendRequest(
 					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE,
+					SetuArg.arg("origGuiComponentType", this.getComponentType()),
+					SetuArg.arg("elementSetuId", this.getSetuId()),
 					SetuArg.arg("defGuiComponentType", GuiComponentType.FRAME),
-					SetuArg.arg("locators", arg)
+					SetuArg.arg("locators", getLocatorsAsMap(locators))
 			);
 			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
 		}
@@ -434,6 +445,8 @@ public class GuiAutoComponentFactory {
 		public Frame ParentFrame() throws Exception {
 			throw new Exception("DomRoot does not have a parent frame.");
 		}
+		
+
 	}
 
 	private static class DefaultDomRoot extends BaseFrame implements DomRoot{
@@ -441,10 +454,17 @@ public class GuiAutoComponentFactory {
 		public DefaultDomRoot(TestSession session, AppAutomator automator) {
 			super(session, automator, GuiComponentType.DOMROOT);
 		}
-
+		
 		@Override
-		public void focus() throws Exception {
-			this.sendSetuRequest(GuiAutoActionType.FOCUS);
+		public Frame Frame(With... locators) throws Exception {
+			SetuResponse response = this.sendRequest(
+					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE,
+					SetuArg.arg("origGuiComponentType", GuiComponentType.DOMROOT),
+					SetuArg.arg("elementSetuId", this.getSetuId()),
+					SetuArg.arg("defGuiComponentType", GuiComponentType.FRAME),
+					SetuArg.arg("locators", getLocatorsAsMap(locators))
+			);
+			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
 		}
 
 	}

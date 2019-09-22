@@ -23,6 +23,7 @@ import org.testng.annotations.Test;
 
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
+import arjuna.tpi.guiauto.GuiSource;
 import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.DomRoot;
 import arjuna.tpi.guiauto.component.DropDown;
@@ -35,6 +36,13 @@ import arjuna.tpi.testng.TestNGBaseTest;
 
 public class YXElementSource extends TestNGBaseTest{
 	
+	private void printSources(GuiSource source) throws Exception {
+		System.out.println(source.getRootContent());
+		System.out.println(source.getFullContent());
+		System.out.println(source.getInnerContent());
+		System.out.println(source.getTextContent());		
+	}
+	
 	@Test
 	public void testGuiElementSourceRetrieval() throws Exception{
 		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
@@ -43,11 +51,7 @@ public class YXElementSource extends TestNGBaseTest{
 		// Based on Text
 		GuiElement element = automator.Element(With.id("loginform"));
 		element.identify();
-		System.out.println(element.getRootSource());
-		System.out.println(element.getFullSource());
-		System.out.println(element.getInnerSource());
-		System.out.println(element.getText());
-
+		printSources(element.Source());
 		automator.quit();
 	}
 	
@@ -60,10 +64,7 @@ public class YXElementSource extends TestNGBaseTest{
 		automator.Element(With.linkText("Settings")).click();
 		
 		DropDown dropdown = automator.DropDown(With.id("default_role"));
-		System.out.println(dropdown.getRootSource());
-		System.out.println(dropdown.getFullSource());
-		System.out.println(dropdown.getInnerSource());
-		System.out.println(dropdown.getText());
+		printSources(dropdown.Source());
 		
 		WPLoginLogout.logout(automator);
 	}
@@ -73,17 +74,13 @@ public class YXElementSource extends TestNGBaseTest{
 		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.dropdown.url").asString());
 
-		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
-		GuiActionConfig config = confBuilder.checkType(false).checkPostState(false).build();
+		GuiActionConfig config = GuiActionConfig.builder().checkType(false).checkPostState(false).build();
 		
 		DropDown dropdown = automator.DropDown(With.id("DropDown")).configure(config);
 		dropdown.setOptionContainer(With.className("dropdown"));
 		dropdown.setOptionLocators(With.className("dropdown-item"));
 		
-		System.out.println(dropdown.getRootSource());
-		System.out.println(dropdown.getFullSource());
-		System.out.println(dropdown.getInnerSource());
-		System.out.println(dropdown.getText());
+		printSources(dropdown.Source());
 		
 		automator.quit();
 	}
@@ -103,10 +100,7 @@ public class YXElementSource extends TestNGBaseTest{
 		radio.selectByValue("\\c\\u\\s\\t\\o\\m");
 		radio.selectByIndex(2);
 		
-		System.out.println(radio.getRootSource());
-		System.out.println(radio.getFullSource());
-		System.out.println(radio.getInnerSource());
-		System.out.println(radio.getText());
+		printSources(radio.Source());
 		
 		WPLoginLogout.logout(automator);
 	}
@@ -120,10 +114,7 @@ public class YXElementSource extends TestNGBaseTest{
 		automator.Element(With.linkText("Posts")).click();
 		automator.Element(With.linkText("Add New")).click();
 		
-		System.out.println(automator.getRootSource());
-		System.out.println(automator.getFullSource());
-		System.out.println(automator.getInnerSource());
-		System.out.println(automator.getText());
+		printSources(automator.Source());
 		
 		//WPLoginLogout.logout(automator);
 	}
@@ -139,10 +130,7 @@ public class YXElementSource extends TestNGBaseTest{
 		
 		DomRoot root = automator.DomRoot();
 		
-		System.out.println(root.getRootSource());
-		System.out.println(root.getFullSource());
-		System.out.println(root.getInnerSource());
-		System.out.println(root.getText());
+		printSources(root.Source());
 		
 		//WPLoginLogout.logout(automator);
 	}
@@ -161,11 +149,7 @@ public class YXElementSource extends TestNGBaseTest{
 		frame.focus();
 		
 		// !!!!!!!!!!!!! This does not work yet. Needs feature development.
-		
-		System.out.println(frame.getRootSource());
-		System.out.println(frame.getFullSource());
-		System.out.println(frame.getInnerSource());
-		System.out.println(frame.getText());
+		printSources(frame.Source());
 		
 		WPLoginLogout.logout(automator);
 	}

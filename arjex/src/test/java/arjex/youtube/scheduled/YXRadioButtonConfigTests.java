@@ -81,8 +81,7 @@ public class YXRadioButtonConfigTests extends TestNGBaseTest{
 		
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.radio.url").asString());
 
-		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
-		GuiActionConfig config = confBuilder.checkPreState(false).build();
+		GuiActionConfig config = GuiActionConfig.builder().checkPreState(false).build();
 		
 		RadioGroup group = automator.RadioGroup(With.name("Traditional")).configure(config);
 		group.selectByIndex(1);
@@ -96,8 +95,7 @@ public class YXRadioButtonConfigTests extends TestNGBaseTest{
 		
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.radio.url").asString());
 
-		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
-		GuiActionConfig config = confBuilder.checkType(false).checkPreState(false).build();
+		GuiActionConfig config = GuiActionConfig.builder().checkType(false).checkPreState(false).build();
 		
 		RadioGroup group = automator.RadioGroup(With.name("Prob1")).configure(config);
 		group.selectByIndex(1);

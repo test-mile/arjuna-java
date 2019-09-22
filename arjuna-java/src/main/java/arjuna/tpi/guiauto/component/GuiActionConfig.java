@@ -15,5 +15,9 @@ public class GuiActionConfig {
 	public Map<GuiActionConfigType, Object> getSettings(){
 		return this.settings;
 	}
+	
+	public static GuiActionConfigBuilder builder() {
+		return new GuiActionConfigBuilder();
+	}
 
 }

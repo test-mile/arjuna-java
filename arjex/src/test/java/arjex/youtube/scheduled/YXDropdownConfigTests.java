@@ -60,8 +60,7 @@ public class YXDropdownConfigTests extends TestNGBaseTest{
 		
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.dropdown.url").asString());
 
-		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
-		GuiActionConfig config = confBuilder.checkPreState(false).build();
+		GuiActionConfig config = GuiActionConfig.builder().checkPreState(false).build();
 		
 		automator.DropDown(With.id("test")).configure(config).selectByIndex(1);;
 		
@@ -74,8 +73,7 @@ public class YXDropdownConfigTests extends TestNGBaseTest{
 		
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.dropdown.url").asString());
 
-		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
-		GuiActionConfig config = confBuilder.checkType(false).checkPreState(false).build();
+		GuiActionConfig config = GuiActionConfig.builder().checkType(false).checkPreState(false).build();
 		
 		automator.DropDown(With.id("Prob1")).configure(config).selectByIndex(1);
 		
@@ -88,8 +86,7 @@ public class YXDropdownConfigTests extends TestNGBaseTest{
 		
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.dropdown.url").asString());
 
-		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
-		GuiActionConfig config = confBuilder.checkType(false).checkPostState(false).build();
+		GuiActionConfig config = GuiActionConfig.builder().checkType(false).checkPostState(false).build();
 		
 		DropDown dropdown = automator.DropDown(With.id("DropDown")).configure(config);
 		automator.enableSlowMotion(true);

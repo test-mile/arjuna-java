@@ -28,6 +28,7 @@ import arjuna.client.core.config.ArjunaComponent;
 import arjuna.client.core.connector.BaseSetuObject;
 import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuResponse;
+import arjuna.client.guiauto.component.DefaultGuiSource;
 import arjuna.client.guiauto.component.GuiAutoComponentFactory;
 import arjuna.client.guiauto.component.GuiComponentType;
 import arjuna.client.testsession.TestSession;
@@ -53,7 +54,6 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 	private GuiAutomationContext autoContext;
 	private TestSession testSession;
 	private TestConfig config;
-	private GuiSource source;
 	
 	public AbstractAppAutomator() {
 		super();
@@ -112,7 +112,7 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 
 	@Override
 	public DropDown DropDown(With... locators) throws Exception {
-		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE, GuiComponentType.ELEMENT, locators);
+		String elemSetuId = createGenericElement(GuiAutoActionType.DEFINE, GuiComponentType.DROPDOWN, locators);
 		return GuiAutoComponentFactory.DropDown(this.testSession, this, elemSetuId);
 	}
 
@@ -216,11 +216,7 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 	
 	@Override
 	public GuiSource Source() throws Exception {
-		return this.source;
-	}
-	
-	protected void setSource(GuiSource source) {
-		this.source = source;
+		return new DefaultGuiSource(this, this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.GET_SOURCE).getValueForKey("textBlobSetuId").asString());
 	}
 
 }

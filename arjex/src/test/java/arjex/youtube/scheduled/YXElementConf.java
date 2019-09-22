@@ -37,8 +37,7 @@ public class YXElementConf extends TestNGBaseTest{
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.elemstate.url").asString());
 		
 		// The following would fail because we have switched off auto state checking.
-		GuiActionConfigBuilder confBuilder = new GuiActionConfigBuilder();
-		GuiActionConfig conf = confBuilder.checkPreState(false).build();
+		GuiActionConfig conf = GuiActionConfig.builder().checkPreState(false).build();
 		
 		automator.Element(With.id("target")).configure(conf).click();
 		automator.Alert().confirm();
