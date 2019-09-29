@@ -26,7 +26,7 @@ import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.GuiActionConfig;
 import arjuna.tpi.guiauto.component.GuiActionConfigBuilder;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class YXElementConf extends TestNGBaseTest{
 	

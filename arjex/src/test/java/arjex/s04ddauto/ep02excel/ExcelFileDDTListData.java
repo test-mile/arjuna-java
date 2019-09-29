@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.ddauto.ListDataRecord;
 import arjuna.tpi.ddauto.ListDataSource;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class ExcelFileDDTListData extends TestNGBaseTest {
 	

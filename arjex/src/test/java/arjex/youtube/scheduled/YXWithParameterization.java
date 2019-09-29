@@ -26,7 +26,7 @@ import arjuna.tpi.arg.Args;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.GuiElement;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class YXWithParameterization extends TestNGBaseTest{
 	

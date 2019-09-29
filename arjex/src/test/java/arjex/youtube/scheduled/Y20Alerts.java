@@ -25,7 +25,7 @@ import arjex.youtube.basics.WPLoginLogout;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.component.Alert;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class Y20Alerts extends TestNGBaseTest{
 	

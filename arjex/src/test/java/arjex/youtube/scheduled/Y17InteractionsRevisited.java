@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class Y17InteractionsRevisited extends TestNGBaseTest{
 	

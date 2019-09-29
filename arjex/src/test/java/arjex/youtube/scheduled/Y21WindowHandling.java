@@ -27,7 +27,7 @@ import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.ChildWindow;
 import arjuna.tpi.guiauto.component.MainWindow;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class Y21WindowHandling extends TestNGBaseTest{
 	

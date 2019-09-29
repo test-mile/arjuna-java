@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class Y06BasicTestNGExample extends TestNGBaseTest{
 	

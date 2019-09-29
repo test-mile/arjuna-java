@@ -22,7 +22,7 @@ package arjex.s05basicfixtures.ep03testlevel;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.test.TestContext;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class TestFixturesSeqExec extends TestNGBaseTest {
 	

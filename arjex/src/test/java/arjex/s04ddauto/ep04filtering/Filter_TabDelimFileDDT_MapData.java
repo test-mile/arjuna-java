@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.ddauto.MapDataRecord;
 import arjuna.tpi.ddauto.MapDataSource;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class Filter_TabDelimFileDDT_MapData extends TestNGBaseTest {
 	

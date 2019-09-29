@@ -31,7 +31,7 @@ import arjuna.tpi.ddauto.ListDataRecord;
 import arjuna.tpi.ddauto.ListDataSource;
 import arjuna.tpi.ddauto.MapDataRecord;
 import arjuna.tpi.ddauto.MapDataSource;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class TabDelimFileDDT extends TestNGBaseTest {
 	

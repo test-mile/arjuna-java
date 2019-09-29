@@ -17,7 +17,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjuna.tpi.testng;
+package arjuna.tpi.testengine;
 
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;

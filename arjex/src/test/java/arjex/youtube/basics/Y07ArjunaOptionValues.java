@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 
 import arjuna.tpi.enums.ArjunaOption;
 import arjuna.tpi.test.TestConfig;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 import arjuna.tpi.value.Value;
 
 public class Y07ArjunaOptionValues extends TestNGBaseTest{

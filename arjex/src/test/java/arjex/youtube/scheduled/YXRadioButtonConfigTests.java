@@ -27,7 +27,7 @@ import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.GuiActionConfig;
 import arjuna.tpi.guiauto.component.GuiActionConfigBuilder;
 import arjuna.tpi.guiauto.component.RadioGroup;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class YXRadioButtonConfigTests extends TestNGBaseTest{
 	

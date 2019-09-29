@@ -22,7 +22,7 @@ package arjex.youtube.basics;
 import org.testng.annotations.Test;
 
 import arjuna.tpi.test.TestConfig;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class Y09UserOptionsFromProjectConf extends TestNGBaseTest{
 	

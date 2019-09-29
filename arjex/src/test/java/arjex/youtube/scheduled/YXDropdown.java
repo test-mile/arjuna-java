@@ -30,7 +30,7 @@ import arjuna.tpi.guiauto.component.DropDown;
 import arjuna.tpi.guiauto.component.GuiActionConfig;
 import arjuna.tpi.guiauto.component.GuiActionConfigBuilder;
 import arjuna.tpi.guiauto.component.RadioGroup;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class YXDropdown extends TestNGBaseTest{
 	

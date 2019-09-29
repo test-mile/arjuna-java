@@ -32,7 +32,7 @@ import arjuna.tpi.guiauto.component.GuiActionConfig;
 import arjuna.tpi.guiauto.component.GuiActionConfigBuilder;
 import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.component.RadioGroup;
-import arjuna.tpi.testng.TestNGBaseTest;
+import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class YXElementSource extends TestNGBaseTest{
 	
