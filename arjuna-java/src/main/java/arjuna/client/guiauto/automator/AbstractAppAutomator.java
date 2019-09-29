@@ -83,7 +83,7 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 				ArjunaComponent.GUI_AUTOMATOR, 
 				actionType, 
 				SetuArg.combineArrays(new SetuArg[] {SetuArg.arg("defGuiComponentType", component)}, arg));
-		return response.getValueForElementSetuId();		
+		return response.getValueForGuiComponentSetuId();		
 	}
 
 	private String createGenericElement(GuiAutoActionType actionType, GuiComponentType component, With... locators) throws Exception {

@@ -43,7 +43,7 @@ public interface SetuResponse {
 	
 	boolean getValueForCheckResult() throws Exception;
 
-	String getValueForElementSetuId() throws Exception;
+	String getValueForGuiComponentSetuId() throws Exception;
 
 	String getValueForTestSessionSetuId() throws Exception;
 	

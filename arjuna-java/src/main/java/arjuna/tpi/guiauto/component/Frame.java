@@ -28,4 +28,5 @@ public interface Frame extends SetuManagedObject, SourceInquirable{
 	void focus() throws Exception;
 	Frame ParentFrame() throws Exception;
 	Frame Frame(With... locators) throws Exception;
+	String enumerateFrames() throws Exception;
 }

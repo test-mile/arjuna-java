@@ -65,5 +65,19 @@ public class YXFrame extends TestNGBaseTest{
 		
 		WPLoginLogout.logout(automator);
 	}
+	
+	@Test
+	public void test2() throws Exception{
+		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
+		
+		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("narada.ex.frames1.url").asString());
+		
+		System.out.println(automator.DomRoot().enumerateFrames());
+		
+		Frame f1 = automator.DomRoot().Frame(With.id("f1"));
+		
+		System.out.println(f1.enumerateFrames());
+		
+	}
 
 }

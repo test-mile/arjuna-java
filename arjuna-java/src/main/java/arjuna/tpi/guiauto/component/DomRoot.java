@@ -25,4 +25,5 @@ import arjuna.tpi.guiauto.With;
 public interface DomRoot extends SourceInquirable{	
 	void focus() throws Exception;
 	Frame Frame(With... locators) throws Exception;
+	String enumerateFrames() throws Exception;
 }

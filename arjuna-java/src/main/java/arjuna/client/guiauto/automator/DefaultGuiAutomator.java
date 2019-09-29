@@ -65,7 +65,7 @@ public class DefaultGuiAutomator extends AbstractAppAutomator implements GuiAuto
 		this.setSelfSetuIdArg("automatorSetuId");
 		
 		SetuResponse winResponse = this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE, SetuArg.arg("defGuiComponentType", GuiComponentType.MAIN_WINDOW));
-		this.setMainWindow(GuiAutoComponentFactory.MainWindow(this.getTestSession(), this, winResponse.getValueForElementSetuId()));
+		this.setMainWindow(GuiAutoComponentFactory.MainWindow(this.getTestSession(), this, winResponse.getValueForGuiComponentSetuId()));
 		
 		this.setDomRoot(GuiAutoComponentFactory.DomRoot(this.getTestSession(), this));
 		this.setBrowser(GuiAutoComponentFactory.Browser(this.getTestSession(), this));

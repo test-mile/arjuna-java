@@ -66,6 +66,9 @@ public enum GuiAutoActionType {
 	GET_TEXT,
 	SEND_TEXT,
 	
+	// DOMROOT
+	ENUMERATE_FRAMES,
+	
 	// DOMROOT, FRAME, WINDOW
 	FOCUS,
 	

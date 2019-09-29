@@ -123,7 +123,7 @@ public class GuiAutoComponentFactory {
 		public BaseElement(TestSession session, AppAutomator automator, GuiComponentType compType, String elemSetuId) {
 			super(session, automator, compType);
 			this.setSetuId(elemSetuId);
-			this.setSelfSetuIdArg("elementSetuId");
+			this.setSelfSetuIdArg("guiComponentSetuId");
 		}
 		
 		public BaseElement(TestSession testSession, AppAutomator automator, GuiComponentType compType, String elemSetuId, int index) {
@@ -394,12 +394,12 @@ public class GuiAutoComponentFactory {
 
 		protected BaseFrame(TestSession session, AppAutomator automator, GuiComponentType compType, String setuId) {
 			super(session, automator, compType, setuId);
-			this.setSelfSetuIdArg("elementSetuId");
+			this.setSelfSetuIdArg("guiComponentSetuId");
 		}
 
 		protected BaseFrame(TestSession session, AppAutomator automator, GuiComponentType compType) {
 			super(session, automator, compType);
-			this.setSelfSetuIdArg("elementSetuId");
+			this.setSelfSetuIdArg("guiComponentSetuId");
 		}
 		
 		
@@ -421,17 +421,27 @@ public class GuiAutoComponentFactory {
 			SetuResponse response = this.sendRequest(
 					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE,
 					SetuArg.arg("origGuiComponentType", this.getComponentType()),
-					SetuArg.arg("elementSetuId", this.getSetuId()),
+					SetuArg.arg("guiComponentSetuId", this.getSetuId()),
 					SetuArg.arg("defGuiComponentType", GuiComponentType.FRAME),
 					SetuArg.arg("locators", getLocatorsAsMap(locators))
 			);
-			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
+			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForGuiComponentSetuId());
+		}
+		
+		@Override
+		public String enumerateFrames() throws Exception {
+			SetuResponse response = this.sendRequest(
+					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ENUMERATE_FRAMES,
+					SetuArg.arg("origGuiComponentType", this.getComponentType()),
+					SetuArg.arg("guiComponentSetuId", this.getSetuId())
+			);
+			return response.getValueForValueAttr();
 		}
 		
 		@Override
 		public Frame ParentFrame() throws Exception {
 			SetuResponse response = this.sendSetuRequest(GuiAutoActionType.GET_PARENT);
-			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
+			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForGuiComponentSetuId());
 		}
 	}
 
@@ -439,7 +449,7 @@ public class GuiAutoComponentFactory {
 
 		public DefaultFrame(TestSession session, AppAutomator automator, String setuId) {
 			super(session, automator, GuiComponentType.FRAME, setuId);
-			this.setSelfSetuIdArg("elementSetuId");
+			this.setSelfSetuIdArg("guiComponentSetuId");
 		}		
 
 	}
@@ -455,11 +465,11 @@ public class GuiAutoComponentFactory {
 			SetuResponse response = this.sendRequest(
 					ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE,
 					SetuArg.arg("origGuiComponentType", GuiComponentType.DOMROOT),
-					SetuArg.arg("elementSetuId", this.getSetuId()),
+					SetuArg.arg("guiComponentSetuId", this.getSetuId()),
 					SetuArg.arg("defGuiComponentType", GuiComponentType.FRAME),
 					SetuArg.arg("locators", getLocatorsAsMap(locators))
 			);
-			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
+			return new DefaultFrame(this.getTestSession(), this.getAutomator(), response.getValueForGuiComponentSetuId());
 		}
 
 		public Frame ParentFrame() throws Exception {
@@ -513,7 +523,7 @@ public class GuiAutoComponentFactory {
 		
 		protected String takeElementFindingAction(GuiAutoActionType actionType, SetuArg... args) throws Exception {
 			SetuResponse response = this.sendSetuRequest(actionType, args);
-			return response.getValueForElementSetuId();		
+			return response.getValueForGuiComponentSetuId();		
 		}
 		
 		@Override
@@ -529,13 +539,13 @@ public class GuiAutoComponentFactory {
 					SetuArg.arg("defGuiComponentType", GuiComponentType.CHILD_WINDOW),
 					SetuArg.arg("locators", arg)
 			);
-			return new DefaultChildWindow(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
+			return new DefaultChildWindow(this.getTestSession(), this.getAutomator(), response.getValueForGuiComponentSetuId());
 		}
 		
 		@Override
 		public ChildWindow ChildWindow() throws Exception {
 			SetuResponse response = sendSetuRequest(GuiAutoActionType.GET_LATEST_CHILD_WINDOW);
-			return new DefaultChildWindow(this.getTestSession(), this.getAutomator(), response.getValueForElementSetuId());
+			return new DefaultChildWindow(this.getTestSession(), this.getAutomator(), response.getValueForGuiComponentSetuId());
 		}
 
 		@Override

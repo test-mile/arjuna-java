@@ -260,8 +260,8 @@ class DefaultSetuResponse implements SetuResponse {
 	}
 	
 	@Override
-	public String getValueForElementSetuId() throws Exception {
-		return getValueForKey("elementSetuId").asString();
+	public String getValueForGuiComponentSetuId() throws Exception {
+		return getValueForKey("guiComponentSetuId").asString();
 	}
 	
 	@Override

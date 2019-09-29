@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>com.testmile</groupId>
 			<artifactId>arjuna-java</artifactId>
-			<version>0.1.3</version>
+			<version>0.1.4-SNAPSHOT</version>
 		</dependency>
   </dependencies>
 </project>
