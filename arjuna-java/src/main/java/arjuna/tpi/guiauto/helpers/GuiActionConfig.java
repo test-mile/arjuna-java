@@ -1,4 +1,4 @@
-package arjuna.tpi.guiauto.component;
+package arjuna.tpi.guiauto.helpers;
 
 import java.util.HashMap;
 import java.util.Map;

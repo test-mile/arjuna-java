@@ -3,7 +3,7 @@ package arjuna.lib.value;
 import java.util.ArrayList;
 import java.util.List;
 
-import arjuna.tpi.value.Value;
+import arjuna.tpi.helpers.Value;
 
 public class AbstractValueList implements RWValueList{
 	

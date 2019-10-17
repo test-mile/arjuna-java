@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import arjuna.lib.exceptions.UnsupportedRepresentationException;
-import arjuna.tpi.value.Value;
+import arjuna.tpi.helpers.Value;
 
 public class AnyRefValue implements Value {
 	private Object object = null;

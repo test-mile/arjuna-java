@@ -20,9 +20,10 @@
 package arjuna.client.guiauto.automator;
 
 import arjuna.client.core.connector.SetuManagedObject;
+import arjuna.client.guiauto.actions.DefaultCompositeAction;
+import arjuna.client.guiauto.actions.SingleActionChain;
 import arjuna.client.guiauto.component.SourceInquirable;
 import arjuna.lib.enums.GuiAutomationContext;
-import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.Alert;
 import arjuna.tpi.guiauto.component.Browser;
 import arjuna.tpi.guiauto.component.ChildWindow;
@@ -33,6 +34,9 @@ import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.component.GuiMultiElement;
 import arjuna.tpi.guiauto.component.MainWindow;
 import arjuna.tpi.guiauto.component.RadioGroup;
+import arjuna.tpi.guiauto.helpers.ActionsBuilder;
+import arjuna.tpi.guiauto.helpers.CompositeAction;
+import arjuna.tpi.guiauto.helpers.With;
 import arjuna.tpi.test.TestConfig;
 
 public interface AppAutomator extends SetuManagedObject, SourceInquirable{
@@ -71,4 +75,8 @@ public interface AppAutomator extends SetuManagedObject, SourceInquirable{
 	void enableSlowMotion(boolean on) throws Exception;
 
 	boolean isGui();
+
+	SingleActionChain newActionChain() throws Exception;
+
+	void takeCompositeAction(CompositeAction action) throws Exception;
 }

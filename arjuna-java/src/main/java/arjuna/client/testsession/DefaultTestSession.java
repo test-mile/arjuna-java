@@ -14,8 +14,8 @@ import arjuna.client.core.connector.SetuResponse;
 import arjuna.client.databroker.DataRecordType;
 import arjuna.lib.state.ArjunaSingleton;
 import arjuna.tpi.guiauto.GuiAutomator;
+import arjuna.tpi.helpers.Value;
 import arjuna.tpi.test.TestConfig;
-import arjuna.tpi.value.Value;
 
 public class DefaultTestSession extends BaseSetuObject implements TestSession {
 	private final String DEF_CONF_NAME = "central";

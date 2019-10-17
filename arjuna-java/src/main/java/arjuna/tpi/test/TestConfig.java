@@ -5,7 +5,7 @@ import arjuna.client.testsession.TestSession;
 import arjuna.lib.enums.BrowserName;
 import arjuna.lib.enums.GuiAutomationContext;
 import arjuna.tpi.enums.ArjunaOption;
-import arjuna.tpi.value.Value;
+import arjuna.tpi.helpers.Value;
 
 public interface TestConfig extends SetuManagedObject{
 	Value getArjunaOptionValue(String option) throws Exception;	

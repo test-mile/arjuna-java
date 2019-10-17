@@ -20,7 +20,7 @@
 package arjuna.tpi.guiauto.component;
 
 import arjuna.client.core.connector.SetuManagedObject;
-import arjuna.tpi.guiauto.With;
+import arjuna.tpi.guiauto.helpers.With;
 
 public interface MainWindow extends SetuManagedObject {
 	String getTitle() throws Exception;

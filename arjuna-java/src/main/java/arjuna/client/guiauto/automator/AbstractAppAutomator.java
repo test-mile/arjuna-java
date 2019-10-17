@@ -28,13 +28,12 @@ import arjuna.client.core.config.ArjunaComponent;
 import arjuna.client.core.connector.BaseSetuObject;
 import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuResponse;
+import arjuna.client.guiauto.actions.SingleActionChain;
 import arjuna.client.guiauto.component.DefaultGuiSource;
 import arjuna.client.guiauto.component.GuiAutoComponentFactory;
 import arjuna.client.guiauto.component.GuiComponentType;
 import arjuna.client.testsession.TestSession;
 import arjuna.lib.enums.GuiAutomationContext;
-import arjuna.tpi.guiauto.GuiSource;
-import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.Alert;
 import arjuna.tpi.guiauto.component.Browser;
 import arjuna.tpi.guiauto.component.ChildWindow;
@@ -45,6 +44,9 @@ import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.component.GuiMultiElement;
 import arjuna.tpi.guiauto.component.MainWindow;
 import arjuna.tpi.guiauto.component.RadioGroup;
+import arjuna.tpi.guiauto.helpers.CompositeAction;
+import arjuna.tpi.guiauto.helpers.GuiSource;
+import arjuna.tpi.guiauto.helpers.With;
 import arjuna.tpi.test.TestConfig;
 
 public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator {
@@ -217,6 +219,19 @@ public class AbstractAppAutomator extends BaseSetuObject implements AppAutomator
 	@Override
 	public GuiSource Source() throws Exception {
 		return new DefaultGuiSource(this, this.sendRequest(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.GET_SOURCE).getValueForKey("textBlobSetuId").asString());
+	}
+	
+	@Override
+	public SingleActionChain newActionChain() throws Exception {
+		return new SingleActionChain(this);
+	}
+
+	@Override
+	public void takeCompositeAction(CompositeAction action) throws Exception {
+		this.sendRequest(
+				ArjunaComponent.GUI_AUTOMATOR,
+				GuiAutoActionType.PERFORM_ACTION_CHAIN,
+				SetuArg.arg("partialActionList", action.getPartialActions()));
 	}
 
 }

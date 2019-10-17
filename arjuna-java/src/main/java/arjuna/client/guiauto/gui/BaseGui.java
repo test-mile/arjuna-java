@@ -16,7 +16,6 @@ import arjuna.client.testsession.TestSession;
 import arjuna.lib.enums.GuiAutomationContext;
 import arjuna.tpi.guiauto.Gui;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.Browser;
 import arjuna.tpi.guiauto.component.ChildWindow;
 import arjuna.tpi.guiauto.component.DomRoot;
@@ -26,6 +25,7 @@ import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.component.GuiMultiElement;
 import arjuna.tpi.guiauto.component.MainWindow;
 import arjuna.tpi.guiauto.component.RadioGroup;
+import arjuna.tpi.guiauto.helpers.With;
 
 public class BaseGui extends AbstractAppAutomator implements Gui{
 

@@ -21,7 +21,7 @@ package arjuna.client.core.connector;
 
 import java.util.Map;
 
-import arjuna.tpi.value.Value;
+import arjuna.tpi.helpers.Value;
 
 public interface SetuResponse {
 

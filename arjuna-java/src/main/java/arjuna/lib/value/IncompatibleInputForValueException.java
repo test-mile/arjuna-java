@@ -18,7 +18,7 @@
  ******************************************************************************/
 package arjuna.lib.value;
 
-import arjuna.tpi.value.Value;
+import arjuna.tpi.helpers.Value;
 
 public class IncompatibleInputForValueException extends Exception {
 

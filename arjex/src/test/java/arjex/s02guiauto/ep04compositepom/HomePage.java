@@ -1,7 +1,7 @@
 package arjex.s02guiauto.ep04compositepom;
 
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.With;
+import arjuna.tpi.guiauto.helpers.With;
 
 public class HomePage extends WPBasePage{
 

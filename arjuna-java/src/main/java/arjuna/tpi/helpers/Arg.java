@@ -1,4 +1,4 @@
-package arjuna.tpi.arg;
+package arjuna.tpi.helpers;
 
 public class Arg {
 	private String name;

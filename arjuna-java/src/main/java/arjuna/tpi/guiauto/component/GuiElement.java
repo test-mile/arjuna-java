@@ -20,7 +20,12 @@
 package arjuna.tpi.guiauto.component;
 
 import arjuna.client.core.connector.SetuManagedObject;
+import arjuna.client.guiauto.actions.DefaultCompositeAction;
+import arjuna.client.guiauto.actions.SingleActionChain;
 import arjuna.client.guiauto.component.SourceInquirable;
+import arjuna.tpi.guiauto.helpers.ActionsBuilder;
+import arjuna.tpi.guiauto.helpers.CompositeAction;
+import arjuna.tpi.guiauto.helpers.GuiActionConfig;
 
 public interface GuiElement extends SetuManagedObject, SourceInquirable{
 	

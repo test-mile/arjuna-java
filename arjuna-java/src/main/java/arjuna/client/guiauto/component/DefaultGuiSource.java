@@ -7,7 +7,7 @@ import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuConnectUtils;
 import arjuna.client.core.connector.SetuResponse;
 import arjuna.client.guiauto.automator.AppAutomator;
-import arjuna.tpi.guiauto.GuiSource;
+import arjuna.tpi.guiauto.helpers.GuiSource;
 import arjuna.tpi.test.TestConfig;
 
 public class DefaultGuiSource extends BaseSetuObject implements GuiSource{

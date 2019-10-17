@@ -1,4 +1,4 @@
-package arjuna.tpi.guiauto;
+package arjuna.tpi.guiauto.helpers;
 
 public interface GuiSource {
 	String getRootContent() throws Exception;

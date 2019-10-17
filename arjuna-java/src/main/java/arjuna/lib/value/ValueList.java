@@ -2,7 +2,7 @@ package arjuna.lib.value;
 
 import java.util.List;
 
-import arjuna.tpi.value.Value;
+import arjuna.tpi.helpers.Value;
 
 public interface ValueList {
 

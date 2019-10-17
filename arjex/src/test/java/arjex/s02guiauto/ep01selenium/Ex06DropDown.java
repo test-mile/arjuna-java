@@ -23,8 +23,8 @@ import org.testng.annotations.Test;
 
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.DropDown;
+import arjuna.tpi.guiauto.helpers.With;
 
 public class Ex06DropDown {
 	

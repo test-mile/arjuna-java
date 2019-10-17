@@ -27,7 +27,7 @@ import arjuna.lib.testng.TestNGTestContext;
 import arjuna.tpi.ddauto.DataSourceBuilder;
 import arjuna.tpi.enums.ArjunaOption;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.GuiDriverExtendedConfig;
+import arjuna.tpi.guiauto.helpers.GuiDriverExtendedConfig;
 import arjuna.tpi.test.TestConfig;
 import arjuna.tpi.test.TestContext;
 

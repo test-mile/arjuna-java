@@ -21,7 +21,8 @@ package arjuna.tpi.guiauto.component;
 
 import arjuna.client.core.connector.SetuManagedObject;
 import arjuna.client.guiauto.component.SourceInquirable;
-import arjuna.tpi.guiauto.With;
+import arjuna.tpi.guiauto.helpers.GuiActionConfig;
+import arjuna.tpi.guiauto.helpers.With;
 
 public interface DropDown extends SetuManagedObject, SourceInquirable{
 	DropDown configure(GuiActionConfig config) throws Exception;

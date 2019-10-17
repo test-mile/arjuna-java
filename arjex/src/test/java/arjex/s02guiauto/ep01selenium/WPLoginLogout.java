@@ -22,7 +22,7 @@ package arjex.s02guiauto.ep01selenium;
 import java.util.List;
 
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.With;
+import arjuna.tpi.guiauto.helpers.With;
 
 public class WPLoginLogout {
 	

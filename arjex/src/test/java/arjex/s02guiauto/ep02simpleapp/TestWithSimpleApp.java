@@ -22,12 +22,12 @@ package arjex.s02guiauto.ep02simpleapp;
 import org.testng.annotations.Test;
 
 import arjuna.tpi.Arjuna;
-import arjuna.tpi.arg.Args;
 import arjuna.tpi.guiauto.DefaultGui;
 import arjuna.tpi.guiauto.Gui;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.DropDown;
+import arjuna.tpi.guiauto.helpers.With;
+import arjuna.tpi.helpers.Args;
 
 public class TestWithSimpleApp{
 	

@@ -83,6 +83,9 @@ public enum GuiAutoActionType {
 	GET_LATEST_CHILD_WINDOW,
 	CLOSE_ALL_CHILD_WINDOWS,
 	
+	// Composite action
+	PERFORM_ACTION_CHAIN,
+	
 	// Child Window
 	CLOSE,
 }

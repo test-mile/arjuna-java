@@ -14,8 +14,8 @@ import arjuna.lib.enums.BrowserName;
 import arjuna.lib.enums.GuiAutomationContext;
 import arjuna.lib.state.ArjunaSingleton;
 import arjuna.tpi.enums.ArjunaOption;
+import arjuna.tpi.helpers.Value;
 import arjuna.tpi.test.TestConfig;
-import arjuna.tpi.value.Value;
 
 public class DefaultTestConfig extends BaseSetuObject implements TestConfig {
 	private String name;

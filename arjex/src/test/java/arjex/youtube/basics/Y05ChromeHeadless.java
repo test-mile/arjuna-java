@@ -21,7 +21,7 @@ package arjex.youtube.basics;
 
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.GuiDriverExtendedConfig;
+import arjuna.tpi.guiauto.helpers.GuiDriverExtendedConfig;
 
 public class Y05ChromeHeadless{
 	

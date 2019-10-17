@@ -30,7 +30,7 @@ import arjuna.lib.httpclient.BasicRestClient;
 import arjuna.lib.httpclient.SetuHttpException;
 import arjuna.lib.value.AnyRefValue;
 import arjuna.tpi.Arjuna;
-import arjuna.tpi.value.Value;
+import arjuna.tpi.helpers.Value;
 
 public class BaseSetuObject implements SetuManagedObject {
 	private String setuId;

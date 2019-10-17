@@ -20,7 +20,7 @@
 package arjex.youtube.scheduled;
 
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.With;
+import arjuna.tpi.guiauto.helpers.With;
 
 public class WPLoginLogout {
 	

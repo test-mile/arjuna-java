@@ -20,7 +20,7 @@
 package arjuna.tpi.guiauto.component;
 
 import arjuna.client.guiauto.component.SourceInquirable;
-import arjuna.tpi.guiauto.With;
+import arjuna.tpi.guiauto.helpers.With;
 
 public interface DomRoot extends SourceInquirable{	
 	void focus() throws Exception;

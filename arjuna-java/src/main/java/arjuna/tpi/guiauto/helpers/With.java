@@ -17,7 +17,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package arjuna.tpi.guiauto;
+package arjuna.tpi.guiauto.helpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,8 +25,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import arjuna.tpi.arg.Arg;
 import arjuna.tpi.enums.ArgsType;
+import arjuna.tpi.guiauto.helpers.Screen.Point;
+import arjuna.tpi.helpers.Arg;
 
 public class With {
 	private String withType;
@@ -175,6 +176,10 @@ public class With {
 	public static With classNames(String... names) throws Exception {
 		return new With(WithType.CLASS_NAMES, String.join(" ", names));
 	}
+	
+	public static With location(Point xy) throws Exception {
+		return new With(WithType.LOCATION, xy.getLocation());
+	}
 }
 
 class PosArg extends Arg{
@@ -204,10 +209,11 @@ enum WithType {
     ATTR_PARTIAL_VALUE,
     TYPE,
     VALUE,
+    LOCATION,
     
 	INDEX,
 	WINDOW_TITLE,
 	PARTIAL_WINDOW_TITLE,
 	CHILD_LOCATOR,
-	GNS_NAME
+	GNS_NAME, 
 }

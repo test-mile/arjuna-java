@@ -28,11 +28,18 @@ import arjuna.client.core.config.ArjunaComponent;
 import arjuna.client.core.connector.BaseSetuObject;
 import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuResponse;
+import arjuna.client.guiauto.actions.DefaultCompositeAction;
+import arjuna.client.guiauto.actions.SingleActionChain;
+import arjuna.client.guiauto.actions.SingleActionChainBuilder;
 import arjuna.client.guiauto.automator.AppAutomator;
 import arjuna.client.testsession.TestSession;
-import arjuna.tpi.guiauto.GuiSource;
-import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.*;
+import arjuna.tpi.guiauto.helpers.ActionsBuilder;
+import arjuna.tpi.guiauto.helpers.CompositeAction;
+import arjuna.tpi.guiauto.helpers.GuiActionConfig;
+import arjuna.tpi.guiauto.helpers.GuiSource;
+import arjuna.tpi.guiauto.helpers.With;
+import arjuna.client.guiauto.actions.SingleActionChainBuilder;
 
 public class GuiAutoComponentFactory {
 
@@ -200,6 +207,7 @@ public class GuiAutoComponentFactory {
 			super.updateConfig(config);
 			return this;
 		}
+
 	}
 
 	private static class DefaultGuiMultiElement extends BaseElement implements GuiMultiElement {

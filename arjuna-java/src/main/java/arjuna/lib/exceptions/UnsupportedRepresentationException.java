@@ -18,7 +18,7 @@
  ******************************************************************************/
 package arjuna.lib.exceptions;
 
-import arjuna.tpi.value.Value;
+import arjuna.tpi.helpers.Value;
 
 public class UnsupportedRepresentationException extends Exception {
 

@@ -24,9 +24,9 @@ import org.testng.annotations.Test;
 import arjex.youtube.basics.WPLoginLogout;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.guiauto.With;
 import arjuna.tpi.guiauto.component.ChildWindow;
 import arjuna.tpi.guiauto.component.MainWindow;
+import arjuna.tpi.guiauto.helpers.With;
 import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class Y21WindowHandling extends TestNGBaseTest{
