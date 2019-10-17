@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import arjuna.tpi.enums.ArgsType;
+import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.helpers.Screen.Point;
 import arjuna.tpi.helpers.Arg;
 
@@ -177,8 +178,12 @@ public class With {
 		return new With(WithType.CLASS_NAMES, String.join(" ", names));
 	}
 	
-	public static With location(Point xy) throws Exception {
-		return new With(WithType.LOCATION, xy.getLocation());
+	public static With point(Point xy) throws Exception {
+		return new With(WithType.POINT, xy.getLocation());
+	}
+
+	public static With js(String javascript) throws Exception {
+		return new With(WithType.JS, javascript);
 	}
 }
 
@@ -209,7 +214,8 @@ enum WithType {
     ATTR_PARTIAL_VALUE,
     TYPE,
     VALUE,
-    LOCATION,
+    POINT,
+    JS,
     
 	INDEX,
 	WINDOW_TITLE,

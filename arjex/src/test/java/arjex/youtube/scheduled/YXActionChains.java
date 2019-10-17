@@ -41,9 +41,10 @@ public class YXActionChains extends TestNGBaseTest{
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("wp.login.url").asString());
 		automator.Element(With.id("user_login")).setText("user");
 		automator.Element(With.id("user_pass")).setText("bitnami");
-		GuiElement element1 = automator.Element(With.id("user_login"));
-		GuiElement element = automator.Element(With.id("wp-submit"));
-		automator.newActionChain().click(element1).click(element).perform();
+//		GuiElement element1 = automator.Element(With.id("user_login"));
+//		GuiElement element = automator.Element(With.id("wp-submit"));
+//		automator.newActionChain().click(Screen.xy(1043, 458)).perform();
+		automator.Element(With.js("return document.getElementById('wp-submit')")).click();
 	}
 
 }

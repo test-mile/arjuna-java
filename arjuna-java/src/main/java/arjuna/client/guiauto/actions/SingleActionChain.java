@@ -58,22 +58,22 @@ public class SingleActionChain implements ActionChain{
 	}
 
 	@Override
-	public ActionChain clickAndHold() throws Exception {
+	public ActionChain press() throws Exception {
 		return defaultAction(PartialActionType.CLICK_AND_HOLD);
 	}
 
 	@Override
-	public ActionChain clickAndHold(Point xy) throws Exception {
+	public ActionChain press(Point xy) throws Exception {
 		return defaultPointAction(PartialActionType.CLICK_AND_HOLD, xy);
 	}
 
 	@Override
-	public ActionChain clickAndHold(GuiElement element) throws Exception {
+	public ActionChain press(GuiElement element) throws Exception {
 		return defaultElementAction(PartialActionType.CLICK_AND_HOLD, element);
 	}
 
 	@Override
-	public ActionChain mouseUp() throws Exception {
+	public ActionChain release() throws Exception {
 		return defaultAction(PartialActionType.MOUSE_UP);
 	}
 
@@ -149,22 +149,22 @@ public class SingleActionChain implements ActionChain{
 	}
 
 	@Override
-	public ActionChain dragAndDropByOffset(GuiElement dest, Offset xy) throws Exception {
+	public ActionChain dragAndDrop(GuiElement dest, Offset xy) throws Exception {
 		return dragAndDropVariant(null, null, dest, null, xy);
 	}
 
 	@Override
-	public ActionChain dragAndDropByOffset(GuiElement source, GuiElement dest, Offset xy) throws Exception {
+	public ActionChain dragAndDrop(GuiElement source, GuiElement dest, Offset xy) throws Exception {
 		return dragAndDropVariant(source, null, dest, null, xy);
 	}
 	
 	@Override
-	public ActionChain dragAndDropByOffset(Point source, GuiElement dest, Offset xy) throws Exception {
+	public ActionChain dragAndDrop(Point source, GuiElement dest, Offset xy) throws Exception {
 		return dragAndDropVariant(null, source, dest, null, xy);
 	}
 
 	@Override
-	public ActionChain sendTextWithModifierKeys(String text, ModifierKey... keys) throws Exception {
+	public ActionChain sendText(String text, ModifierKey... keys) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -191,27 +191,22 @@ public class SingleActionChain implements ActionChain{
 	}
 
 	@Override
-	public ActionChain moveTo() throws Exception {
-		return moveToVariant(null, null, null);
-	}
-
-	@Override
-	public ActionChain moveTo(Point xy) throws Exception {
+	public ActionChain hover(Point xy) throws Exception {
 		return moveToVariant(null, xy, null);
 	}
 
 	@Override
-	public ActionChain moveBy(Offset offset) throws Exception {
+	public ActionChain hover(Offset offset) throws Exception {
 		return moveToVariant(null, null, offset);
 	}
 
 	@Override
-	public ActionChain moveToElement(GuiElement element) throws Exception {
+	public ActionChain hover(GuiElement element) throws Exception {
 		return moveToVariant(element, null, null);
 	}
 
 	@Override
-	public ActionChain moveToElementByOffset(GuiElement element, Offset offset) throws Exception {
+	public ActionChain hover(GuiElement element, Offset offset) throws Exception {
 		return moveToVariant(element, null, offset);
 	}
 
