@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import arjuna.client.core.action.DataSourceActionType;
-import arjuna.client.core.action.SetuActionType;
 import arjuna.client.core.config.ArjunaComponent;
 import arjuna.client.core.connector.BaseSetuObject;
 import arjuna.client.core.connector.SetuArg;

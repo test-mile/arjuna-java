@@ -26,7 +26,6 @@ import org.testng.annotations.Test;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.component.DropDown;
-import arjuna.tpi.guiauto.component.RadioGroup;
 import arjuna.tpi.guiauto.helpers.GuiActionConfig;
 import arjuna.tpi.guiauto.helpers.GuiActionConfigBuilder;
 import arjuna.tpi.guiauto.helpers.With;

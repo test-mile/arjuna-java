@@ -25,7 +25,6 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import arjuna.client.core.action.SetuActionType;
 import arjuna.lib.httpclient.BasicRestClient;
 import arjuna.lib.httpclient.SetuHttpException;
 import arjuna.lib.value.AnyRefValue;

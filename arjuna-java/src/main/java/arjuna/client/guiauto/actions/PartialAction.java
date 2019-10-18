@@ -4,13 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import arjuna.client.core.action.PartialActionType;
-import arjuna.lib.value.AnyRefValue;
 import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.helpers.Keyboard.KeyChord;
 import arjuna.tpi.guiauto.helpers.Screen.Offset;
 import arjuna.tpi.guiauto.helpers.Screen.Point;
 import arjuna.tpi.helpers.Time;
-import arjuna.tpi.helpers.Value;
 
 public class PartialAction {
 	private PartialActionType actionType;

@@ -23,12 +23,10 @@ import arjuna.client.core.action.GuiAutoActionType;
 import arjuna.client.core.config.ArjunaComponent;
 import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuResponse;
-import arjuna.client.guiauto.component.DefaultGuiSource;
 import arjuna.client.guiauto.component.GuiAutoComponentFactory;
 import arjuna.client.guiauto.component.GuiComponentType;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.helpers.GuiDriverExtendedConfig;
-import arjuna.tpi.guiauto.helpers.GuiSource;
 import arjuna.tpi.test.TestConfig;
 
 public class DefaultGuiAutomator extends AbstractAppAutomator implements GuiAutomator {

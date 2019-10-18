@@ -20,7 +20,6 @@
 package arjuna.client.guiauto.automator;
 
 import arjuna.client.core.connector.SetuManagedObject;
-import arjuna.client.guiauto.actions.DefaultCompositeAction;
 import arjuna.client.guiauto.actions.SingleActionChain;
 import arjuna.client.guiauto.component.SourceInquirable;
 import arjuna.lib.enums.GuiAutomationContext;
@@ -34,7 +33,6 @@ import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.component.GuiMultiElement;
 import arjuna.tpi.guiauto.component.MainWindow;
 import arjuna.tpi.guiauto.component.RadioGroup;
-import arjuna.tpi.guiauto.helpers.ActionsBuilder;
 import arjuna.tpi.guiauto.helpers.CompositeAction;
 import arjuna.tpi.guiauto.helpers.With;
 import arjuna.tpi.test.TestConfig;

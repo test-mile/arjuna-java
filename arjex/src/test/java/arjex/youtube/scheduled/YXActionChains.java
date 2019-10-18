@@ -19,17 +19,13 @@
 
 package arjex.youtube.scheduled;
 
-import java.util.List;
-
 import org.testng.annotations.Test;
 
-import arjex.youtube.basics.WPLoginLogout;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.helpers.Screen;
 import arjuna.tpi.guiauto.helpers.With;
-import arjuna.tpi.guiauto.helpers.Screen.Point;
 import arjuna.tpi.testengine.TestNGBaseTest;
 
 public class YXActionChains extends TestNGBaseTest{
@@ -39,12 +35,19 @@ public class YXActionChains extends TestNGBaseTest{
 		GuiAutomator automator = Arjuna.createGuiAutomator(this.getTestContext().getConfig());
 
 		automator.Browser().goToUrl(automator.getConfig().getUserOptionValue("wp.login.url").asString());
-		automator.Element(With.id("user_login")).setText("user");
-		automator.Element(With.id("user_pass")).setText("bitnami");
-//		GuiElement element1 = automator.Element(With.id("user_login"));
-//		GuiElement element = automator.Element(With.id("wp-submit"));
-//		automator.newActionChain().click(Screen.xy(1043, 458)).perform();
-		automator.Element(With.js("return document.getElementById('wp-submit')")).click();
+		
+		GuiElement element = automator.Element(With.point(Screen.xy(1043, 458)));
+//		for(int i=0; i<element.length(); i++) {
+			System.out.println(element.Source().getRootContent());	
+//		}
+		
+		
+//		automator.Element(With.id("user_login")).setText("user");
+//		automator.Element(With.id("user_pass")).setText("bitnami");
+////		GuiElement element1 = automator.Element(With.id("user_login"));
+////		GuiElement element = automator.Element(With.id("wp-submit"));
+////		automator.newActionChain().click(Screen.xy(1043, 458)).perform();
+//		automator.Element(With.js("return document.getElementById('wp-submit')")).click();
 	}
 
 }

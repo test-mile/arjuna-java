@@ -1,7 +1,5 @@
 package arjuna.lib.sysauto.process;
 
-import java.io.IOException;
-
 public class ProcessOutput {
 	private Process proc = null;
 	private String stdout = null;

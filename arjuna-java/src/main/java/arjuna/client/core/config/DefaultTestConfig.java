@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import arjuna.client.core.action.ConfigActionType;
-import arjuna.client.core.action.SetuActionType;
 import arjuna.client.core.connector.BaseSetuObject;
 import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuConnectUtils;

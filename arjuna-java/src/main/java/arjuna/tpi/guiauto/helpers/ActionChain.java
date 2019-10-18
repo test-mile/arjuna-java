@@ -1,7 +1,5 @@
 package arjuna.tpi.guiauto.helpers;
 
-import static arjuna.tpi.guiauto.helpers.Screen.*;
-
 import arjuna.tpi.enums.ModifierKey;
 import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.helpers.Keyboard.KeyChord;

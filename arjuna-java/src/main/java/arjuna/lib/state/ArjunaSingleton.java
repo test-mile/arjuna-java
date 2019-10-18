@@ -1,7 +1,6 @@
 package arjuna.lib.state;
 
 import java.io.File;
-import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.testng.ITestContext;
 
-import arjuna.client.core.action.SetuActionType;
 import arjuna.client.core.connector.SetuService;
 import arjuna.client.guiauto.automator.DefaultGuiAutomator;
 import arjuna.client.testsession.DefaultTestSession;
@@ -20,8 +18,6 @@ import arjuna.client.testsession.TestSession;
 import arjuna.lib.config.CliArgsConfig;
 import arjuna.lib.config.DefaultTestContext;
 import arjuna.lib.console.Console;
-import arjuna.lib.sysauto.process.CommandExecutor;
-import arjuna.lib.sysauto.process.ProcessOutput;
 import arjuna.lib.testng.TestNGSuiteContext;
 import arjuna.lib.testng.TestNGTestContext;
 import arjuna.tpi.ddauto.DataSourceBuilder;

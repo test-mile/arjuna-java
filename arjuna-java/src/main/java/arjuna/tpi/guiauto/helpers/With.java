@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 import arjuna.tpi.enums.ArgsType;
-import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.helpers.Screen.Point;
 import arjuna.tpi.helpers.Arg;
 

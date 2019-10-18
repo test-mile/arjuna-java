@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 import arjuna.tpi.Arjuna;
 import arjuna.tpi.guiauto.GuiAutomator;
 import arjuna.tpi.guiauto.component.GuiElement;
+import arjuna.tpi.guiauto.helpers.Screen;
 import arjuna.tpi.guiauto.helpers.With;
 import arjuna.tpi.testengine.TestNGBaseTest;
 
@@ -75,6 +76,16 @@ public class Y13ArjunaHigherLevelIdentifiers extends TestNGBaseTest{
 		System.out.println(element.Source().getRootContent());
 		
 		element = automator.Element(With.classNames("button", "button-large"));
+		element.identify();
+		System.out.println(element.Source().getRootContent());
+		
+		// Based on Point (location in terms of X,Y co-ordinates)
+		element = automator.Element(With.point(Screen.xy(1043, 458)));
+		element.identify();
+		System.out.println(element.Source().getRootContent());
+		
+		// With Javascript
+		element = automator.Element(With.js("return document.getElementById('wp-submit')"));
 		element.identify();
 		System.out.println(element.Source().getRootContent());
 

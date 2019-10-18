@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import arjuna.client.guiauto.automator.AppAutomator;
-import arjuna.tpi.guiauto.component.GuiElement;
 import arjuna.tpi.guiauto.helpers.CompositeAction;
 
 public class DefaultCompositeAction implements CompositeAction{

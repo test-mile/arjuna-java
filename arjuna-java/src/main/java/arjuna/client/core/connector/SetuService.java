@@ -2,20 +2,15 @@ package arjuna.client.core.connector;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.Properties;
 
 import arjuna.client.core.action.SetuActionType;
 import arjuna.client.core.config.ArjunaComponent;
 import arjuna.lib.sysauto.process.CommandExecutor;
-import arjuna.lib.sysauto.process.ProcessOutput;
-import arjuna.client.core.connector.*;
-
-import java.net.*; 
-import java.io.*; 
+import arjuna.lib.sysauto.process.ProcessOutput; 
 
 public class SetuService {
 	private ProcessOutput po;

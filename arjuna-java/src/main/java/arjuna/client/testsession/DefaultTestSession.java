@@ -1,20 +1,12 @@
 package arjuna.client.testsession;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import arjuna.client.core.action.SetuActionType;
 import arjuna.client.core.action.TestSessionActionType;
 import arjuna.client.core.config.ArjunaComponent;
 import arjuna.client.core.config.DefaultTestConfig;
 import arjuna.client.core.connector.BaseSetuObject;
 import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuResponse;
-import arjuna.client.databroker.DataRecordType;
 import arjuna.lib.state.ArjunaSingleton;
-import arjuna.tpi.guiauto.GuiAutomator;
-import arjuna.tpi.helpers.Value;
 import arjuna.tpi.test.TestConfig;
 
 public class DefaultTestSession extends BaseSetuObject implements TestSession {

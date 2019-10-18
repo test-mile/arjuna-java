@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import arjuna.client.core.action.GuiActionType;
-import arjuna.client.core.action.SetuActionType;
 import arjuna.client.core.config.ArjunaComponent;
 import arjuna.client.core.connector.SetuArg;
 import arjuna.client.core.connector.SetuConnectUtils;
